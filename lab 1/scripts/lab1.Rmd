@@ -1,0 +1,65 @@
+---
+title: "lab 1"
+author: "anisha, diana, dillon, futing, ian"
+date: "3/29/2022"
+output: html_document
+---
+
+# Getting Started
+```{r}
+
+
+set.seed(123) 
+
+m <- lm(mpg ~ hp + cyl + drat, mtcars)
+
+l <- list(a = list(m = matrix(1:12, ncol = 3),
+                   v = 1:7),
+          b = data.frame(student = 1:15,
+                         score = rnorm(15, 100, 10)))
+```
+
+
+#1
+```{r}
+m$qr$tol
+
+attributes(m$terms)$term.labels ##??
+
+```
+
+
+#2
+
+```{r}
+l$a
+l[[1]]
+
+l$a$m[,3] ##?? not sure if this maintains structure...
+
+l$b[7,2]
+```
+
+
+#3
+```{r}
+insurance <- readr::read_csv("~/Downloads/insurance_coverage.csv")
+split <- split(insurance, list(insurance$age_bucket, insurance$sex_name))
+```
+
+#4
+```{r}
+means <- rep(NA, length(split))
+for(i in seq_along(split)){
+  means[i] <- mean(split[[i]]$hc_pop, na.rm = TRUE)
+}
+means
+```
+
+#5
+```{r}
+means2 <- unlist(lapply(split, function(x) mean(x$hc_pop, na.rm = TRUE)))
+means2
+```
+
+
