@@ -33,7 +33,7 @@ attributes(m$terms)$term.labels ##??
 
 ```{r, echo = FALSE, warning = FALSE, message = FALSE}
 l$a$m
-l[[1]][[1]]
+l[[1]]
 
 # maintaining matrix structure
 l$a$m[,3, drop = FALSE] 
@@ -43,7 +43,7 @@ l$b[7,2]
 
 
 #3
-```{r, echo = FALSE, warning = FALSE, message = FALSE}
+```{r, warning = FALSE, message = FALSE}
 here::set_here(path='..')
 insurance <- readr::read_csv(here::here("data", "insurance_coverage.csv"))
 
@@ -63,6 +63,13 @@ means
 ```{r, echo = FALSE, warning = FALSE, message = FALSE}
 means2 <- unlist(lapply(split, function(x) mean(x$hc_pop, na.rm = TRUE)))
 means2
+
+means3 <- sapply(split, function(df) mean(df$hc_pop, na.rm = TRUE))
+means3
+
+means4 <- vapply(split, function(df) mean(df$hc_pop, na.rm = TRUE), FUN.VALUE = double(1))
+means4
+
 ```
 
 #6
@@ -78,7 +85,7 @@ plots <- lapply(split, function(x) {
 ```
 
 #7
-```{r, echo = FALSE, warning = FALSE, message = FALSE}
+```{r, warning = FALSE, message = FALSE}
 filenames <- here::here(
   "plots",
   paste0(names(split), ".png")
