@@ -8,7 +8,6 @@ output: html_document
 # Getting Started
 ```{r}
 
-
 set.seed(123) 
 
 m <- lm(mpg ~ hp + cyl + drat, mtcars)
@@ -43,7 +42,9 @@ l$b[7,2]
 
 #3
 ```{r}
-insurance <- readr::read_csv("~/Downloads/insurance_coverage.csv")
+here::set_here(path='..')
+insurance <- readr::read_csv(here::here("data", "insurance_coverage.csv"))
+
 split <- split(insurance, list(insurance$age_bucket, insurance$sex_name))
 ```
 
@@ -62,4 +63,13 @@ means2 <- unlist(lapply(split, function(x) mean(x$hc_pop, na.rm = TRUE)))
 means2
 ```
 
+#6
+```{r}
+
+```
+
+#7
+```{r}
+
+```
 
