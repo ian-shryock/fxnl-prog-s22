@@ -32,8 +32,8 @@ attributes(m$terms)$term.labels ##??
 #2
 
 ```{r, echo = FALSE, warning = FALSE, message = FALSE}
-l$a
-l[[1]]
+l$a$m
+l[[1]][[1]]
 
 # maintaining matrix structure
 l$a$m[,3, drop = FALSE] 
