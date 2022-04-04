@@ -6,7 +6,8 @@ output: html_document
 ---
 
 # Getting Started
-```{r}
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
+library(tidyverse)
 
 set.seed(123) 
 
@@ -20,7 +21,7 @@ l <- list(a = list(m = matrix(1:12, ncol = 3),
 
 
 #1
-```{r}
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
 m$qr$tol
 
 attributes(m$terms)$term.labels ##??
@@ -30,7 +31,7 @@ attributes(m$terms)$term.labels ##??
 
 #2
 
-```{r}
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
 l$a
 l[[1]]
 
@@ -42,7 +43,7 @@ l$b[7,2]
 
 
 #3
-```{r}
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
 here::set_here(path='..')
 insurance <- readr::read_csv(here::here("data", "insurance_coverage.csv"))
 
@@ -50,7 +51,7 @@ split <- split(insurance, list(insurance$age_bucket, insurance$sex_name))
 ```
 
 #4
-```{r}
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
 means <- rep(NA, length(split))
 for(i in seq_along(split)){
   means[i] <- mean(split[[i]]$hc_pop, na.rm = TRUE)
@@ -59,13 +60,13 @@ means
 ```
 
 #5
-```{r}
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
 means2 <- unlist(lapply(split, function(x) mean(x$hc_pop, na.rm = TRUE)))
 means2
 ```
 
 #6
-```{r}
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
 plots <- lapply(split, function(x) {
   ggplot(x, aes(year, hc_pop)) +
     geom_point() +
@@ -77,7 +78,7 @@ plots <- lapply(split, function(x) {
 ```
 
 #7
-```{r}
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
 filenames <- here::here(
   "plots",
   paste0(names(split), ".png")
