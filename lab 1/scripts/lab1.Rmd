@@ -65,11 +65,30 @@ means2
 
 #6
 ```{r}
+plots <- lapply(split, function(x) {
+  ggplot(x, aes(year, hc_pop)) +
+    geom_point() +
+    geom_line() +
+    ylim(min(insurance$hc_pop), max(insurance$hc_pop))
+    
+})
 
 ```
 
 #7
 ```{r}
+filenames <- here::here(
+  "plots",
+  paste0(names(split), ".png")
+)
+
+for(i in seq_along(plots)) {
+    ggsave(filenames[i], # single bracket
+           plots[[i]], # double bracket
+           device = "png",
+           width = 6.5, 
+           height = 8)
+}
 
 ```
 
