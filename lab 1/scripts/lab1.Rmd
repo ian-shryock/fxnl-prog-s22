@@ -34,7 +34,8 @@ attributes(m$terms)$term.labels ##??
 l$a
 l[[1]]
 
-l$a$m[,3] ##?? not sure if this maintains structure...
+# maintaining matrix structure
+l$a$m[,3, drop = FALSE] 
 
 l$b[7,2]
 ```
