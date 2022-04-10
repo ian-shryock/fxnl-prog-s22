@@ -25,7 +25,7 @@ l <- list(a = list(m = matrix(1:12, ncol = 3),
 m$qr$tol
 
 attributes(m$terms)$term.labels ##??
-
+attr(m$terms,"term.labels") #could also do
 ```
 
 
@@ -38,9 +38,8 @@ l[[1]][1]
 # maintaining matrix structure
 l$a$m[,3, drop = FALSE] 
 
-l$b[7,2]
+l$b[7,2] #l$b$score[7] also an option
 ```
-
 
 #3
 ```{r, warning = FALSE, message = FALSE}
@@ -74,12 +73,14 @@ means4
 
 #6
 ```{r, echo = FALSE, warning = FALSE, message = FALSE}
+#Suppressed plots in knit file
 plots <- lapply(split, function(x) {
   ggplot(x, aes(year, hc_pop)) +
     geom_point() +
     geom_line() +
-    ylim(min(insurance$hc_pop), max(insurance$hc_pop))
-    
+    ylim(min(insurance$hc_pop), max(insurance$hc_pop))+
+    scale_x_continuous("Year", minor_breaks = NULL, breaks = c(min(x$year),max(x$year)))+ #just tidying up the x axis
+    labs(title=paste0("Insured HC_pop (by Age Bucket and Sex): ", x$sex_name[1],", ", x$age_bucket[1]), caption = paste0("Change of ", x$hc_pop[2]-x$hc_pop[1], " (", round(100*(x$hc_pop[2]/x$hc_pop[1]-1),1),"%)"))
 })
 
 ```
