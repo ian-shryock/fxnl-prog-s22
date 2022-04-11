@@ -25,7 +25,8 @@ l <- list(a = list(m = matrix(1:12, ncol = 3),
 m$qr$tol
 
 attributes(m$terms)$term.labels ##??
-attr(m$terms,"term.labels") #could also do
+
+attr(attr(m$model, "terms"), "term.labels") ##method 2
 ```
 
 
@@ -38,7 +39,9 @@ l[[1]][1]
 # maintaining matrix structure
 l$a$m[,3, drop = FALSE] 
 
-l$b[7,2] #l$b$score[7] also an option
+# extract the score for student 7 in the df
+l$b[7,] # method 1
+l[["b"]][7, ] # method 2
 ```
 
 #3
