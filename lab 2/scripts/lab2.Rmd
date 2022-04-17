@@ -87,6 +87,13 @@ ability1 <- GET("https://pokeapi.co/api/v2/ability/1") %>%
 
 abilities_n <- 5
 abilities_list <- 1:abilities_n %>% map(~GET(paste0("https://pokeapi.co/api/v2/ability/", .x)) %>%
-	content("parsed") )
+	content("parsed"))
+```
+
+```{r}
+abilities_df <- abilities_list %>% map_df(~tibble(name =.x$name, ability = list(.x), pokemonNumber = length(.x$pokemon)))
+abilities_df
+
+
 ```
 
