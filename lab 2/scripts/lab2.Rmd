@@ -59,3 +59,24 @@ ggplot(benchmarks, aes(wave, math)) +
 
 ```
 
+# Part B
+```{r}
+install.packages("repurrrsive")
+library(repurrrsive)
+```
+```{r}
+#unique(map_chr(sw_species, ~.x$hair_colors))
+species_hair <- tibble(species = map_chr(sw_species, ~.x$name),
+                       hair_color = map_chr(sw_species, ~.x$hair_colors)) %>%
+  filter(hair_color != "n/a" & 
+           hair_color != "none" & 
+           hair_color != "unknown")
+
+species_hair
+```
+
+
+
+
+
+
