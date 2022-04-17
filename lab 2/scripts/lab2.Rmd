@@ -80,3 +80,9 @@ species_hair
 
 
 
+
+#Part 3
+```{r}
+
+```
+
