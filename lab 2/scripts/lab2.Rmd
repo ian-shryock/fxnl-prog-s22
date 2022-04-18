@@ -60,11 +60,16 @@ ggplot(benchmarks, aes(wave, math)) +
 ```
 
 # Part B
-```{r}
+```{r part 1}
 install.packages("repurrrsive")
 library(repurrrsive)
+
+num_characters <- map(sw_films, ~length(unique(.x$characters)))
+num_characters
+
 ```
-```{r}
+
+```{r part 2}
 #unique(map_chr(sw_species, ~.x$hair_colors))
 species_hair <- tibble(species = map_chr(sw_species, ~.x$name),
                        hair_color = map_chr(sw_species, ~.x$hair_colors)) %>%
@@ -73,6 +78,7 @@ species_hair <- tibble(species = map_chr(sw_species, ~.x$name),
            hair_color != "unknown")
 
 species_hair
+
 ```
 
 
