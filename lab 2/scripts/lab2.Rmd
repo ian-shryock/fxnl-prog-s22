@@ -4,7 +4,7 @@ author: "Anisha, Diana, Dillon, Futing, Ian"
 date: "4/11/2022"
 output: html_document
 ---
-# Setup
+# Part A
 ```{r, echo  = FALSE}
 file <- "https://github.com/datalorax/esvis/raw/master/data/benchmarks.rda"
 load(url(file))
@@ -61,7 +61,7 @@ ggplot(benchmarks, aes(wave, math)) +
 
 # Part B
 ```{r part 1}
-install.packages("repurrrsive")
+# install.packages("repurrrsive")
 library(repurrrsive)
 
 num_characters <- map(sw_films, ~length(unique(.x$characters)))
@@ -84,7 +84,7 @@ species_hair
 
 
 
-#Part C
+# Part C
 ```{r}
 ##Part 1
 library(httr)
