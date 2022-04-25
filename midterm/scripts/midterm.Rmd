@@ -1,0 +1,18 @@
+---
+title: "Midterm"
+author: "Anisha, Diana, Dillon, Futing, Ian"
+date: "4/24/2022"
+output: html_document
+---
+```{r,  knitr::opts_chunk$set(cache = TRUE)}
+library(tidyverse)
+download_file <- function(year) {
+  link <- glue::glue("https://www.oregon.gov/ode/educator-resources/assessment/v/pagr_schools_ela_raceethnicity_{year-1}{year}.xlsx")
+  rio::import(link, setclass = "tibble", na = c("-", "--", "*"))
+}
+
+download_file(15)
+
+
+```
+
