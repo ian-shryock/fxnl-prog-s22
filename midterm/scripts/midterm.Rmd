@@ -6,13 +6,25 @@ output: html_document
 ---
 ```{r,  knitr::opts_chunk$set(cache = TRUE)}
 library(tidyverse)
+
+
 download_file <- function(year) {
-  link <- glue::glue("https://www.oregon.gov/ode/educator-resources/assessment/v/pagr_schools_ela_raceethnicity_{year-1}{year}.xlsx")
+  link <- glue::glue("https://www.oregon.gov/ode/educator-resources/assessment/TestResults20{year}/pagr_schools_ela_raceethnicity_{year-1}{year}.xlsx")
   rio::import(link, setclass = "tibble", na = c("-", "--", "*"))
 }
 
-download_file(15)
+raw_dat <- map_dfr(list(15, 16, 17, 18), ~download_file(.x))
 
-
+cleaned_dat <- raw_dat %>% 
+  janitor::clean_names() %>% 
+  filter(., 
+         student_group == "White" | 
+           student_group == "Hispanic/Latino") %>% 
+  select(academic_year, district, school, student_group, grade_level, 
+         starts_with("number_level")) %>% 
+  pivot_longer(starts_with("number_level"), names_to = "level", 
+               names_prefix = "number_level_", values_to = "n", 
+               values_drop_na = TRUE)
+rm(raw_dat)
 ```
 
