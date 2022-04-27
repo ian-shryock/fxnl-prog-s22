@@ -27,4 +27,12 @@ cleaned_dat <- raw_dat %>%
                values_drop_na = TRUE)
 rm(raw_dat)
 ```
+```{r Part A2}
+
+
+count2 <- cleaned_dat %>% nest_by(district) %>% rowwise() %>% mutate(unique = count(unique(data[2]))) %>% unnest(data) %>% 
+  nest_by(district, academic_year, student_group, level) %>% rowwise() %>% mutate(sum = sum(data[3])) %>% unnest(data) %>%nest_by(district, academic_year, unique, student_group, level, sum) %>% select(-data)%>% pivot_wider(names_from = student_group, values_from = sum) %>% filter(!is.na(`White`)) %>% filter(!is.na(count2$`Hispanic/Latino`)) 
+
+
+```
 
