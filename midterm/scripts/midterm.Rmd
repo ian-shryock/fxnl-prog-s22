@@ -3,6 +3,8 @@ title: "Midterm"
 author: "Anisha, Diana, Dillon, Futing, Ian"
 date: "4/24/2022"
 output: html_document
+editor_options: 
+  chunk_output_type: console
 ---
 ```{r,  knitr::opts_chunk$set(cache = TRUE)}
 library(tidyverse)
@@ -57,18 +59,28 @@ count2 <- count2 %>%
 library(gapr)
 library(purrr)
 
+
 v1 <- count2 %>%
   group_by(district) %>%
   nest() %>%
-  mutate(v_diff = map(.x, estimate_v(count2, "White", "Hispanic/Latino"))) %>%
+  mutate(v_diff = map(data, ~estimate_v(data = .x, "White","Hispanic/Latino"))) %>%
   unnest(v_diff)
+
 
 v2 <- count2 %>%
   nest_by(district) %>%
   rowwise() %>%
-  summarize(v_diff = list(estimate_v(count2, "White","Hispanic/Latino"))) %>%
+  summarize(v_diff = list(estimate_v(data = data, "White","Hispanic/Latino"))) %>%
   unnest(v_diff)
 
+
+# plot
+v <- data.frame(v2$v, v1$v)
+
+ggplot(v, aes(x = v2.v, y = v1.v,)) +
+  geom_point(color = "steelblue1") +
+  geom_line(color = "steelblue1") +
+  theme_dark()
 ```
 
 
