@@ -73,7 +73,9 @@ v2 <- count2 %>%
   summarize(v_diff = list(estimate_v(data = data, "White","Hispanic/Latino"))) %>%
   unnest(v_diff)
 
+```
 
+```{r Part B2}
 # plot
 v <- data.frame(v2$v, v1$v)
 
@@ -81,6 +83,39 @@ ggplot(v, aes(x = v2.v, y = v1.v,)) +
   geom_point(color = "steelblue1") +
   geom_line(color = "steelblue1") +
   theme_dark()
+```
+
+```{r Part B3}
+# calculate achievement difference by district & year
+v3 <- count2 %>%
+  group_by(district, academic_year) %>%
+  nest() %>%
+  mutate(v_diff = map(data, ~estimate_v(data = .x, "White","Hispanic/Latino"))) %>%
+  unnest(v_diff)
+```
+
+```{r Part B3}
+# select values for plots
+selectVals <- v3 %>%
+  select(district, academic_year, v)
+
+#select first 100 districts
+dists <- unique(selectVals$district)[1:2] # change to 100 later
+firstHundred <- selectVals %>% 
+  filter(district %in% dists)
+
+# nest by district
+by_district <- firstHundred %>%
+    group_by(district) %>%
+    nest()
+
+# version 1
+by_district %>%
+    mutate(plot = map(data, ~{
+      ggplot(aes(academic_year, v)) +
+            geom_point() 
+      }))
+
 ```
 
 
