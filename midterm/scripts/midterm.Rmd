@@ -86,21 +86,23 @@ ggplot(v, aes(x = v2.v, y = v1.v,)) +
 ```
 
 ```{r Part B3}
+library(glue)
+library(ggtext)
+
 # calculate achievement difference by district & year
 v3 <- count2 %>%
   group_by(district, academic_year) %>%
   nest() %>%
   mutate(v_diff = map(data, ~estimate_v(data = .x, "White","Hispanic/Latino"))) %>%
   unnest(v_diff)
-```
 
-```{r Part B3}
 # select values for plots
 selectVals <- v3 %>%
-  select(district, academic_year, v)
+  mutate(n_school = data[[1]]$unique[1,1]) %>%
+  select(district, n_school, academic_year, v, v_se)
 
 #select first 100 districts
-dists <- unique(selectVals$district)[1:2] # change to 100 later
+dists <- unique(selectVals$district)[1:100] 
 firstHundred <- selectVals %>% 
   filter(district %in% dists)
 
@@ -110,12 +112,45 @@ by_district <- firstHundred %>%
     nest()
 
 # version 1
-by_district %>%
-    mutate(plot = map(data, ~{
-      ggplot(aes(academic_year, v)) +
-            geom_point() 
+version1 <- by_district %>%
+    mutate(plots1 = map(data, y=district, ~{
+      ggplot(data = .x, aes(academic_year, v)) +
+        geom_point(aes(colour = cut(v, c(-Inf, 0, Inf))), show.legend = FALSE) +
+        scale_color_manual(name = "v", values = c("(-Inf,0]" = "mediumorchid2", "(0,Inf]" = "blue")) +
+        geom_errorbar(aes(ymin=v-v_se, ymax=v+v_se), width = 0.2, color = 'gray50') +
+        geom_line(aes(group=1), color = 'gray50') +
+        labs(x = 'School year',
+             y = 'Average achievement difference (SD units)',
+             title = glue("Achievement Gap Estimates: {.y}"),
+             subtitle = "Negative values indicate White students have higher average achievement\nPositive values indicate Hispanic/Latino students have higher achievement",
+             caption = paste('Note: District included', .x[[1]][[1]], 'schools')) +
+        geom_hline(yintercept= 0, color = 'red') +
+        theme_minimal()
       }))
 
-```
+# version 2
+version2 <- firstHundred %>%
+  ungroup() %>%
+  nest_by(district) %>%
+  mutate(
+    plots2 = list(
+      ggplot(data, aes(academic_year, v)) +
+        geom_point(aes(colour = cut(v, c(-Inf, 0,Inf))), show.legend = FALSE) +
+        scale_color_manual(name = "v", values = c("(-Inf,0]" = "mediumorchid2","(0,Inf]" = "cornflowerblue")) +
+        geom_errorbar(aes(ymin=v-v_se, ymax=v+v_se), width = 0.2, color = 'gray50') +
+        geom_line(aes(group=1), color = 'gray50') +
+        labs(x = 'School year',
+             y = 'Average achievement difference (SD units)',
+             title = glue("Achievement Gap Estimates: {district}"),
+             subtitle = "Negative values indicate White students have higher average achievement\nPositive values indicate Hispanic/Latino students have higher achievement",
+             caption = paste('Note: District included', {data[[1]][[1]]}, 'schools')) +
+        geom_hline(yintercept= 0, color = 'red') +
+        theme_minimal()
+      
+    )
+  )
 
+
+
+```
 
