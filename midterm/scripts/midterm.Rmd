@@ -122,10 +122,12 @@ version1 <- by_district %>%
         labs(x = 'School year',
              y = 'Average achievement difference (SD units)',
              title = glue("Achievement Gap Estimates: {.y}"),
-             subtitle = "Negative values indicate White students have higher average achievement\nPositive values indicate Hispanic/Latino students have higher achievement",
+             subtitle = "Negative values indicate <span style='color: #BC4EE5'>White</span> students have higher average achievement<br/>Positive values indicate <span style='color: #4E5FEB'>Hispanic/Latino</span> students have higher achievement",
              caption = paste('Note: District included', .x[[1]][[1]], 'schools')) +
         geom_hline(yintercept= 0, color = 'red') +
-        theme_minimal()
+        theme_minimal() +
+        theme(plot.subtitle = element_markdown(),
+              plot.title.position = "plot")
       }))
 
 # version 2
@@ -142,15 +144,45 @@ version2 <- firstHundred %>%
         labs(x = 'School year',
              y = 'Average achievement difference (SD units)',
              title = glue("Achievement Gap Estimates: {district}"),
-             subtitle = "Negative values indicate White students have higher average achievement\nPositive values indicate Hispanic/Latino students have higher achievement",
+             subtitle = "Negative values indicate <span style='color: #BC4EE5;'>White</span> students have higher average achievement<br/>Positive values indicate <span style='color: #4E5FEB;'>Hispanic/Latino</span> students have higher achievement",
              caption = paste('Note: District included', {data[[1]][[1]]}, 'schools')) +
         geom_hline(yintercept= 0, color = 'red') +
-        theme_minimal()
-      
+        theme_minimal() +
+        theme(plot.subtitle = element_markdown(),
+              plot.title.position = "plot")
     )
   )
 
 
 
 ```
+
+```{r bonus}
+library(patchwork)
+bonus <- map2(version1$plots1, version2$plots2, `+`)
+# bonus[[1]]
+```
+
+
+```{r Part B4, warning=FALSE}
+fs::dir_create(here::here("plots"))
+files <- map_chr(
+  str_replace_all(
+    tolower(version1$district), " ", "_"), 1)
+paths <- here::here("plots", glue("achievement-gap_{files}.png"))
+version1 %>%
+  ungroup() %>%
+  mutate(path = paths) %>%
+  rowwise() %>%
+  summarize(
+    ggsave(
+      path,
+      plots1,
+      width = 9,
+      height = 6)
+  )
+```
+
+
+
 
