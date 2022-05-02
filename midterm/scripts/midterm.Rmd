@@ -110,13 +110,15 @@ firstHundred <- selectVals %>%
 by_district <- firstHundred %>%
     group_by(district) %>%
     nest()
+```
 
+```{r}
 # version 1
 version1 <- by_district %>%
     mutate(plots1 = map(data, y=district, ~{
       ggplot(data = .x, aes(academic_year, v)) +
         geom_point(aes(colour = cut(v, c(-Inf, 0, Inf))), show.legend = FALSE) +
-        scale_color_manual(name = "v", values = c("(-Inf,0]" = "mediumorchid2", "(0,Inf]" = "blue")) +
+        scale_color_manual(values = c("#BC4EE5", "#4E5FEB")) +
         geom_errorbar(aes(ymin=v-v_se, ymax=v+v_se), width = 0.2, color = 'gray50') +
         geom_line(aes(group=1), color = 'gray50') +
         labs(x = 'School year',
@@ -138,7 +140,7 @@ version2 <- firstHundred %>%
     plots2 = list(
       ggplot(data, aes(academic_year, v)) +
         geom_point(aes(colour = cut(v, c(-Inf, 0,Inf))), show.legend = FALSE) +
-        scale_color_manual(name = "v", values = c("(-Inf,0]" = "mediumorchid2","(0,Inf]" = "cornflowerblue")) +
+        scale_color_manual(values = c("#BC4EE5", "#4E5FEB")) +
         geom_errorbar(aes(ymin=v-v_se, ymax=v+v_se), width = 0.2, color = 'gray50') +
         geom_line(aes(group=1), color = 'gray50') +
         labs(x = 'School year',
