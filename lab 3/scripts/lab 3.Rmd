@@ -10,17 +10,29 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r Part B, Q1}
-calcMean <- function(x) {
-  newVector <- x[!is.na(x)]
-  sumVector <- sum(newVector)
-  meanVector <- sumVector / length(newVector)
+warningNA <- function(x) {
   if(sum(is.na(x)) != 0) {
     warning(
       sum(is.na(x)),
-      " NAs in vector",
+      " NAs in vector removed",
       call. = FALSE
     )
   }
 }
+
+meanCalc <- function(x) {
+  newVector <- x[!is.na(x)]
+  sumVector <- sum(newVector)
+  meanVector <- sumVector / length(newVector)
+  meanVector
+}
+
+meanWarning <- function(x) {
+    warningNA(x)
+    meanCalc(x)
+}
+
+check <- c(NA, NA, 3, 3, 10, 2)
+meanWarning(check)
 
 ```
