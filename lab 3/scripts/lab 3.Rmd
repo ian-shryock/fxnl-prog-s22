@@ -36,3 +36,20 @@ check <- c(NA, NA, 3, 3, 10, 2)
 meanWarning(check)
 
 ```
+
+
+
+```{r Part B, Q4}
+only_numeric <- function(df){
+  df %>% 
+    select_if(is.numeric)
+  
+  
+}
+
+
+only_numeric(mtcars)
+
+
+```
+
