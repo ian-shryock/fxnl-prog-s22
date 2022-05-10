@@ -7,6 +7,7 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
 ```
 
 ```{r Part B, Q1}
@@ -51,5 +52,32 @@ only_numeric <- function(df){
 only_numeric(mtcars)
 
 
+```
+
+```{r Part B, Q5}
+only_numeric_summary <- function(df){
+  df_numeric <- only_numeric(df)
+  if (length(df_numeric)!=0) {
+    if (length(df_numeric)!=length(df)){
+      warning("The columns are omitted because they are non-numeric:\n",
+              paste(names(df%>%select(which(!colnames(df) %in% colnames(df_numeric)))),
+                    collapse=","))
+    }
+    df_numeric %>%
+      pivot_longer(everything(),
+                   names_to = "var",
+                   values_to = "val") %>%
+      group_by(var) %>%
+      summarise(mean = mean(val, na.rm = TRUE),
+                sd = sd(val, na.rm = TRUE))
+  }
+  else{
+    return("All columns are non-numeric")
+  }
+}
+
+only_numeric_summary(mtcars)
+only_numeric_summary(forcats::gss_cat)
+only_numeric_summary(forcats::gss_cat["marital"])
 ```
 
