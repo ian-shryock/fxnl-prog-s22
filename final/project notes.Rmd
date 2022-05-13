@@ -1,0 +1,215 @@
+---
+title: "notes"
+author: "Anisha, Diana, Dillon, Futing, Ian"
+date: "5/13/2022"
+output: html_document
+---
+
+# General Notes
+
+Here are some code snippets that should help with the final...
+
+## Specific Comments
+
+I've set up the other file to create a table of contents based on sections - single hashtags for section headers and double hashtags for subsections. Make sure that code snippets don't go over 80 characters as they'll run off the page 
+
+
+# Demographics
+Useful code from the tableby package
+
+```{r, eval = FALSE}
+library(tableby)
+
+labels(demog_dat)  <- c(age = 'Age', sex = "Gender", 
+                        ethnic_cat = "Race", education = "Education")
+demog_tab <- summary(tableby(~ age + sex + ethnic_cat + education, 
+                             data = demog_dat, test = FALSE),  
+                     title = "Full Sample Demographics")
+demog_tab
+
+demog_tab_group <- summary(tableby(list(sex, agegroup_fac) ~ 
+                                     age + sex + ethnic_cat + education, 
+                                   data = demog_dat, test = FALSE), 
+                           title = "Grouped Sample Demographics") 
+
+demog_tab_group
+```
+
+
+# Scoring Scales
+The psych package has a function that will score scales if you give it a key - the key for the ipip items are downloading from the dataverse website...here's code i have that does this for a different project
+
+https://personality-project.org/r/psych/help/score.items.html
+```{r, eval = FALSE}
+
+items <-  as.list( key %>% select(facet, item_id) %>% 
+  pivot_wider(names_from = facet, values_from = item_id  ))
+
+factor_items <- as.list( key %>% select(factor, item_id) %>% 
+  pivot_wider(names_from = factor, values_from = item_id  ))
+
+key <- key %>% 
+  mutate(reversed_new =
+         case_when(
+           reversed == FALSE ~ "", 
+           TRUE ~ "-"), 
+         codes = paste(reversed_new, item_id, sep = ""))
+
+scales <-   key %>% select(facet, codes) %>% 
+  pivot_wider(names_from = facet, values_from = codes  )
+
+factor_scales <-   as.list( key %>% select(factor, codes) %>% 
+  pivot_wider(names_from = factor, values_from = codes  ))
+
+key_unlist <- list(
+                 Anhedonia = unlist(scales$Anhedonia), 
+                 Anxiousness = unlist(scales$Anxiousness), 
+                 AttentionSeeking = unlist(scales$`Attention Seeking`), 
+                 Callousness= unlist(scales$Callousness), 
+                 Deceitfulness = unlist(scales$Deceitfulness), 
+                 Depressivity = unlist(scales$Depressivity), 
+                 Distractability = unlist(scales$Distractibility), 
+                 Eccentricity = unlist(scales$Eccentricity), 
+                 EmotionalLability = unlist(scales$`Emotional Lability`), 
+                 Grandiosity = unlist(scales$Grandiosity), 
+                 Hostility = unlist(scales$Hostility), 
+                 Impulsivity = unlist(scales$Impulsivity),
+                 IntimacyAvoidance = unlist(scales$`Intimacy Avoidance`), 
+                 Irresponsibility = unlist(scales$Irresponsibility), 
+                 Manipulativeness = unlist(scales$Manipulativeness), 
+                 PerceptualDisregulation = unlist(scales$`Perceptual Dysregulation`), 
+                 Perseveration = unlist(scales$Perseveration), 
+                 RestrictedAffectivity = unlist(scales$`Restricted Affectivity`),
+                 RigidPerfectionism = unlist(scales$`Rigid Perfectionism`), 
+                 RiskTaking = unlist(scales$`Risk Taking`), 
+                 SeparationAnxiety = unlist(scales$`Separation Insecurity`), 
+                 Submissiveness = unlist(scales$Submissiveness), 
+                 Suspiciousness = unlist(scales$Suspiciousness), 
+                 UnusualBeliefs = unlist(scales$`Unusual Beliefs & Experiences`), 
+                 Withdrawal = unlist(scales$`Withdrawal`), 
+                 Detachment = unlist(factor_scales$`Detachment`), 
+                 Disinhibition = unlist(factor_scales$Disinhibition), 
+                 Psychoticism = unlist(factor_scales$Psychoticism), 
+                 NegativeAffect = unlist(factor_scales$`Negative Affect`), 
+                 Antagonism = unlist(factor_scales$Antagonism), 
+                 Schizotypal = c(unlist(items$`Percentual Dysregulation`), 
+                                 unlist(items$`Unusual Beliefs & Experiences`),
+                                 unlist(items$Eccentricity), 
+                                 unlist(items$`Restricted Affectivity`), 
+                                 unlist(items$Withdrawal), 
+                                 unlist(items$Suspiciousness)), 
+                 Antisocial = c(unlist(items$Manipulativeness), 
+                                unlist(items$Callousness), 
+                                unlist(items$Deceitfulness), 
+                                unlist(items$Hostility), 
+                                unlist(items$`Risk Taking`), 
+                                unlist(items$Impulsivity), 
+                                unlist(items$Irresponsibility)), 
+                 Borderline = c(unlist(items$`Emotional Lability`), 
+                                unlist(items$Anxiousness), 
+                                unlist(items$`Separation Insecurity`), 
+                                unlist(items$Depressivity), 
+                                unlist(items$Impulsivity), 
+                                unlist(items$`Risk Taking`), 
+                                unlist(items$Hostility)), 
+                 Narcissistic = c(unlist(items$Grandiosity), 
+                                  unlist(items$`Attention Seeking`)), 
+                 Avoidant =     c(unlist(items$Anxiousness), 
+                                  unlist(items$Withdrawal), 
+                                  unlist(items$Anhedonia), 
+                                  unlist(items$`Intimacy Avoidance`)), 
+                 OCPD =         c(unlist(items$`Rigid Perfectionism`), 
+                                  unlist(items$Perseveration), 
+                                  unlist(items$`Intimacy Avoidance`), 
+                                  unlist(items$`Restricted Affectivity`))
+                 )
+
+
+
+pid_raw_comp2 <- cbind(pid_sub, psych::scoreItems(key_unlist, pid_sub, 
+                       min=1, max=6, totals = FALSE, impute = "none")$scores)
+
+
+          
+```
+
+# Descriptives Tables
+
+We wont want the same contents of the tables, but here's code that will create nice looking tables - idk if we'll need the "add_header_above" commend...but it's helpful sometimes
+
+note that in the code options results = 'asis'
+
+```{r, eval = FALSE, results = 'asis'}
+kable(
+  full_facet_descriptives,
+  booktabs = TRUE,
+  longtable = TRUE,
+  #escape = FALSE,
+  col.names = c("Scale", "N", "Mean", "SD", "Mean", "SD", 
+                "Perc. 1", "Perc. 2", "Perc. 3", 
+                "Perc. 4", "Perc. 5", "Perc. 6", 
+                "Perc. 1", "Perc. 2", "Perc. 3", 
+                "Perc. 4", "Perc. 5"),
+  caption = "Scale Norms"
+  ) %>% 
+  landscape() %>% 
+  kable_styling(font_size = 6, 
+                latex_options = c("scale_down", "repeat_header")) %>% 
+  kable_classic() %>% 
+  add_header_above(c(" " = 2, "Unweighted" = 2, 
+                     "Weighted" = 2, "Normal" = 6, "Empirical" = 5))
+
+
+```
+
+
+## Grouped Descriptives tables
+
+probably should do this in something other than a loop...wrote this code before taking this class
+```{r, results = 'asis', eval = FALSE}
+grouped_facet_descriptives <- map(grouped_facet_descriptives,
+   ~select(., item, n, mean, sd, contains("norm"), contains("ecdf")) %>% 
+    `rownames<-`( NULL )  %>% 
+  mutate(across(where(is.numeric), round, 2)))
+
+
+for(i in 1:length(grouped_facet_descriptives)){
+  
+print(grouped_facet_descriptives[[i]] %>% 
+kable(
+  booktabs = TRUE,
+  longtable = TRUE,
+  #escape = FALSE,.c
+  col.names = c("Item", "N", "Mean", "SD", 
+                "Perc. 1", "Perc. 2", "Perc. 3", 
+                "Perc. 4", "Perc. 5", "Perc. 6", 
+                "E. Perc. 1", "E. Perc. 2", "E. Perc. 3", 
+                "E. Perc. 4","E. Perc. 5"),
+  caption = paste("Scale Norms", names(item_descriptives[i]), sep = ": ")
+  ) %>% 
+  landscape() %>% 
+  kable_styling(font_size = 7, latex_options = c("repeat_header")) %>% 
+  kable_classic() %>% 
+  add_header_above(c(" " = 4, "Normal" = 6, "Empirical" = 5))
+)}
+```
+
+
+# Parallel Analysis
+
+this is where we actually examine the factor structure of the data - we should do this once in the whole sample and once in the nested data
+
+we'll want to extract model results here...i'll leave it up to you what all to extract but number of factors is what we're most interested in
+```{r, eval = FALSE}
+pid_item_cov <- cov(raw_pid)
+
+parallel <- fa.parallel(pid_item_cov, n.iter = 20, cor = "cov") 
+plot(parallel$fa.values[1:10])
+
+
+
+
+```
+
+```
+

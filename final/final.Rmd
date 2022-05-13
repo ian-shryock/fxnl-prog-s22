@@ -1,0 +1,33 @@
+---
+title: "The Personality Structures of the 50 States"
+author: "Anisha Babu, Diana DeWald, Ian Shryock, Dillon Welindt, Futing Zou"
+output: 
+  bookdown::pdf_document2:
+    toc: TRUE
+    lof: TRUE
+    lot: TRUE
+    extra_dependencies: ["tocbibind"]
+always_allow_html: true
+---
+
+
+\renewcommand{\thetable}{S\arabic{table}} 
+\renewcommand{\thefigure}{S\arabic{figure}}
+
+
+
+\definecolor{fancyTextColor}{HTML}{4284f5}
+\definecolor{hightlightColor}{HTML}{FFFF66}
+
+\newpage
+
+\listoftables
+
+\newpage
+
+\listoffigures
+
+\newpage
+
+
+
