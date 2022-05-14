@@ -10,6 +10,25 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 ```
 
+### Q1:
+
+A. Three fundamental components of a function are the:
+
+1. Formals: Arguments supplied to a function;
+
+2. Body: The code within the functions, and;
+
+3. Environment: The data structure that maps how the function finds the values associated with each variable or name.
+
+B. Three ways functions can be stored/applied:
+
+1. Stored in an object (named). Useful when fundamental/having various uses, so that you want to call it concisely and define it eslewhere.
+
+2. Anonymously, where the function isn't bound to a name. Can be appeaing, perhaps, when used within a loop
+
+3. Stored in a list, which then lets you loop through each function in the list simply.
+
+
 ```{r Part B, Q1}
 warningNA <- function(x) {
   if(sum(is.na(x)) != 0) {
@@ -38,6 +57,14 @@ meanWarning(check)
 
 ```
 
+```{r Part B, Q2}
+testVec <- c(-1000230, -102, -37, -22, -7, -5, -1, NA, NA, 0, 1, 5, 7, 16, 22, 37, 102, 1000230) #Test vector with NAs and larger numbers. Mean is 1 if NAs are removed
+warningNA(testVec) #we test here to see if 2 NAs are removed with the warningNA function
+meanCalc(testVec) #check the meanCalc function
+base::mean(testVec, na.rm = TRUE) #compare base mean against our function
+meanWarning(testVec)
+base::mean(testVec, na.rm = TRUE)==meanWarning(testVec) #make extra sure they're the same
+```
 
 
 ```{r Part B, Q4}
