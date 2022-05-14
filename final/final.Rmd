@@ -10,6 +10,22 @@ output:
 always_allow_html: true
 ---
 
+```{r setup, include=FALSE}
+library(tidyverse)
+
+# download data (what URL???)
+SAPA <- read.csv('sapaTempData04apr2006thru18aug2010.csv')
+load('IPIPitemLists.rdata')
+
+```
+
+```{r preprocessing}
+# filter in US, 50 states
+SAPA <- SAPA %>%
+  filter(country == "USA") %>%
+  filter(!state %in% c('District of Columbia', 'Guam', 'Palau','Puerto Rico', 'Virgin Islands',
+                       'Northern Mariana Islands', 'American Samoa', 'Marshall Islands', NA))
+```
 
 \renewcommand{\thetable}{S\arabic{table}} 
 \renewcommand{\thefigure}{S\arabic{figure}}
