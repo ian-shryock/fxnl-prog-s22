@@ -84,6 +84,40 @@ scores <- psych::scoreItems(keys = IPIPkeys, items = SAPA, min=1, max=6, totals 
 ```
 
 ```{r #6/7 state-wise descriptives}
+# combine demographics & traits
+factorSAPA <- cbind(SAPA[1:7], scores)
+
+# nest data by state
+by_state <- split(factorSAPA, factorSAPA$state)
+
+# descriptive stats - THERE SHOULD BE A BETTER WAY TO DO THIS (SOME KIND OF NESTED MAP FXN?)
+stateAgree <- map(by_state, ~summarize(.x, meanFactor = mean(IPIP100agreeableness, na.rm = TRUE),
+                                    sdFactor = sd(IPIP100agreeableness, na.rm = TRUE),
+                                    nFactor = length(IPIP100agreeableness)))
+stateCons <- map(by_state, ~summarize(.x, meanFactor = mean(IPIP100conscientiousness, na.rm = TRUE),
+                                    sdFactor = sd(IPIP100conscientiousness, na.rm = TRUE),
+                                    nFactor = length(IPIP100conscientiousness)))
+stateExtra <- map(by_state, ~summarize(.x, meanFactor = mean(IPIP100extraversion, na.rm = TRUE),
+                                    sdFactor = sd(IPIP100extraversion, na.rm = TRUE),
+                                    nFactor = length(IPIP100extraversion)))
+stateIntel <- map(by_state, ~summarize(.x, meanFactor = mean(IPIP100intellect, na.rm = TRUE),
+                                    sdFactor = sd(IPIP100intellect, na.rm = TRUE),
+                                    nFactor = length(IPIP100intellect)))
+# group all factors in list
+allFactor = list(stateAgree, stateCons, stateExtra, stateIntel)
+names(allFactor) = c('Agreeableness', 'Conscientiousness', 'Extraversion', 'Intellect')
+
+# function to create table - SHOULD FIND A WAY TO CAPTION EACH TABLE BY STATE & FACTOR
+makeTable <- function(x) {
+  kable(x, booktabs = TRUE, longtable = TRUE, col.names = c("Mean", "SD", "N"), 
+        caption = paste('State of ', x, ' Descriptives')) %>% 
+    landscape() %>% 
+    kable_styling(font_size = 12, latex_options = c("scale_down", "repeat_header")) %>% 
+    kable_classic() 
+}
+
+# create tables for each factor & state
+map(allFactor, ~map(.x, ~makeTable(.x)))
 
 ```
 
