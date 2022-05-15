@@ -57,6 +57,12 @@ IPIPkeys <- map(IPIPkeysList, function(x) {
 
 ```
 
+```{r demographics}
+# idk if this is what we want here - tableby package not available
+map((SAPA[c(2,3,5,6,7)]), table)
+
+```
+
 \renewcommand{\thetable}{S\arabic{table}} 
 \renewcommand{\thefigure}{S\arabic{figure}}
 
