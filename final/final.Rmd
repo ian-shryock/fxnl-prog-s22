@@ -12,19 +12,39 @@ always_allow_html: true
 
 ```{r setup, include=FALSE}
 library(tidyverse)
+library(dataverse)
 
-# download data (what URL???)
-SAPA <- read.csv('sapaTempData04apr2006thru18aug2010.csv')
+# download data from files
+# SAPA <- read.csv('sapaTempData04apr2006thru18aug2010.csv')
 load('IPIPitemLists.rdata')
+
+# download data from url
+Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
+SAPA <- get_dataframe_by_name(
+  "sapaTempData04apr2006thru18aug2010.tab",
+  "10.7910/DVN/H9RQD6")
 
 ```
 
 ```{r preprocessing}
-# filter in US, 50 states
 SAPA <- SAPA %>%
+  # filter in US
   filter(country == "USA") %>%
+  # filter 50 states
   filter(!state %in% c('District of Columbia', 'Guam', 'Palau','Puerto Rico', 'Virgin Islands',
-                       'Northern Mariana Islands', 'American Samoa', 'Marshall Islands', NA))
+                       'Northern Mariana Islands', 'American Samoa', 'Marshall Islands', NA)) 
+
+# filter out rows with all NA
+SAPA <- SAPA[rowSums(is.na(SAPA)) < 99, ]
+
+# combine all 150 IPIP Q's 
+IPIPkeys <- c()
+for (i in IPIPitemLists) {IPIPkeys <- append(IPIPkeys, i)}
+# select only Q's in dataset
+matchKeys <- match(colnames(SAPA), IPIPkeys) %>%
+  na.omit()
+IPIPkeys <- IPIPkeys[matchKeys]
+
 ```
 
 \renewcommand{\thetable}{S\arabic{table}} 
