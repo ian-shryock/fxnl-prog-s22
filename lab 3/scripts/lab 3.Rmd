@@ -22,7 +22,7 @@ A. Three fundamental components of a function are the:
 
 B. Three ways functions can be stored/applied:
 
-1. Stored in an object (named). Useful when fundamental/having various uses, so that you want to call it concisely and define it eslewhere.
+1. Stored in an object (named). Useful when fundamental/having various uses, so that you want to call it concisely and define it elsewhere.
 
 2. Anonymously, where the function isn't bound to a name. Can be appeaing, perhaps, when used within a loop
 
@@ -64,6 +64,42 @@ meanCalc(testVec) #check the meanCalc function
 base::mean(testVec, na.rm = TRUE) #compare base mean against our function
 meanWarning(testVec)
 base::mean(testVec, na.rm = TRUE)==meanWarning(testVec) #make extra sure they're the same
+```
+
+```{r Part B, Q3}
+# 1. Function for counting number of missing elements in a vector
+sum(is.na(airquality$Ozone))
+
+sum.missing <- function(x) {
+  NAvector <- is.na(x)
+  sumVector <- sum(NAvector)
+  sumVector
+}
+
+# test
+sum.missing(airquality$Ozone)
+
+# 2. Function for showing proportional representation of each level (unique element) in a vector
+purrr::map_dbl(split(mtcars$cyl, mtcars$cyl), length) / length(mtcars$cyl)
+
+elementproportion <- function(x) {
+  proportion <- map_dbl(split(x, f = x), length)/length(x)
+  proportion
+}
+
+#test
+elementproportion(mtcars$cyl)
+
+# 3. Function for normalizing or z-scoring a vector so the mean is zero and sd is one
+(mtcars$mpg - mean(mtcars$mpg, na.rm = TRUE)) / 
+  sd(mtcars$mpg, na.rm = TRUE)
+
+normalize <- function(x) {
+  z_score <- (x - mean(x, na.rm = TRUE)) / sd(x, na.rm = TRUE)
+  z_score
+}
+ # test
+normalize(mtcars$mpg)
 ```
 
 
