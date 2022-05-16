@@ -157,11 +157,16 @@ map(allFactor, ~map(.x, ~makeTable(.x)))
 
 ```
 
-```{r #9 factor structure - from nested states}
+```{r #9 factor structure - from nested states, include = FALSE}
 by_stateFactors <- split(SAPA, factorSAPA$state)
 
 stateFactor <- map(by_stateFactors, ~fa.parallel(cov(.x[,8:106], use = "pairwise.complete.obs"), n.iter = 20, cor = "cov")$nfact)
+stateFactordf <- as.data.frame(stateFactor)
 
+```
+
+```{r #9 table}
+stateFactordf
 ```
 
 \renewcommand{\thetable}{S\arabic{table}} 
