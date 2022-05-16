@@ -38,7 +38,7 @@ IPIP50stability = c("-q_108", "-q_1099", "-q_1479", "-q_1989", "-q_497", "-q_974
 
 ```
 
-```{r preprocessing}
+```{r preprocessing, warning = FALSE}
 SAPA <- SAPA %>%
   # filter in US
   filter(country == "USA") %>%
@@ -60,20 +60,20 @@ IPIPkeys <- IPIPkeys[1:4]
 
 ```
 
-```{r demographics}
+```{r demographics, warning= FALSE}
 # idk if this is what we want here - tableby package not available
 map((SAPA[c(2,3,5,6,7)]), table)
 
 ```
 
-```{r individual subject scores}
+```{r individual subject scores, warning= FALSE}
 # score items
 scores <- psych::scoreItems(keys = IPIPkeys, items = SAPA, min=1, max=6, totals = FALSE, impute = 'none')$scores
 
 
 ```
 
-```{r #3 descriptives statistics}
+```{r #3 descriptives statistics, warning = FALSE}
 
 library(arsenal)
 
@@ -96,7 +96,7 @@ library(apaTables)
 apa.cor.table(scores, filename="Corr_table.doc", show.conf.interval=F)
 ```
 
-```{r #4 average scores by factor}
+```{r #4 average scores by factor, warning = FALSE}
 
 # average scores on included survey questions
 average_surveyscores <- SAPA %>%
@@ -114,7 +114,7 @@ average_statescores <- SAPA %>%
 
 ```
 
-```{r #6/7 state-wise descriptives}
+```{r #6/7 state-wise descriptives, warning = FALSE, results='hide'}
 # combine demographics & traits
 factorSAPA <- cbind(SAPA[1:7], scores)
 
@@ -157,7 +157,7 @@ map(allFactor, ~map(.x, ~makeTable(.x)))
 
 ```
 
-```{r #9 factor structure - from nested states, include = FALSE}
+```{r #9 factor structure - from nested states, include = FALSE, warning = FALSE}
 by_stateFactors <- split(SAPA, factorSAPA$state)
 
 stateFactor <- map(by_stateFactors, ~fa.parallel(cov(.x[,8:106], use = "pairwise.complete.obs"), n.iter = 20, cor = "cov")$nfact)
@@ -165,7 +165,7 @@ stateFactordf <- as.data.frame(stateFactor)
 
 ```
 
-```{r #9 table}
+```{r #9 table, warning = FALSE}
 stateFactordf
 ```
 
