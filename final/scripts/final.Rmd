@@ -24,19 +24,76 @@ SAPA <- get_dataframe_by_name(
 
 # IPIP keys list
 IPIPkeysList <- list(
-IPIP100agreeableness = c("-q_140", "-q_146", "q_150", "-q_195", "-q_200", "q_217", "-q_838", "q_844", "q_1041", "q_1053", "q_1162", "-q_1163", "q_1206", "q_1364", "q_1385", "q_1419", "q_1705", "q_1763", "q_1792", "q_1832"),
-IPIP100conscientiousness = c("q_76", "q_124", "q_530", "q_619", "-q_626", "-q_904", "q_931", "q_962", "-q_1254", "-q_1255", "q_1290", "q_1333", "q_1374", "-q_1397", "q_1422", "-q_1452", "-q_1483", "q_1507", "-q_1696", "-q_1949"),
-IPIP100extraversion = c("-q_241", "q_254", "q_262", "-q_403", "-q_690", "q_698", "-q_712", "q_815", "q_819", "-q_901", "-q_1114", "-q_1180", "q_1205", "q_1410", "-q_1480", "q_1742", "q_1768", "q_1803", "-q_1913"),
-IPIP100intellect = c("q_128", "q_132", "-q_194", "q_240", "-q_316", "q_422", "q_492", "q_493", "-q_609", "q_1050", "q_1058", "-q_1083", "-q_1088", "q_1090", "q_1388", "q_1392", "q_1738", "-q_1861", "q_1893", "-q_1964"),
-IPIP100stability = c("-q_108", "q_177", "q_248", "-q_497", "-q_890", "-q_952", "-q_960", "-q_974", "-q_979", "-q_986", "-q_995", "-q_1020", "-q_1099", "-q_1479", "-q_1505", "q_1585", "q_1677", "q_1683", "-q_1775", "-q_1989"),
-IPIP50agreeableness = c("q_844", "q_1792", "q_1763", "q_150", "q_1419", "q_1053", "-q_838", "-q_200", "-q_195", "-q_1163"),
-IPIP50conscientiousness = c("-q_1255", "-q_1397", "-q_1483", "-q_1696", "q_124", "q_1290", "q_1507", "q_76", "q_931", "q_962"),
-IPIP50extraversion = c("q_819", "q_698", "q_262", "q_1803", "q_1742", "-q_712", "-q_690", "-q_241", "-q_1180", "-q_1114"),
-IPIP50intellect = c("q_128", "q_240", "q_1893", "q_1738", "q_1090", "q_1058", "q_1050", "-q_609", "-q_194", "-q_1088"),
-IPIP50stability = c("-q_108", "-q_1099", "-q_1479", "-q_1989", "-q_497", "-q_974", "-q_986", "-q_995", "q_1677", "q_248")
-)
-
+IPIP100agreeableness = c("-q_140", "-q_146", "q_150", "-q_195", "-q_200", 
+                         "q_217", "-q_838", "q_844", "q_1041", "q_1053", 
+                         "q_1162", "-q_1163", "q_1206", "q_1364", "q_1385", 
+                         "q_1419", "q_1705", "q_1763", "q_1792", "q_1832"),
+IPIP100conscientiousness = c("q_76", "q_124", "q_530", "q_619", "-q_626", 
+                             "-q_904", "q_931", "q_962", "-q_1254", "-q_1255", 
+                             "q_1290", "q_1333", "q_1374", "-q_1397", "q_1422",
+                             "-q_1452", "-q_1483", "q_1507", "-q_1696",
+                             "-q_1949"),
+IPIP100extraversion = c("-q_241", "q_254", "q_262", "-q_403", "-q_690", "q_698",
+                        "-q_712", "q_815", "q_819", "-q_901", "-q_1114", 
+                        "-q_1180", "q_1205", "q_1410", "-q_1480", "q_1742", 
+                        "q_1768", "q_1803", "-q_1913"),
+IPIP100intellect = c("q_128", "q_132", "-q_194", "q_240", "-q_316", "q_422", 
+                     "q_492", "q_493", "-q_609", "q_1050", "q_1058", "-q_1083",
+                     "-q_1088", "q_1090", "q_1388", "q_1392", "q_1738",
+                     "-q_1861", "q_1893", "-q_1964"),
+IPIP100stability = c("-q_108", "q_177", "q_248", "-q_497", "-q_890", "-q_952", 
+                     "-q_960", "-q_974", "-q_979", "-q_986", "-q_995", 
+                     "-q_1020", "-q_1099", "-q_1479", "-q_1505", "q_1585",
+                     "q_1677", "q_1683", "-q_1775", "-q_1989"))
 ```
+
+#Introduction
+##Big Five Background
+One of the most widely replicated findings within the field of personality psychology is the Big Five structure of personality. With roots in the 1800’s, personality psychology sought to determine the best way to represent the large number of personality traits in a concise structure. This research initially involved researchers providing participants with large numbers of trait descriptive adjectives and asking them to rate the extent to which those adjectives characterize themselves or someone they knew. Dimension reduction analyses were then used to create a simpler structure from those responses. 
+
+Multiple research groups began converging on the five factor structure as early as the 1960’s, with an increasing consensus by the late 1980’s. Most of the recent work on the big five has been conducted through a combination of confirmatory factor analysis and theory driven selection of survey items based on previous findings about the structure. 
+
+
+
+
+##Geographical Personality
+In recent years, there has been increasing focus on regional variation of personality traits within the United States. Work has examined the extent to which regions of the US differ on the Big Five domains and can be said to have distinct and characteristic combinations of trait levels. For example, Rentfrow and colleagues (2013) show that the south and midwest are best characterized as friendly and conventional, whereas the west is relaxed and creative, and the northeast is temperamental and uninhibited. 
+
+A limitation of this work is that it examines the extent to which the five factor structure captures each region and what differences in the levels of each factor are due to regional variation. This research utilizes confirmatory factor analyses that assume that the five factor structure is the ideal level of dimensionality to characterize all regions. 
+
+##Cross Cultural Studies
+Much of the cross-cultural work on personality structure has found some support for the notion that the five factor structure has applicability in a number of cultures. However, these studies typically are conducted from an etic perspective that translate the items used in western samples. 
+
+However, when studies are conducted from an emic perspective – that is, using trait descriptive adjectives from the language of the culture, rather than translations of items used in the big five framework – different structures emerge. A varying number of factors have been found to best fit different cultures, ranging from one to seven in many cases.
+
+
+
+
+##Geographical Factor Structure within US
+Within the US, the regional variation in factor structures has not been an extensively studied topic. Because most research operates within a framework that utilizes confirmatory factor analysis, there is little information on the extent to which regions differ in their factor structure. 
+
+In the current study, we use exploratory factor analyses to provide estimates of the optimal factor structures for each of the fifty states. 
+
+
+#Brief Methods
+
+##Measures
+The International Personality Item Pool is an open-source repository of personality trait items that have been researched extensively in the big five tradition. The current study uses ninety nine of one hundred items from the IPIP-100. Participants rated themselves on a number of personality traits from 1- not at all like me to 6- very much like me. 
+
+##Data Collection
+
+Data were obtained from the Harvard [Dataverse](https://dataverse.harvard.edu/dataverse/SAPA-Project). Data were initially collected using the Synthetic Aperture for Personality Assessment  (Revelle et al., 2016; Condon and Revelle, 2014; Wilt et al., 2011) which utilizes a massively missing completely at random design, wherein each participant only provides responses to a fraction of items. 
+
+
+#Analyses
+
+First, we provide descriptive norms for the entire US sample, and then by state. 
+
+Next, we use parallel analysis to determine the optimal number of factors in the whole sample. Our hypothesis is that five factors will provide an optimal fit. 
+
+The main analyses are fifty parallel analyses, one for every state, that estimates the optimal number of personality dimensions for each state. We hypothesize that there will be variation in the number of ideal dimensions across states. 
+
+
 
 ```{r preprocessing}
 SAPA <- SAPA %>%
@@ -73,7 +130,7 @@ scores <- psych::scoreItems(keys = IPIPkeys, items = SAPA, min=1, max=6, totals 
 
 ```
 
-```{r #3 descriptives statistics}
+```{r #3 descriptives statistics, results = 'asis'}
 
 library(arsenal)
 
@@ -114,7 +171,7 @@ average_statescores <- SAPA %>%
 
 ```
 
-```{r #6/7 state-wise descriptives}
+```{r #6/7 state-wise descriptives, results = 'asis'}
 # combine demographics & traits
 factorSAPA <- cbind(SAPA[1:7], scores)
 
@@ -157,7 +214,7 @@ map(allFactor, ~map(.x, ~makeTable(.x)))
 
 ```
 
-```{r #9 factor structure - from nested states}
+```{r #9 factor structure - from nested states, eval = FALSE}
 by_stateFactors <- split(SAPA, factorSAPA$state)
 
 stateFactor <- map(by_stateFactors, ~fa.parallel(cov(.x[,8:106], use = "pairwise.complete.obs"), n.iter = 20, cor = "cov")$nfact)
