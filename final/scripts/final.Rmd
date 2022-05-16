@@ -75,9 +75,38 @@ scores <- psych::scoreItems(keys = IPIPkeys, items = SAPA, min=1, max=6, totals 
 
 ```{r #3 descriptives statistics}
 
+library(arsenal)
+
+# demographic table
+demog_tab <- summary(tableby(~ age + gender + race + education, 
+                             data = SAPA, test = FALSE),  
+                     title = "Full Sample Demographics")
+demog_tab
+
+# to add for final: demographic table grouped by state
+
+# to add for final:  improve correlation matrix format/names (below), include other personality traits (like stability), and include more complex grouping by state, gender, race, etc.
+
+
+res <- cor(scores, use = "complete.obs")
+round(res, 2)
+
+library(apaTables)
+
+apa.cor.table(scores, filename="Corr_table.doc", show.conf.interval=F)
 ```
 
 ```{r #4 average scores by factor}
+
+# average scores on included survey questions
+average_surveyscores <- SAPA %>%
+  summarize_at(vars(q_76:q_1989), mean, na.rm = TRUE)
+
+
+# average scores on survey questions by state (for final: can group by other variables as well)
+average_statescores <- SAPA %>%
+  group_by(state) %>%
+  summarize_at(vars(q_76:q_1989), mean, na.rm = TRUE)
 
 ```
 
