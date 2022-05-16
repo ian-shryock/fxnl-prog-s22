@@ -73,7 +73,7 @@ scores <- psych::scoreItems(keys = IPIPkeys, items = SAPA, min=1, max=6, totals 
 
 ```
 
-```{r #3 descriptives statistics, warning = FALSE}
+```{r #3 descriptives statistics, warning = FALSE, results = 'asis'}
 
 library(arsenal)
 
