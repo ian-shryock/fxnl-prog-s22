@@ -169,9 +169,9 @@ stateFactordf <- as.data.frame(stateFactor)
 stateFactordf
 ```
 
-#Introduction
+# Introduction
 
-##Big Five 
+## Big Five 
 One of the most widely replicated findings within the field of personality psychology is the Big Five structure of personality. With roots in the 1800’s, personality psychology sought to determine the best way to represent the large number of personality traits in a concise structure. This research initially involved researchers providing participants with large numbers of trait descriptive adjectives and asking them to rate the extent to which those adjectives characterize themselves or someone they knew. Dimension reduction analyses were then used to create a simpler structure from those responses. 
 
 Multiple research groups began converging on the five factor structure as early as the 1960’s, with an increasing consensus by the late 1980’s. Most of the recent work on the big five has been conducted through a combination of confirmatory factor analysis and theory driven selection of survey items based on previous findings about the structure. 
@@ -179,12 +179,12 @@ Multiple research groups began converging on the five factor structure as early 
 
 
 
-##Geographical Personality
+## Geographical Personality
 In recent years, there has been increasing focus on regional variation of personality traits within the United States. Work has examined the extent to which regions of the US differ on the Big Five domains and can be said to have distinct and characteristic combinations of trait levels. For example, Rentfrow and colleagues (2013) show that the south and midwest are best characterized as friendly and conventional, whereas the west is relaxed and creative, and the northeast is temperamental and uninhibited. 
 
 A limitation of this work is that it examines the extent to which the five factor structure captures each region and what differences in the levels of each factor are due to regional variation. This research utilizes confirmatory factor analyses that assume that the five factor structure is the ideal level of dimensionality to characterize all regions. 
 
-##Cross Cultural Studies
+## Cross Cultural Studies
 Much of the cross-cultural work on personality structure has found some support for the notion that the five factor structure has applicability in a number of cultures. However, these studies typically are conducted from an etic perspective that translate the items used in western samples. 
 
 However, when studies are conducted from an emic perspective – that is, using trait descriptive adjectives from the language of the culture, rather than translations of items used in the big five framework – different structures emerge. A varying number of factors have been found to best fit different cultures, ranging from one to seven in many cases.
@@ -192,22 +192,22 @@ However, when studies are conducted from an emic perspective – that is, using 
 
 
 
-##Geographical Factor Structure within US
+## Geographical Factor Structure within US
 Within the US, the regional variation in factor structures has not been an extensively studied topic. Because most research operates within a framework that utilizes confirmatory factor analysis, there is little information on the extent to which regions differ in their factor structure. 
 
 In the current study, we use exploratory factor analyses to provide estimates of the optimal factor structures for each of the fifty states. 
 
 
-#Brief Methods
+# Brief Methods
 
-##Measures
+## Measures
 The International Personality Item Pool is an open-source repository of personality trait items that have been researched extensively in the big five tradition. The current study uses ninety nine of one hundred items from the IPIP-100. Participants rated themselves on a number of personality traits from 1- not at all like me to 6- very much like me. 
 
-##Data Collection
+## Data Collection
 Data were obtained from the Harvard [Dataverse](https://dataverse.harvard.edu/dataverse/SAPA-Project). Data were initially collected using the Synthetic Aperture for Personality Assessment  (Revelle et al., 2016; Condon and Revelle, 2014; Wilt et al., 2011) which utilizes a massively missing completely at random design, wherein each participant only provides responses to a fraction of items. 
 
 
-#Analyses
+# Analyses
 
 First, we provide descriptive norms for the entire US sample, and then by state. 
 
