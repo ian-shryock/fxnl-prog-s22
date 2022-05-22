@@ -22,6 +22,8 @@ SAPA <- get_dataframe_by_name(
   "sapaTempData04apr2006thru18aug2010.tab",
   "10.7910/DVN/H9RQD6")
 
+#RG This didn't work for me: Error in get_dataframe_by_name("sapaTempData04apr2006thru18aug2010.tab",  : could not find function "get_dataframe_by_name"
+
 # IPIP keys list
 IPIPkeysList <- list(
 IPIP100agreeableness = c("-q_140", "-q_146", "q_150", "-q_195", "-q_200", "q_217", "-q_838", "q_844", "q_1041", "q_1053", "q_1162", "-q_1163", "q_1206", "q_1364", "q_1385", "q_1419", "q_1705", "q_1763", "q_1792", "q_1832"),
@@ -87,13 +89,14 @@ demog_tab
 
 # to add for final:  improve correlation matrix format/names (below), include other personality traits (like stability), and include more complex grouping by state, gender, race, etc.
 
+#RG This table looks great on the pdf, would you consider collapsing the race/ethnicity variables for clarity?
 
 res <- cor(scores, use = "complete.obs")
 round(res, 2)
 
 library(apaTables)
 
-apa.cor.table(scores, filename="Corr_table.doc", show.conf.interval=F)
+apa.cor.table(scores, filename="Corr_table.doc", show.conf.interval=FALSE)
 ```
 
 ```{r #4 average scores by factor, warning = FALSE}
@@ -149,6 +152,8 @@ makeTable <- function(x) {
 
 # create tables for each factor & state
 map(allFactor, ~map(.x, ~makeTable(.x)))
+
+
 
 ```
 
