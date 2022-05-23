@@ -122,6 +122,9 @@ factorSAPA <- cbind(SAPA[1:7], scores)
 by_state <- split(factorSAPA, factorSAPA$state)
 
 # descriptive stats - THERE SHOULD BE A BETTER WAY TO DO THIS (SOME KIND OF NESTED MAP FXN?)  ## summarize_at?
+
+# I am not sure but I feel like map2 could work here if you have a vector of variable names.
+
 stateAgree <- map(by_state, ~summarize(.x, meanFactor = mean(IPIP100agreeableness, na.rm = TRUE),
                                     sdFactor = sd(IPIP100agreeableness, na.rm = TRUE),
                                     nFactor = length(IPIP100agreeableness)))
