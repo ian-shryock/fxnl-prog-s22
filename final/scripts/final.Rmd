@@ -11,10 +11,12 @@ always_allow_html: true
 ---
 
 ```{r setup, include=FALSE}
-library(tidyverse)
-library(dataverse)
-library(kableExtra)
-library(psych)
+library(needs)
+needs(tidyverse, dataverse, kableExtra, psych, arsenal, apaTables)
+#library(tidyverse)
+#library(dataverse)
+#library(kableExtra)
+#library(psych)
 
 # download data from url
 Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
@@ -75,7 +77,7 @@ scores <- psych::scoreItems(keys = IPIPkeys, items = SAPA, min=1, max=6, totals 
 
 ```{r #3 descriptives statistics, warning = FALSE, results = 'asis'}
 
-library(arsenal)
+#library(arsenal)
 
 # demographic table
 demog_tab <- summary(tableby(~ age + gender + race + education, 
@@ -91,7 +93,7 @@ demog_tab
 res <- cor(scores, use = "complete.obs")
 round(res, 2)
 
-library(apaTables)
+#library(apaTables)
 
 apa.cor.table(scores, filename="Corr_table.doc", show.conf.interval=F)
 ```
@@ -234,5 +236,15 @@ The main analyses are fifty parallel analyses, one for every state, that estimat
 
 \newpage
 
+### EK Peer Review:
+# Areas of strength:
+1. Awesome use of branches/git features in general! Made it clear to see who was working on  what sections, and how the project was arranged. 
+2. Code is arranged easily to read, nice use of sections and not doing more than 1~2 things per line of code.
+3. Great reproducibility with having data loading working on first try for me, and doesn't require any extra files/folders outside of the "scripts" folder- might be beneficial to cache the data however?
+
+What I learned: Familiarity with the IPIP dataset! I'd really like tos ee some visualizations on how these factors vary across the different states, maybe using a geographic visualization?
+
+# EK Suggestions:
+- Code cleanup: moved library declarations to teh beginning of the script, and added the "needs" package" to simplify package loading
 
 
