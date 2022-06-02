@@ -11,10 +11,12 @@ always_allow_html: true
 ---
 
 ```{r setup, include=FALSE}
-library(tidyverse)
-library(dataverse)
-library(kableExtra)
-library(psych)
+library(needs)
+needs(tidyverse, dataverse, kableExtra, psych, arsenal, apaTables)
+#library(tidyverse)
+#library(dataverse)
+#library(kableExtra)
+#library(psych)
 
 # download data from url
 Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
@@ -74,8 +76,13 @@ scores <- psych::scoreItems(keys = IPIPkeys, items = SAPA, min=1, max=6, totals 
 ```
 
 ```{r #3 descriptives statistics, warning = FALSE, results = 'asis'}
+
 # PEER REVIEW: Move this to the top 
 library(arsenal)
+
+
+#library(arsenal)
+
 
 #Move package up to the top
 
@@ -109,9 +116,30 @@ sample(SAPA,education)
 res <- cor(scores, use = "complete.obs")
 round(res, 2)
 
-library(apaTables)
+#library(apaTables)
 
 apa.cor.table(scores, filename="Corr_table.doc", show.conf.interval=F)
+
+# SUGGESTION FROM MANUEL BELOW #
+
+# PEER REVIEW: To get a more elegant table, perhaps you can create your own function that gives you the sample size and percent of sample size by different characteristic and then use map to create a data frame with the categories of choice. I wrote a function below to get you started.
+
+ sample <- function(df,x) {
+   df %>%
+   group_by({{x}}) %>%
+   summarize(group_sample = n()) %>%
+   ungroup() %>%
+   rename(group = {{x}}) %>%
+   mutate(total_sample = sum(group_sample),
+          percent_sample = group_sample/total_sample) %>%
+   select(group,group_sample, percent_sample)
+ }
+
+ sample(SAPA,race)
+ sample(SAPA,education)
+ 
+ # END SUGGESTION FROM MANUAL # 
+ 
 ```
 
 ```{r #4 average scores by factor, warning = FALSE}
@@ -140,6 +168,12 @@ factorSAPA <- cbind(SAPA[1:7], scores)
 by_state <- split(factorSAPA, factorSAPA$state)
 
 # descriptive stats - THERE SHOULD BE A BETTER WAY TO DO THIS (SOME KIND OF NESTED MAP FXN?)  ## summarize_at?
+
+# I am not sure but I feel like map2 could work here if you have a vector of variable names.
+
+# descriptive stats - THERE SHOULD BE A BETTER WAY TO DO THIS (SOME KIND OF NESTED MAP FXN?)  ## summarize_at? 
+# I am not sure but I feel like map2 could work here if you have a vector of variable names. (Murat comment)
+
 stateAgree <- map(by_state, ~summarize(.x, meanFactor = mean(IPIP100agreeableness, na.rm = TRUE),
                                     sdFactor = sd(IPIP100agreeableness, na.rm = TRUE),
                                     nFactor = length(IPIP100agreeableness)))
@@ -168,6 +202,7 @@ makeTable <- function(x) {
 # create tables for each factor & state
 map(allFactor, ~map(.x, ~makeTable(.x)))
 
+
 # PEER REVIEW: I'm not 100% sure what your end goal is. If your trying to create summary statistics for all your factors for each state, I think you can use map_df and split the allFactor list so that you can end up with a nice data frame with a row for each state and summary statistics as columns. Then I can imagine you could use something like the gt package to create a table with color coded cells that show high and low mean scores. Below is a not so very elegan way that you can get there. 
 
 state_factor <- tibble(
@@ -178,6 +213,21 @@ state_factor <- tibble(
   intel_factor = map_df(stateExtra,~.x[1])
 )
 
+
+
+# SUGGESTION FROM MANUEL #
+
+# PEER REVIEW: I'm not 100% sure what your end goal is. If your trying to create summary statistics for all your factors for each state, I think you can use map_df and split the allFactor list so that you can end up with a nice data frame with a row for each state and summary statistics as columns. Then I can imagine you could use something like the gt package to create a table with color coded cells that show high and low mean scores. Below is a not so very elegan way that you can get there. 
+
+ state_factor <- tibble(
+   state_names = names(stateAgree),
+   agree_factor = map_df(stateAgree,~.x[1]),
+   cons_factor = map_df(stateCons,~.x[1]),
+   extra_factor = map_df(stateExtra,~.x[1]),
+   intel_factor = map_df(stateExtra,~.x[1])
+ )
+
+# END SUGGESTION FROM MANUEL #
 
 
 ```
@@ -264,5 +314,15 @@ The main analyses are fifty parallel analyses, one for every state, that estimat
 
 \newpage
 
+### EK Peer Review:
+# Areas of strength:
+1. Awesome use of branches/git features in general! Made it clear to see who was working on  what sections, and how the project was arranged. 
+2. Code is arranged easily to read, nice use of sections and not doing more than 1~2 things per line of code.
+3. Great reproducibility with having data loading working on first try for me, and doesn't require any extra files/folders outside of the "scripts" folder- might be beneficial to cache the data however?
+
+What I learned: Familiarity with the IPIP dataset! I'd really like tos ee some visualizations on how these factors vary across the different states, maybe using a geographic visualization?
+
+# EK Suggestions:
+- Code cleanup: moved library declarations to teh beginning of the script, and added the "needs" package" to simplify package loading
 
 
