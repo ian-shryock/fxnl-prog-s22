@@ -11,10 +11,8 @@ always_allow_html: true
 ---
 
 ```{r setup, include=FALSE}
-library(tidyverse)
-library(dataverse)
-library(kableExtra)
-library(psych)
+library(needs)
+needs(tidyverse, dataverse, kableExtra, psych, arsenal, apaTables)
 
 # download data from url
 Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
