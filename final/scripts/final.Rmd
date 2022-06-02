@@ -24,6 +24,8 @@ SAPA <- get_dataframe_by_name(
   "sapaTempData04apr2006thru18aug2010.tab",
   "10.7910/DVN/H9RQD6")
 
+#RG This didn't work for me: Error in get_dataframe_by_name("sapaTempData04apr2006thru18aug2010.tab",  : could not find function "get_dataframe_by_name"
+
 # IPIP keys list
 IPIPkeysList <- list(
 IPIP100agreeableness = c("-q_140", "-q_146", "q_150", "-q_195", "-q_200", "q_217", "-q_838", "q_844", "q_1041", "q_1053", "q_1162", "-q_1163", "q_1206", "q_1364", "q_1385", "q_1419", "q_1705", "q_1763", "q_1792", "q_1832"),
@@ -112,11 +114,15 @@ sample(SAPA,education)
 
 # to add for final:  improve correlation matrix format/names (below), include other personality traits (like stability), and include more complex grouping by state, gender, race, etc.
 
+#RG This table looks great on the pdf, would you consider collapsing the race/ethnicity variables for clarity?
 
 res <- cor(scores, use = "complete.obs")
 round(res, 2)
 
 #library(apaTables)
+
+
+apa.cor.table(scores, filename="Corr_table.doc", show.conf.interval=FALSE)
 
 apa.cor.table(scores, filename="Corr_table.doc", show.conf.interval=F)
 
@@ -140,6 +146,7 @@ apa.cor.table(scores, filename="Corr_table.doc", show.conf.interval=F)
  
  # END SUGGESTION FROM MANUAL # 
  
+
 ```
 
 ```{r #4 average scores by factor, warning = FALSE}
@@ -203,6 +210,8 @@ makeTable <- function(x) {
 map(allFactor, ~map(.x, ~makeTable(.x)))
 
 
+
+
 # PEER REVIEW: I'm not 100% sure what your end goal is. If your trying to create summary statistics for all your factors for each state, I think you can use map_df and split the allFactor list so that you can end up with a nice data frame with a row for each state and summary statistics as columns. Then I can imagine you could use something like the gt package to create a table with color coded cells that show high and low mean scores. Below is a not so very elegan way that you can get there. 
 
 state_factor <- tibble(
@@ -228,6 +237,7 @@ state_factor <- tibble(
  )
 
 # END SUGGESTION FROM MANUEL #
+
 
 
 ```
