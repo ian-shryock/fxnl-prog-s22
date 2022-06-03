@@ -11,21 +11,8 @@ always_allow_html: true
 ---
 
 ```{r setup, include=FALSE}
-
-library(tidyverse)
-library(dataverse)
-library(kableExtra)
-library(psych)
-library(arsenal) #I moved this package and those below up with the rest of the packages
-library(apaTables)
-
 library(needs)
 needs(tidyverse, dataverse, kableExtra, psych, arsenal, apaTables)
-#library(tidyverse)
-#library(dataverse)
-#library(kableExtra)
-#library(psych)
-
 
 # download data from url
 Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
@@ -35,6 +22,7 @@ SAPA <- get_dataframe_by_name(
   "10.7910/DVN/H9RQD6")
 
 #RG This didn't work for me: Error in get_dataframe_by_name("sapaTempData04apr2006thru18aug2010.tab",  : could not find function "get_dataframe_by_name"
+#AB: I think this fxn is just from the psych library right?
 
 # IPIP keys list
 IPIPkeysList <- list(
@@ -119,18 +107,6 @@ scores <- psych::scoreItems(keys = IPIPkeys, items = SAPA, min = 1, max = 6,
 ```
 
 ```{r #3 descriptives statistics, warning = FALSE, results = 'asis'}
-
-
-# PEER REVIEW: Move this to the top 
-library(arsenal)
-
-
-#library(arsenal)
-
-
-#Move package up to the top
-
-
 # demographic table
 demog_tab <- summary(tableby(~ age + gender + race + education, 
                              data = SAPA, test = FALSE),  
@@ -158,54 +134,39 @@ sample(SAPA,education)
 
 # to add for final:  improve correlation matrix format/names (below), include other personality traits (like stability), and include more complex grouping by state, gender, race, etc.
 
-
-res <- cor(scores, use = "complete.obs")
-round(res, 2)
-
-apa.cor.table(scores, filename = "Corr_table.doc", show.conf.interval = FALSE)
-
 #RG This table looks great on the pdf, would you consider collapsing the race/ethnicity variables for clarity?
 
 res <- cor(scores, use = "complete.obs")
 round(res, 2)
-
-#library(apaTables)
 
 
 apa.cor.table(scores, filename="Corr_table.doc", show.conf.interval=FALSE)
 
 apa.cor.table(scores, filename="Corr_table.doc", show.conf.interval=F)
 
-# SUGGESTION FROM MANUEL BELOW #
-
 # PEER REVIEW: To get a more elegant table, perhaps you can create your own function that gives you the sample size and percent of sample size by different characteristic and then use map to create a data frame with the categories of choice. I wrote a function below to get you started.
 
- sample <- function(df,x) {
-   df %>%
-   group_by({{x}}) %>%
-   summarize(group_sample = n()) %>%
-   ungroup() %>%
-   rename(group = {{x}}) %>%
-   mutate(total_sample = sum(group_sample),
-          percent_sample = group_sample/total_sample) %>%
-   select(group,group_sample, percent_sample)
- }
+sample <- function(df,x) {
+  df %>%
+    group_by({{x}}) %>%
+    summarize(group_sample = n()) %>%
+    ungroup() %>%
+    rename(group = {{x}}) %>%
+    mutate(total_sample = sum(group_sample),
+           percent_sample = group_sample/total_sample) %>%
+    select(group,group_sample, percent_sample)
+}
 
- sample(SAPA,race)
- sample(SAPA,education)
- 
- # END SUGGESTION FROM MANUAL # 
- 
+sample(SAPA,race)
+sample(SAPA,education)
 
 
 ```
 
 ```{r #4 average scores by factor, warning = FALSE}
-
 # average scores on included survey questions
 average_surveyscores <- SAPA %>%
   summarize_at(vars(q_76:q_1989), mean, na.rm = TRUE)
-
 
 # average scores on survey questions by state (for final: can group by other variables as well)
 average_statescores <- SAPA %>%
@@ -224,10 +185,6 @@ factorSAPA <- cbind(SAPA[1:7], scores)
 
 # nest data by state
 by_state <- split(factorSAPA, factorSAPA$state)
-
-# descriptive stats - THERE SHOULD BE A BETTER WAY TO DO THIS (SOME KIND OF NESTED MAP FXN?)  ## summarize_at?
-
-# I am not sure but I feel like map2 could work here if you have a vector of variable names.
 
 # descriptive stats - THERE SHOULD BE A BETTER WAY TO DO THIS (SOME KIND OF NESTED MAP FXN?)  ## summarize_at? 
 # I am not sure but I feel like map2 could work here if you have a vector of variable names. (Murat comment)
@@ -264,9 +221,6 @@ makeTable <- function(x) {
 # create tables for each factor & state
 map(allFactor, ~map(.x, ~makeTable(.x)))
 
-
-
-
 # PEER REVIEW: I'm not 100% sure what your end goal is. If your trying to create summary statistics for all your factors for each state, I think you can use map_df and split the allFactor list so that you can end up with a nice data frame with a row for each state and summary statistics as columns. Then I can imagine you could use something like the gt package to create a table with color coded cells that show high and low mean scores. Below is a not so very elegan way that you can get there. 
 
 state_factor <- tibble(
@@ -276,23 +230,6 @@ state_factor <- tibble(
   extra_factor = map_df(stateExtra,~.x[1]),
   intel_factor = map_df(stateExtra,~.x[1])
 )
-
-
-
-# SUGGESTION FROM MANUEL #
-
-# PEER REVIEW: I'm not 100% sure what your end goal is. If your trying to create summary statistics for all your factors for each state, I think you can use map_df and split the allFactor list so that you can end up with a nice data frame with a row for each state and summary statistics as columns. Then I can imagine you could use something like the gt package to create a table with color coded cells that show high and low mean scores. Below is a not so very elegan way that you can get there. 
-
- state_factor <- tibble(
-   state_names = names(stateAgree),
-   agree_factor = map_df(stateAgree,~.x[1]),
-   cons_factor = map_df(stateCons,~.x[1]),
-   extra_factor = map_df(stateExtra,~.x[1]),
-   intel_factor = map_df(stateExtra,~.x[1])
- )
-
-# END SUGGESTION FROM MANUEL #
-
 
 
 ```
