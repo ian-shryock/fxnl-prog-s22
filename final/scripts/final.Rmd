@@ -179,40 +179,55 @@ average_statescores <- SAPA %>%
 
 ```
 
-```{r #6/7 state-wise descriptives, warning = FALSE, results='hide'}
+```{r #6/7 state-wise descriptives, warning = FALSE}
 # combine demographics & traits
 factorSAPA <- cbind(SAPA[1:7], scores)
 
+# add extra state column
+factorSAPAstate <- factorSAPA %>%
+  mutate(state_name = state)
+
 # nest data by state
-by_state <- split(factorSAPA, factorSAPA$state)
+by_state <- split(factorSAPAstate, factorSAPAstate$state)
 
 # descriptive stats - THERE SHOULD BE A BETTER WAY TO DO THIS (SOME KIND OF NESTED MAP FXN?)  ## summarize_at? 
 # I am not sure but I feel like map2 could work here if you have a vector of variable names. (Murat comment)
+# AB: I am not sure that map2 would actually be more efficient since the variable names are different for each of the 4 factors. So it would have to be done 4 separate times anyway ...?
 
 stateAgree <- map(by_state, ~summarize(.x, meanFactor = mean(IPIP100agreeableness, na.rm = TRUE),
                                     sdFactor = sd(IPIP100agreeableness, na.rm = TRUE),
-                                    nFactor = length(IPIP100agreeableness)))
+                                    nFactor = length(IPIP100agreeableness),
+                                    stateName = state_name[1],
+                                    factorName = "Agreeableness"))
 
 stateCons <- map(by_state, ~summarize(.x, meanFactor = mean(IPIP100conscientiousness, na.rm = TRUE),
                                     sdFactor = sd(IPIP100conscientiousness, na.rm = TRUE),
-                                    nFactor = length(IPIP100conscientiousness)))
+                                    nFactor = length(IPIP100conscientiousness),
+                                    stateName = state_name[1],
+                                    factorName = "Conscientiousness"))
 
 stateExtra <- map(by_state, ~summarize(.x, meanFactor = mean(IPIP100extraversion, na.rm = TRUE),
                                     sdFactor = sd(IPIP100extraversion, na.rm = TRUE),
-                                    nFactor = length(IPIP100extraversion)))
+                                    nFactor = length(IPIP100extraversion),
+                                    stateName = state_name[1],
+                                    factorName = "Extraversion"))
 
 stateIntel <- map(by_state, ~summarize(.x, meanFactor = mean(IPIP100intellect, na.rm = TRUE),
                                     sdFactor = sd(IPIP100intellect, na.rm = TRUE),
-                                    nFactor = length(IPIP100intellect)))
+                                    nFactor = length(IPIP100intellect),
+                                    stateName = state_name[1],
+                                    factorName = "Intellect"))
 # group all factors in list
 allFactor <- list(stateAgree, stateCons, stateExtra, stateIntel)
 
 names(allFactor) = c('Agreeableness', 'Conscientiousness', 'Extraversion', 'Intellect')
 
-# function to create table - SHOULD FIND A WAY TO CAPTION EACH TABLE BY STATE & FACTOR
-makeTable <- function(x) {
-  kable(x, booktabs = TRUE, longtable = TRUE, col.names = c("Mean", "SD", "N"), 
-        caption = paste('State of ', x, ' Descriptives')) %>% 
+# VERSION 1 SEPARATE TABLES FOR ALL FACTOR/STATE COMBINATIONS
+
+# function to create table 
+makeTable <- function(x, name=deparse(substitute(x))) {
+  kable(x[1:3], booktabs = TRUE, longtable = TRUE, col.names = c("Mean", "SD", "N"), 
+        caption = paste('State of ', x[4], ' ', x[5], ' Descriptives')) %>% 
     landscape() %>% 
     kable_styling(font_size = 12, latex_options = c("scale_down", "repeat_header")) %>% 
     kable_classic() 
@@ -221,16 +236,59 @@ makeTable <- function(x) {
 # create tables for each factor & state
 map(allFactor, ~map(.x, ~makeTable(.x)))
 
-# PEER REVIEW: I'm not 100% sure what your end goal is. If your trying to create summary statistics for all your factors for each state, I think you can use map_df and split the allFactor list so that you can end up with a nice data frame with a row for each state and summary statistics as columns. Then I can imagine you could use something like the gt package to create a table with color coded cells that show high and low mean scores. Below is a not so very elegan way that you can get there. 
 
-state_factor <- tibble(
+
+
+# VERSION 2 FROM PEER REVIEW:
+# They suggested using the gt package, but it does not seem to be available for this version of R
+
+# summarize each factor by state
+state_factor_agree <- tibble(
   state_names = names(stateAgree),
-  agree_factor = map_df(stateAgree,~.x[1]),
-  cons_factor = map_df(stateCons,~.x[1]),
-  extra_factor = map_df(stateExtra,~.x[1]),
-  intel_factor = map_df(stateExtra,~.x[1])
+  agree_mean = map_df(stateAgree,~.x[1]),
+  agree_sd = map_df(stateAgree,~.x[2]),
+  agree_n = map_df(stateAgree,~.x[3]),
+)
+state_factor_cons <- tibble(
+  state_names = names(stateCons),
+  cons_mean = map_df(stateCons,~.x[1]),
+  cons_sd = map_df(stateCons,~.x[2]),
+  cons_n = map_df(stateCons,~.x[3]),
+)
+state_factor_extra <- tibble(
+  state_names = names(stateExtra),
+  extra_mean = map_df(stateExtra,~.x[1]),
+  extra_sd = map_df(stateExtra,~.x[2]),
+  extra_n = map_df(stateExtra,~.x[3]),
+)
+state_factor_intel <- tibble(
+  state_names = names(stateIntel),
+  intel_mean = map_df(stateIntel,~.x[1]),
+  intel_sd = map_df(stateIntel,~.x[2]),
+  intel_n = map_df(stateIntel,~.x[3]),
 )
 
+
+kable(state_factor_agree, booktabs = TRUE, longtable = TRUE, col.names = c("State", "Mean", "SD", "N"), 
+    caption = "Agreeableness Descriptives") %>% 
+    landscape() %>% 
+    kable_styling(font_size = 12, latex_options = c("scale_down", "repeat_header")) %>% 
+    kable_classic() 
+kable(state_factor_cons, booktabs = TRUE, longtable = TRUE, col.names = c("State", "Mean", "SD", "N"), 
+    caption = "Conscientiousness Descriptives") %>% 
+    landscape() %>% 
+    kable_styling(font_size = 12, latex_options = c("scale_down", "repeat_header")) %>% 
+    kable_classic() 
+kable(state_factor_extra, booktabs = TRUE, longtable = TRUE, col.names = c("State", "Mean", "SD", "N"), 
+    caption = "Extraversion Descriptives") %>% 
+    landscape() %>% 
+    kable_styling(font_size = 12, latex_options = c("scale_down", "repeat_header")) %>% 
+    kable_classic() 
+kable(state_factor_intel, booktabs = TRUE, longtable = TRUE, col.names = c("State", "Mean", "SD", "N"), 
+    caption = "Intellect Descriptives") %>% 
+    landscape() %>% 
+    kable_styling(font_size = 12, latex_options = c("scale_down", "repeat_header")) %>% 
+    kable_classic() 
 
 ```
 
