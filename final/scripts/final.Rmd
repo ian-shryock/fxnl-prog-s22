@@ -10,9 +10,27 @@ output:
 always_allow_html: true
 ---
 
+\renewcommand{\thetable}{\arabic{table}} 
+\renewcommand{\thefigure}{\arabic{figure}}
+
+
+
+\definecolor{fancyTextColor}{HTML}{4284f5}
+\definecolor{hightlightColor}{HTML}{FFFF66}
+
+\newpage
+
+\listoftables
+
+\newpage
+
+
+
+
 ```{r setup, include=FALSE}
 library(needs)
 needs(tidyverse, dataverse, kableExtra, psych, arsenal, apaTables)
+
 
 # download data from url
 Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
@@ -20,6 +38,7 @@ Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
 SAPA <- get_dataframe_by_name(
   "sapaTempData04apr2006thru18aug2010.tab",
   "10.7910/DVN/H9RQD6")
+
 
 #RG This didn't work for me: Error in get_dataframe_by_name("sapaTempData04apr2006thru18aug2010.tab",  : could not find function "get_dataframe_by_name"
 #AB: I think this fxn is just from the psych library right?
@@ -57,6 +76,7 @@ IPIP50intellect = c("q_128", "q_240", "q_1893", "q_1738", "q_1090", "q_1058",
                     "q_1050", "-q_609", "-q_194", "-q_1088"),
 IPIP50stability = c("-q_108", "-q_1099", "-q_1479", "-q_1989", "-q_497", 
                     "-q_974", "-q_986", "-q_995", "q_1677", "q_248")
+
 )
 
 ```
@@ -92,7 +112,7 @@ IPIPkeys <- IPIPkeys[1:4]
 
 ```
 
-```{r demographics, warning= FALSE}
+```{r demographics, warning= FALSE, echo = FALSE}
 # idk if this is what we want here - tableby package not available
 map((SAPA[c(2,3,5,6,7)]), table)
 
@@ -297,7 +317,7 @@ kable(state_factor_intel, booktabs = TRUE, longtable = TRUE, col.names = c("Stat
 
 ```
 
-```{r #9 factor structure - from nested states, include = FALSE, warning = FALSE}
+```{r #9 factor structure - from nested states, include = FALSE, warning = FALSE, eval = F}
 by_stateFactors <- split(SAPA, factorSAPA$state)
 
 stateFactor <- map(by_stateFactors, ~fa.parallel(cov(.x[,8:106], use = "pairwise.complete.obs"), n.iter = 20, cor = "cov")$nfact)
@@ -306,8 +326,83 @@ stateFactordf <- as.data.frame(stateFactor)
 ```
 
 ```{r #9 table, warning = FALSE}
+load(here("data", "statefactor.rda"))
 stateFactordf
 ```
+
+```{r #10 prep efas, warning = FALSE, echo = FALSE}
+## Using a larger dataset for the following analyses (correlation matrices couldn't full be estimated)
+load(here("data", "statefactor.rda"))
+SAPA2 <- get_dataframe_by_name(
+  "sapaTempData373items18aug2010thru08dec2013.tab",
+  "10.7910/DVN/C40K1U")
+items <- import(here("data", "IPIPitemLists.rdata"))
+
+ip <- items[1:5] %>% unlist() 
+names(ip) <- NULL
+SAPA2 <- SAPA2 %>% 
+    # filter in US
+  filter(country == "USA") %>%
+  # filter 50 states
+  filter(!state %in% 
+           c('District of Columbia', 'Guam', 'Palau',
+             'Puerto Rico', 'Virgin Islands',
+             'Northern Mariana Islands', 'American Samoa', 
+             'Marshall Islands', NA)) %>% 
+  select(state, all_of(ip))
+  
+
+
+stateFacLong <- stateFactordf %>% 
+  pivot_longer(everything(), names_to = "state", values_to = "nfact") %>% 
+  mutate(state = gsub(".", " ", state, fixed = TRUE))
+
+nest_stateFactors <- SAPA2 %>% 
+  group_by(state) %>% 
+  #select(starts_with("q")) %>% 
+  nest()
+
+for_efa <- left_join(nest_stateFactors, stateFacLong)
+```
+
+
+```{r #10 run efa, warning = FALSE, echo = FALSE, eval = FALSE}
+efaSolutions <- for_efa %>% mutate(solution = list(fa(as.data.frame(data), 
+                                                      nfactors = nfact, 
+                                                      rotate = "oblimin")$loadings))
+save(efaSolutions, file = here("data", "solutions2.rda")) 
+```
+
+
+```{r  warning = FALSE, echo = FALSE, eval = F}
+## regrettably, qgraph automatically plots, resulting in all 50 plots rendered
+## 
+load(here("data", "solutions2.rda"))
+
+
+efaSolutions2 <- efaSolutions %>% 
+  mutate(plot = map(
+    solution,
+  ~{qgraph(.x,
+       minimum = 0.2, cut = 0.4, 
+       vsize = c(1, 15),borders = FALSE, 
+       asize = 0.07, esize = 4, vTrans = 200)
+    }
+  )
+  )
+
+save(efaSolutions2, file = here("data", "netplots.rda"))
+```
+
+
+```{r  warning = FALSE, echo = FALSE}
+## get loadings for whole population
+five_factor <- fa(SAPA2 %>% select(starts_with("q")), 
+                  nfactors = 5, rotate = "oblimin")
+```
+
+
+\newpage
 
 # Introduction
 
@@ -356,23 +451,28 @@ Next, we use parallel analysis to determine the optimal number of factors in the
 The main analyses are fifty parallel analyses, one for every state, that estimates the optimal number of personality dimensions for each state. We hypothesize that there will be variation in the number of ideal dimensions across states. 
 
 
-\renewcommand{\thetable}{S\arabic{table}} 
-\renewcommand{\thefigure}{S\arabic{figure}}
-
-
-
-\definecolor{fancyTextColor}{HTML}{4284f5}
-\definecolor{hightlightColor}{HTML}{FFFF66}
-
 \newpage
 
-\listoftables
+```{r  warning = FALSE, echo = FALSE}
+load(here("data", "netplots.rda"))
+qgraph(five_factor$loadings, minimum = 0.2, cut = 0.4, 
+       vsize = c(1, 15),borders = FALSE, 
+       asize = 0.07, esize = 4, vTrans = 200)
+title("Personality Structure for United States")
 
-\newpage
+qgraph(efaSolutions2$plot[[1]])
+title(paste0("Personality Structure for ", efaSolutions2[[1]][1]))
 
-\listoffigures
+qgraph(efaSolutions2$plot[[25]])
+title(paste0("Personality Structure for ", efaSolutions2[[1]][25]))
 
-\newpage
+qgraph(efaSolutions2$plot[[50]])
+title(paste0("Personality Structure for ", efaSolutions2[[1]][50]))
+
+
+```
+
+
 
 ### EK Peer Review:
 # Areas of strength:
