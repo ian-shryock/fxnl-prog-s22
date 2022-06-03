@@ -10,11 +10,33 @@ output:
 always_allow_html: true
 ---
 
+\renewcommand{\thetable}{\arabic{table}} 
+\renewcommand{\thefigure}{\arabic{figure}}
+
+
+
+\definecolor{fancyTextColor}{HTML}{4284f5}
+\definecolor{hightlightColor}{HTML}{FFFF66}
+
+\newpage
+
+\listoftables
+
+\newpage
+
+
+
+
 ```{r setup, include=FALSE}
 library(tidyverse)
 library(dataverse)
 library(kableExtra)
 library(psych)
+library(haven)
+library(here)
+library(rio)
+library(semPlot)
+library(qgraph) 
 
 # download data from url
 Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
@@ -22,18 +44,14 @@ SAPA <- get_dataframe_by_name(
   "sapaTempData04apr2006thru18aug2010.tab",
   "10.7910/DVN/H9RQD6")
 
+
 # IPIP keys list
 IPIPkeysList <- list(
 IPIP100agreeableness = c("-q_140", "-q_146", "q_150", "-q_195", "-q_200", "q_217", "-q_838", "q_844", "q_1041", "q_1053", "q_1162", "-q_1163", "q_1206", "q_1364", "q_1385", "q_1419", "q_1705", "q_1763", "q_1792", "q_1832"),
 IPIP100conscientiousness = c("q_76", "q_124", "q_530", "q_619", "-q_626", "-q_904", "q_931", "q_962", "-q_1254", "-q_1255", "q_1290", "q_1333", "q_1374", "-q_1397", "q_1422", "-q_1452", "-q_1483", "q_1507", "-q_1696", "-q_1949"),
 IPIP100extraversion = c("-q_241", "q_254", "q_262", "-q_403", "-q_690", "q_698", "-q_712", "q_815", "q_819", "-q_901", "-q_1114", "-q_1180", "q_1205", "q_1410", "-q_1480", "q_1742", "q_1768", "q_1803", "-q_1913"),
 IPIP100intellect = c("q_128", "q_132", "-q_194", "q_240", "-q_316", "q_422", "q_492", "q_493", "-q_609", "q_1050", "q_1058", "-q_1083", "-q_1088", "q_1090", "q_1388", "q_1392", "q_1738", "-q_1861", "q_1893", "-q_1964"),
-IPIP100stability = c("-q_108", "q_177", "q_248", "-q_497", "-q_890", "-q_952", "-q_960", "-q_974", "-q_979", "-q_986", "-q_995", "-q_1020", "-q_1099", "-q_1479", "-q_1505", "q_1585", "q_1677", "q_1683", "-q_1775", "-q_1989"),
-IPIP50agreeableness = c("q_844", "q_1792", "q_1763", "q_150", "q_1419", "q_1053", "-q_838", "-q_200", "-q_195", "-q_1163"),
-IPIP50conscientiousness = c("-q_1255", "-q_1397", "-q_1483", "-q_1696", "q_124", "q_1290", "q_1507", "q_76", "q_931", "q_962"),
-IPIP50extraversion = c("q_819", "q_698", "q_262", "q_1803", "q_1742", "-q_712", "-q_690", "-q_241", "-q_1180", "-q_1114"),
-IPIP50intellect = c("q_128", "q_240", "q_1893", "q_1738", "q_1090", "q_1058", "q_1050", "-q_609", "-q_194", "-q_1088"),
-IPIP50stability = c("-q_108", "-q_1099", "-q_1479", "-q_1989", "-q_497", "-q_974", "-q_986", "-q_995", "q_1677", "q_248")
+IPIP100stability = c("-q_108", "q_177", "q_248", "-q_497", "-q_890", "-q_952", "-q_960", "-q_974", "-q_979", "-q_986", "-q_995", "-q_1020", "-q_1099", "-q_1479", "-q_1505", "q_1585", "q_1677", "q_1683", "-q_1775", "-q_1989")
 )
 
 ```
@@ -60,7 +78,7 @@ IPIPkeys <- IPIPkeys[1:4]
 
 ```
 
-```{r demographics, warning= FALSE}
+```{r demographics, warning= FALSE, echo = FALSE}
 # idk if this is what we want here - tableby package not available
 map((SAPA[c(2,3,5,6,7)]), table)
 
@@ -157,7 +175,7 @@ map(allFactor, ~map(.x, ~makeTable(.x)))
 
 ```
 
-```{r #9 factor structure - from nested states, include = FALSE, warning = FALSE}
+```{r #9 factor structure - from nested states, include = FALSE, warning = FALSE, eval = F}
 by_stateFactors <- split(SAPA, factorSAPA$state)
 
 stateFactor <- map(by_stateFactors, ~fa.parallel(cov(.x[,8:106], use = "pairwise.complete.obs"), n.iter = 20, cor = "cov")$nfact)
@@ -166,8 +184,83 @@ stateFactordf <- as.data.frame(stateFactor)
 ```
 
 ```{r #9 table, warning = FALSE}
+load(here("data", "statefactor.rda"))
 stateFactordf
 ```
+
+```{r #10 prep efas, warning = FALSE, echo = FALSE}
+## Using a larger dataset for the following analyses (correlation matrices couldn't full be estimated)
+load(here("data", "statefactor.rda"))
+SAPA2 <- get_dataframe_by_name(
+  "sapaTempData373items18aug2010thru08dec2013.tab",
+  "10.7910/DVN/C40K1U")
+items <- import(here("data", "IPIPitemLists.rdata"))
+
+ip <- items[1:5] %>% unlist() 
+names(ip) <- NULL
+SAPA2 <- SAPA2 %>% 
+    # filter in US
+  filter(country == "USA") %>%
+  # filter 50 states
+  filter(!state %in% 
+           c('District of Columbia', 'Guam', 'Palau',
+             'Puerto Rico', 'Virgin Islands',
+             'Northern Mariana Islands', 'American Samoa', 
+             'Marshall Islands', NA)) %>% 
+  select(state, all_of(ip))
+  
+
+
+stateFacLong <- stateFactordf %>% 
+  pivot_longer(everything(), names_to = "state", values_to = "nfact") %>% 
+  mutate(state = gsub(".", " ", state, fixed = TRUE))
+
+nest_stateFactors <- SAPA2 %>% 
+  group_by(state) %>% 
+  #select(starts_with("q")) %>% 
+  nest()
+
+for_efa <- left_join(nest_stateFactors, stateFacLong)
+```
+
+
+```{r #10 run efa, warning = FALSE, echo = FALSE, eval = FALSE}
+efaSolutions <- for_efa %>% mutate(solution = list(fa(as.data.frame(data), 
+                                                      nfactors = nfact, 
+                                                      rotate = "oblimin")$loadings))
+save(efaSolutions, file = here("data", "solutions2.rda")) 
+```
+
+
+```{r  warning = FALSE, echo = FALSE, eval = F}
+## regrettably, qgraph automatically plots, resulting in all 50 plots rendered
+## 
+load(here("data", "solutions2.rda"))
+
+
+efaSolutions2 <- efaSolutions %>% 
+  mutate(plot = map(
+    solution,
+  ~{qgraph(.x,
+       minimum = 0.2, cut = 0.4, 
+       vsize = c(1, 15),borders = FALSE, 
+       asize = 0.07, esize = 4, vTrans = 200)
+    }
+  )
+  )
+
+save(efaSolutions2, file = here("data", "netplots.rda"))
+```
+
+
+```{r  warning = FALSE, echo = FALSE}
+## get loadings for whole population
+five_factor <- fa(SAPA2 %>% select(starts_with("q")), 
+                  nfactors = 5, rotate = "oblimin")
+```
+
+
+\newpage
 
 # Introduction
 
@@ -216,23 +309,28 @@ Next, we use parallel analysis to determine the optimal number of factors in the
 The main analyses are fifty parallel analyses, one for every state, that estimates the optimal number of personality dimensions for each state. We hypothesize that there will be variation in the number of ideal dimensions across states. 
 
 
-\renewcommand{\thetable}{S\arabic{table}} 
-\renewcommand{\thefigure}{S\arabic{figure}}
-
-
-
-\definecolor{fancyTextColor}{HTML}{4284f5}
-\definecolor{hightlightColor}{HTML}{FFFF66}
-
 \newpage
 
-\listoftables
+```{r  warning = FALSE, echo = FALSE}
+load(here("data", "netplots.rda"))
+qgraph(five_factor$loadings, minimum = 0.2, cut = 0.4, 
+       vsize = c(1, 15),borders = FALSE, 
+       asize = 0.07, esize = 4, vTrans = 200)
+title("Personality Structure for United States")
 
-\newpage
+qgraph(efaSolutions2$plot[[1]])
+title(paste0("Personality Structure for ", efaSolutions2[[1]][1]))
 
-\listoffigures
+qgraph(efaSolutions2$plot[[25]])
+title(paste0("Personality Structure for ", efaSolutions2[[1]][25]))
 
-\newpage
+qgraph(efaSolutions2$plot[[50]])
+title(paste0("Personality Structure for ", efaSolutions2[[1]][50]))
+
+
+```
+
+
 
 
 
