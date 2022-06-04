@@ -1,13 +1,15 @@
 ---
 title: "The Personality Structures of the 50 States"
 author: "Anisha Babu, Diana DeWald, Ian Shryock, Dillon Welindt, Futing Zou"
-output: 
+output:
   bookdown::pdf_document2:
-    toc: TRUE
-    lof: TRUE
-    lot: TRUE
-    extra_dependencies: ["tocbibind"]
-always_allow_html: true
+    toc: yes
+    lof: yes
+    lot: yes
+    extra_dependencies: tocbibind
+  pdf_document:
+    toc: yes
+always_allow_html: yes
 ---
 
 \renewcommand{\thetable}{\arabic{table}} 
@@ -29,7 +31,7 @@ always_allow_html: true
 
 ```{r setup, include=FALSE}
 library(needs)
-needs(tidyverse, dataverse, kableExtra, psych, arsenal, apaTables)
+needs(tidyverse, dataverse, kableExtra, psych, arsenal, apaTables, here, rio, GPArotation, qgraph)
 
 
 # download data from url
@@ -199,7 +201,7 @@ average_statescores <- SAPA %>%
 
 ```
 
-```{r #6/7 state-wise descriptives, warning = FALSE}
+```{r #6/7 state-wise descriptives, warning = FALSE, include = FALSE}
 # combine demographics & traits
 factorSAPA <- cbind(SAPA[1:7], scores)
 
@@ -266,9 +268,17 @@ map(allFactor, ~map(.x, ~makeTable(.x)))
 state_factor_agree <- tibble(
   state_names = names(stateAgree),
   agree_mean = map_df(stateAgree,~.x[1]),
-  agree_sd = map_df(stateAgree,~.x[2]),
-  agree_n = map_df(stateAgree,~.x[3]),
+  agree_sd = map_df(stateAgree,~.x[1]),
+  agree_n = map_df(stateAgree,~.x[1]),
 )
+
+# state_factor_agree <- tibble(
+#   state_names = names(stateAgree),
+#   agree_mean = map_dbl(stateAgree,~.x[[1]][1]),
+#   agree_sd = map_dbl(stateAgree,~.x[[2]][1]),
+#   agree_n = map_int(stateAgree,~.x[[3]][1]),
+# )
+
 state_factor_cons <- tibble(
   state_names = names(stateCons),
   cons_mean = map_df(stateCons,~.x[1]),
@@ -312,6 +322,30 @@ kable(state_factor_intel, booktabs = TRUE, longtable = TRUE, col.names = c("Stat
 
 ```
 
+```{r KableOuput, echo = FALSE, message=FALSE, warning=FALSE}
+kable(state_factor_agree, booktabs = TRUE, longtable = TRUE, col.names = c("State", "Mean", "SD", "N"), 
+    caption = "Agreeableness Descriptives") %>% 
+    landscape() %>% 
+    kable_styling(font_size = 12, latex_options = c("scale_down", "repeat_header")) %>% 
+    kable_classic() 
+kable(state_factor_cons, booktabs = TRUE, longtable = TRUE, col.names = c("State", "Mean", "SD", "N"), 
+    caption = "Conscientiousness Descriptives") %>% 
+    landscape() %>% 
+    kable_styling(font_size = 12, latex_options = c("scale_down", "repeat_header")) %>% 
+    kable_classic() 
+kable(state_factor_extra, booktabs = TRUE, longtable = TRUE, col.names = c("State", "Mean", "SD", "N"), 
+    caption = "Extraversion Descriptives") %>% 
+    landscape() %>% 
+    kable_styling(font_size = 12, latex_options = c("scale_down", "repeat_header")) %>% 
+    kable_classic() 
+kable(state_factor_intel, booktabs = TRUE, longtable = TRUE, col.names = c("State", "Mean", "SD", "N"), 
+    caption = "Intellect Descriptives") %>% 
+    landscape() %>% 
+    kable_styling(font_size = 12, latex_options = c("scale_down", "repeat_header")) %>% 
+    kable_classic() 
+```
+
+
 ```{r #8 average scores by factor - from nested states}
 
 
@@ -321,13 +355,22 @@ kable(state_factor_intel, booktabs = TRUE, longtable = TRUE, col.names = c("Stat
 by_stateFactors <- split(SAPA, factorSAPA$state)
 
 stateFactor <- map(by_stateFactors, ~fa.parallel(cov(.x[,8:106], use = "pairwise.complete.obs"), n.iter = 20, cor = "cov")$nfact)
-stateFactordf <- as.data.frame(stateFactor)
+stateFactordf <- t(as.data.frame(stateFactor))
 
+getmode <- function(v) {
+   uniqv <- unique(v)
+   uniqv[which.max(tabulate(match(v, uniqv)))]
+}
+getmode(purrr::reduce(stateFactor, rbind))
+min(purrr::reduce(stateFactor, rbind))
+max(purrr::reduce(stateFactor, rbind))
+table(purrr::reduce(stateFactor, rbind))
 ```
 
 ```{r #9 table, warning = FALSE}
 load(here("data", "statefactor.rda"))
 stateFactordf
+
 ```
 
 ```{r #10 prep efas, warning = FALSE, echo = FALSE}
@@ -452,6 +495,11 @@ The main analyses are fifty parallel analyses, one for every state, that estimat
 
 
 \newpage
+
+# Results
+
+The parallel factor analyses indicate that the modal number of factors is 5, as is found in 36 of the 50 states, with 7, 6, and 1 states respectively being better represented by 6, 7, and 8 factors.
+
 
 ```{r  warning = FALSE, echo = FALSE}
 load(here("data", "netplots.rda"))
