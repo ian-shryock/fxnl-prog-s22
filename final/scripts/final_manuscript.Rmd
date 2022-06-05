@@ -98,7 +98,7 @@ In the current study, we use exploratory factor analyses to provide estimates of
 The International Personality Item Pool is an open-source repository of personality trait items that have been researched extensively in the big five tradition. The current study uses ninety nine of one hundred items from the IPIP-100. Participants rated themselves on a number of personality traits from 1- not at all like me to 6- very much like me. 
 
 ## Data Collection and Participants
-Data were obtained from the Harvard [Dataverse](https://dataverse.harvard.edu/dataverse/SAPA-Project). Data were initially collected using the Synthetic Aperture for Personality Assessment  (Revelle et al., 2016; Condon and Revelle, 2014; Wilt et al., 2011) which utilizes a massively missing completely at random design, wherein each participant only provides responses to a fraction of items. 
+Data were obtained from the Harvard [Dataverse](https://dataverse.harvard.edu/dataverse/SAPA-Project) (@DVN/2IBBMG_2021). Data were initially collected using the Synthetic Aperture for Personality Assessment [see @revelle2016web; @condon2014international; @wilt2011dynamic] which utilizes a massively missing completely at random design, wherein each participant only provides responses to a fraction of items. 
 
 
 ## Data analysis

@@ -3,10 +3,9 @@
 \PassOptionsToPackage{hyphens}{url}
 %
 \documentclass[
-  english,
-  man]{apa6}
-\title{EDLD 653 Final Project}
-\author{Anisha Babu, Ian Shryock, Dillon Welindt, Futing Zou, Diana DeWald\textsuperscript{1}}
+]{article}
+\title{The Personality Structures of the 50 States}
+\author{Anisha Babu, Diana DeWald, Ian Shryock, Dillon Welindt, Futing Zou}
 \date{}
 
 \usepackage{amsmath,amssymb}
@@ -41,13 +40,52 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
-  pdftitle={EDLD 653 Final Project},
-  pdfauthor={Anisha Babu, Ian Shryock, Dillon Welindt, Futing Zou, Diana DeWald1},
-  pdflang={en-EN},
-  pdfkeywords={keywords},
+  pdftitle={The Personality Structures of the 50 States},
+  pdfauthor={Anisha Babu, Diana DeWald, Ian Shryock, Dillon Welindt, Futing Zou},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs,array}
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
@@ -74,190 +112,76 @@
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
-% Make \paragraph and \subparagraph free-standing
-\ifx\paragraph\undefined\else
-  \let\oldparagraph\paragraph
-  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
-\fi
-\ifx\subparagraph\undefined\else
-  \let\oldsubparagraph\subparagraph
-  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
-\fi
-\newlength{\cslhangindent}
-\setlength{\cslhangindent}{1.5em}
-\newlength{\csllabelwidth}
-\setlength{\csllabelwidth}{3em}
-\newlength{\cslentryspacingunit} % times entry-spacing
-\setlength{\cslentryspacingunit}{\parskip}
-\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
- {% don't indent paragraphs
-  \setlength{\parindent}{0pt}
-  % turn on hanging indent if param 1 is 1
-  \ifodd #1
-  \let\oldpar\par
-  \def\par{\hangindent=\cslhangindent\oldpar}
-  \fi
-  % set entry spacing
-  \setlength{\parskip}{#2\cslentryspacingunit}
- }%
- {}
-\usepackage{calc}
-\newcommand{\CSLBlock}[1]{#1\hfill\break}
-\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
-\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
-\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
-% Manuscript styling
-\usepackage{upgreek}
-\captionsetup{font=singlespacing,justification=justified}
-
-% Table formatting
+\setcounter{secnumdepth}{5}
+\usepackage{tocbibind}
+\usepackage{booktabs}
 \usepackage{longtable}
-\usepackage{lscape}
-% \usepackage[counterclockwise]{rotating}   % Landscape page setup for large tables
-\usepackage{multirow}		% Table styling
-\usepackage{tabularx}		% Control Column width
-\usepackage[flushleft]{threeparttable}	% Allows for three part tables with a specified notes section
-\usepackage{threeparttablex}            % Lets threeparttable work with longtable
-
-% Create new environments so endfloat can handle them
-% \newenvironment{ltable}
-%   {\begin{landscape}\centering\begin{threeparttable}}
-%   {\end{threeparttable}\end{landscape}}
-\newenvironment{lltable}{\begin{landscape}\centering\begin{ThreePartTable}}{\end{ThreePartTable}\end{landscape}}
-
-% Enables adjusting longtable caption width to table width
-% Solution found at http://golatex.de/longtable-mit-caption-so-breit-wie-die-tabelle-t15767.html
-\makeatletter
-\newcommand\LastLTentrywidth{1em}
-\newlength\longtablewidth
-\setlength{\longtablewidth}{1in}
-\newcommand{\getlongtablewidth}{\begingroup \ifcsname LT@\roman{LT@tables}\endcsname \global\longtablewidth=0pt \renewcommand{\LT@entry}[2]{\global\advance\longtablewidth by ##2\relax\gdef\LastLTentrywidth{##2}}\@nameuse{LT@\roman{LT@tables}} \fi \endgroup}
-
-% \setlength{\parindent}{0.5in}
-% \setlength{\parskip}{0pt plus 0pt minus 0pt}
-
-% \usepackage{etoolbox}
-\makeatletter
-\patchcmd{\HyOrg@maketitle}
-  {\section{\normalfont\normalsize\abstractname}}
-  {\section*{\normalfont\normalsize\abstractname}}
-  {}{\typeout{Failed to patch abstract.}}
-\patchcmd{\HyOrg@maketitle}
-  {\section{\protect\normalfont{\@title}}}
-  {\section*{\protect\normalfont{\@title}}}
-  {}{\typeout{Failed to patch title.}}
-\makeatother
-\shorttitle{The Personality Structures of the 50 States}
-\keywords{keywords\newline\indent Word count: X}
-\DeclareDelayedFloatFlavor{ThreePartTable}{table}
-\DeclareDelayedFloatFlavor{lltable}{table}
-\DeclareDelayedFloatFlavor*{longtable}{table}
-\makeatletter
-\renewcommand{\efloat@iwrite}[1]{\immediate\expandafter\protected@write\csname efloat@post#1\endcsname{}}
-\makeatother
-\usepackage{lineno}
-
-\linenumbers
-\usepackage{csquotes}
-\ifXeTeX
-  % Load polyglossia as late as possible: uses bidi with RTL langages (e.g. Hebrew, Arabic)
-  \usepackage{polyglossia}
-  \setmainlanguage[]{english}
-\else
-  \usepackage[main=english]{babel}
-% get rid of language-specific shorthands (see #6817):
-\let\LanguageShortHands\languageshorthands
-\def\languageshorthands#1{}
-\fi
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
 
-
-\authornote{
-
-Website for project can be found at: \url{https://github.com/ian-shryock/fxnl-prog-s22}
-
-}
-
-\affiliation{\vspace{0.5cm}\textsuperscript{1} University of Oregon}
-
-\abstract{
-One or two sentences providing a \textbf{basic introduction} to the field, comprehensible to a scientist in any discipline.
-
-Two to three sentences of \textbf{more detailed background}, comprehensible to scientists in related disciplines.
-
-One sentence clearly stating the \textbf{general problem} being addressed by this particular study.
-
-One sentence summarizing the main result (with the words ``\textbf{here we show}'' or their equivalent).
-
-Two or three sentences explaining what the \textbf{main result} reveals in direct comparison to what was thought to be the case previously, or how the main result adds to previous knowledge.
-
-One or two sentences to put the results into a more \textbf{general context}.
-
-Two or three sentences to provide a \textbf{broader perspective}, readily comprehensible to a scientist in any discipline.
-}
-
-
-
 \begin{document}
 \maketitle
 
-\hypertarget{introduction}{%
-\section{Introduction}\label{introduction}}
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\renewcommand{\thetable}{\arabic{table}} 
+\renewcommand{\thefigure}{\arabic{figure}}
 
-\hypertarget{big-five}{%
-\subsection{Big Five}\label{big-five}}
+\definecolor{fancyTextColor}{HTML}{4284f5}
+\definecolor{hightlightColor}{HTML}{FFFF66}
 
-One of the most widely replicated findings within the field of personality psychology is the Big Five structure of personality. With roots in the 1800's, personality psychology sought to determine the best way to represent the large number of personality traits in a concise structure. This research initially involved researchers providing participants with large numbers of trait descriptive adjectives and asking them to rate the extent to which those adjectives characterize themselves or someone they knew. Dimension reduction analyses were then used to create a simpler structure from those responses.
+\newpage
 
-Multiple research groups began converging on the five factor structure as early as the 1960's, with an increasing consensus by the late 1980's. Most of the recent work on the big five has been conducted through a combination of confirmatory factor analysis and theory driven selection of survey items based on previous findings about the structure.
+\listoftables
 
-\hypertarget{geographical-personality}{%
-\subsection{Geographical Personality}\label{geographical-personality}}
+\newpage
 
-In recent years, there has been increasing focus on regional variation of personality traits within the United States. Work has examined the extent to which regions of the US differ on the Big Five domains and can be said to have distinct and characteristic combinations of trait levels. For example, Rentfrow and colleagues (2013) show that the south and midwest are best characterized as friendly and conventional, whereas the west is relaxed and creative, and the northeast is temperamental and uninhibited.
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{SAPA }\OtherTok{\textless{}{-}}\NormalTok{ SAPA }\SpecialCharTok{\%\textgreater{}\%}
+  \CommentTok{\# filter in US}
+  \FunctionTok{filter}\NormalTok{(country }\SpecialCharTok{==} \StringTok{"USA"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \CommentTok{\# filter 50 states}
+  \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\NormalTok{state }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}District of Columbia\textquotesingle{}}\NormalTok{, }
+                       \StringTok{\textquotesingle{}Guam\textquotesingle{}}\NormalTok{, }
+                       \StringTok{\textquotesingle{}Palau\textquotesingle{}}\NormalTok{,}
+                       \StringTok{\textquotesingle{}Puerto Rico\textquotesingle{}}\NormalTok{, }
+                       \StringTok{\textquotesingle{}Virgin Islands\textquotesingle{}}\NormalTok{,}
+                       \StringTok{\textquotesingle{}Northern Mariana Islands\textquotesingle{}}\NormalTok{, }
+                       \StringTok{\textquotesingle{}American Samoa\textquotesingle{}}\NormalTok{, }
+                       \StringTok{\textquotesingle{}Marshall Islands\textquotesingle{}}\NormalTok{, }
+                       \ConstantTok{NA}\NormalTok{)) }
 
-A limitation of this work is that it examines the extent to which the five factor structure captures each region and what differences in the levels of each factor are due to regional variation. This research utilizes confirmatory factor analyses that assume that the five factor structure is the ideal level of dimensionality to characterize all regions.
+\CommentTok{\# filter out rows with all NA}
+\NormalTok{SAPA }\OtherTok{\textless{}{-}}\NormalTok{ SAPA[}\FunctionTok{rowSums}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(SAPA)) }\SpecialCharTok{\textless{}} \DecValTok{99}\NormalTok{, ]}
 
-\hypertarget{cross-cultural-studies}{%
-\subsection{Cross-Cultural Studies}\label{cross-cultural-studies}}
+\CommentTok{\# in list form select only used Q\textquotesingle{}s}
+\NormalTok{usedQ }\OtherTok{\textless{}{-}} \FunctionTok{colnames}\NormalTok{(SAPA[}\DecValTok{8}\SpecialCharTok{:}\DecValTok{106}\NormalTok{])}
 
-Much of the cross-cultural work on personality structure has found some support for the notion that the five factor structure has applicability in a number of cultures. However, these studies typically are conducted from an etic perspective that translate the items used in western samples.
+\NormalTok{IPIPkeys }\OtherTok{\textless{}{-}} \FunctionTok{map}\NormalTok{(IPIPkeysList, }\ControlFlowTok{function}\NormalTok{(x) \{}
+\NormalTok{    x[}\FunctionTok{match}\NormalTok{(usedQ, x)]}
+    \FunctionTok{na.omit}\NormalTok{(x)}
+\NormalTok{\})}
 
-However, when studies are conducted from an emic perspective -- that is, using trait descriptive adjectives from the language of the culture, rather than translations of items used in the big five framework -- different structures emerge. A varying number of factors have been found to best fit different cultures, ranging from one to seven in many cases.
-
-\hypertarget{geographical-factor-structure-within-us}{%
-\subsection{Geographical Factor Structure within US}\label{geographical-factor-structure-within-us}}
-
-Within the US, the regional variation in factor structures has not been an extensively studied topic. Because most research operates within a framework that utilizes confirmatory factor analysis, there is little information on the extent to which regions differ in their factor structure.
-
-In the current study, we use exploratory factor analyses to provide estimates of the optimal factor structures for each of the fifty states.
-
-\hypertarget{methods}{%
-\section{Methods}\label{methods}}
-
-\hypertarget{measures}{%
-\subsection{Measures}\label{measures}}
-
-The International Personality Item Pool is an open-source repository of personality trait items that have been researched extensively in the big five tradition. The current study uses ninety nine of one hundred items from the IPIP-100. Participants rated themselves on a number of personality traits from 1- not at all like me to 6- very much like me.
-
-\hypertarget{data-collection-and-participants}{%
-\subsection{Data Collection and Participants}\label{data-collection-and-participants}}
-
-Data were obtained from the Harvard \href{https://dataverse.harvard.edu/dataverse/SAPA-Project}{Dataverse} (D. Condon, Zabelina, and Revelle (2021)). Data were initially collected using the Synthetic Aperture for Personality Assessment (D. M. Condon \& Revelle, 2014; see Revelle et al., 2016; Wilt, Funkhouser, \& Revelle, 2011) which utilizes a massively missing completely at random design, wherein each participant only provides responses to a fraction of items.
-
-\hypertarget{data-analysis}{%
-\subsection{Data analysis}\label{data-analysis}}
-
-We used R {[}Version 4.1.1; R Core Team (2021){]} and the R-package \emph{papaja} {[}Version 0.1.0.9997; Aust and Barth (2020){]} for all our analyses.
-
-First, we provide descriptive norms for the entire US sample, and then by state.
-
-Next, we use parallel analysis to determine the optimal number of factors in the whole sample. Our hypothesis is that five factors will provide an optimal fit.
-
-The main analyses are fifty parallel analyses, one for every state, that estimates the optimal number of personality dimensions for each state. We hypothesize that there will be variation in the number of ideal dimensions across states.
+\CommentTok{\# select only IPIP 100}
+\NormalTok{IPIPkeys }\OtherTok{\textless{}{-}}\NormalTok{ IPIPkeys[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{4}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{verbatim}
 ## $gender
@@ -322,6 +246,25 @@ The main analyses are fifty parallel analyses, one for every state, that estimat
 ##                           11759                            8274
 \end{verbatim}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# score items}
+\NormalTok{scores }\OtherTok{\textless{}{-}}\NormalTok{ psych}\SpecialCharTok{::}\FunctionTok{scoreItems}\NormalTok{(}\AttributeTok{keys =}\NormalTok{ IPIPkeys, }\AttributeTok{items =}\NormalTok{ SAPA, }\AttributeTok{min =} \DecValTok{1}\NormalTok{, }\AttributeTok{max =} \DecValTok{6}\NormalTok{, }
+                            \AttributeTok{totals =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{impute =} \StringTok{\textquotesingle{}none\textquotesingle{}}\NormalTok{)}\SpecialCharTok{$}\NormalTok{scores}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# demographic table}
+\NormalTok{demog\_tab }\OtherTok{\textless{}{-}} \FunctionTok{summary}\NormalTok{(}\FunctionTok{tableby}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ age }\SpecialCharTok{+}\NormalTok{ gender }\SpecialCharTok{+}\NormalTok{ race }\SpecialCharTok{+}\NormalTok{ education, }
+                             \AttributeTok{data =}\NormalTok{ SAPA, }\AttributeTok{test =} \ConstantTok{FALSE}\NormalTok{),  }
+                     \AttributeTok{title =} \StringTok{"Full Sample Demographics"}\NormalTok{)}
+
+\NormalTok{demog\_tab}
+\end{Highlighting}
+\end{Shaded}
+
 \begin{longtable}[]{@{}lc@{}}
 \caption{(\#tab:\#3 descriptives statistics)Full Sample Demographics}\tabularnewline
 \toprule
@@ -364,6 +307,25 @@ The main analyses are fifty parallel analyses, one for every state, that estimat
 \bottomrule
 \end{longtable}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# PEER REVIEW: To get a more elegant table, perhaps you can create your own function that gives you the sample size and percent of sample size by different characteristic and then use map to create a data frame with the categories of choice. I wrote a function below to get you started.}
+
+\NormalTok{sample }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(df,x) \{}
+\NormalTok{  df }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(\{\{x\}\}) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{group\_sample =} \FunctionTok{n}\NormalTok{()) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ungroup}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{rename}\NormalTok{(}\AttributeTok{group =}\NormalTok{ \{\{x\}\}) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{total\_sample =} \FunctionTok{sum}\NormalTok{(group\_sample),}
+         \AttributeTok{percent\_sample =}\NormalTok{ group\_sample}\SpecialCharTok{/}\NormalTok{total\_sample) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(group,group\_sample, percent\_sample)}
+\NormalTok{\}}
+
+\FunctionTok{sample}\NormalTok{(SAPA,race)}
+\end{Highlighting}
+\end{Shaded}
+
 \hypertarget{a-tibble-15-x-3}{%
 \section{A tibble: 15 x 3}\label{a-tibble-15-x-3}}
 
@@ -383,7 +345,16 @@ group group\_sample percent\_sample
 13 Puerto Rican 512 0.00629\\
 14 White/Caucasian 62859 0.773\\
 15 6 0.0000737
-\# A tibble: 6 x 3
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sample}\NormalTok{(SAPA,education)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{a-tibble-6-x-3}{%
+\section{A tibble: 6 x 3}\label{a-tibble-6-x-3}}
+
 group group\_sample percent\_sample
 1 College graduate 12381 0.152
 2 Currently attending college 32469 0.399
@@ -391,7 +362,24 @@ group group\_sample percent\_sample
 4 High school graduate 6145 0.0755
 5 Less than 12 years 11759 0.145
 6 Some college did not graduate 8274 0.102
-IPIP100agreeableness IPIP100conscientiousness
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# to add for final: demographic table grouped by state}
+
+\CommentTok{\# to add for final:  improve correlation matrix format/names (below), include other personality traits (like stability), and include more complex grouping by state, gender, race, etc.}
+
+\CommentTok{\#RG This table looks great on the pdf, would you consider collapsing the race/ethnicity variables for clarity?}
+
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{cor}\NormalTok{(scores, }\AttributeTok{use =} \StringTok{"complete.obs"}\NormalTok{)}
+\FunctionTok{round}\NormalTok{(res, }\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+                     IPIP100agreeableness IPIP100conscientiousness
+\end{verbatim}
+
 IPIP100agreeableness 1.00 0.21
 IPIP100conscientiousness 0.21 1.00
 IPIP100extraversion 0.38 0.13
@@ -401,33 +389,12 @@ IPIP100agreeableness 0.38 0.16
 IPIP100conscientiousness 0.13 0.08
 IPIP100extraversion 1.00 0.22
 IPIP100intellect 0.22 1.00
-The ability to suppress reporting of reporting confidence intervals has been deprecated in this version.
-The function argument show.conf.interval will be removed in a later version.
 
-Means, standard deviations, and correlations with confidence intervals
-
-Variable M SD 1 2 3\\
-1. IPIP100agreeableness 4.67 0.77
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{1}
-\item
-  IPIP100conscientiousness 4.14 0.92 .21**\\
-  {[}.21, .22{]}
-\item
-  IPIP100extraversion 3.92 1.02 .38** .13**\\
-  {[}.37, .38{]} {[}.13, .14{]}
-\item
-  IPIP100intellect 4.59 0.73 .16** .08** .22**\\
-  {[}.15, .16{]} {[}.07, .08{]} {[}.21, .23{]}
-\end{enumerate}
-
-Note. M and SD are used to represent mean and standard deviation, respectively.
-Values in square brackets indicate the 95\% confidence interval.
-The confidence interval is a plausible range of population correlations
-that could have caused the sample correlation (Cumming, 2014).
-* indicates p \textless{} .05. ** indicates p \textless{} .01.
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{apa.cor.table}\NormalTok{(scores, }\AttributeTok{filename=}\StringTok{"Corr\_table.doc"}\NormalTok{, }\AttributeTok{show.conf.interval=}\ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 The ability to suppress reporting of reporting confidence intervals has been deprecated in this version.
 The function argument show.conf.interval will be removed in a later version.
@@ -456,6 +423,59 @@ Values in square brackets indicate the 95\% confidence interval.
 The confidence interval is a plausible range of population correlations
 that could have caused the sample correlation (Cumming, 2014).
 * indicates p \textless{} .05. ** indicates p \textless{} .01.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{apa.cor.table}\NormalTok{(scores, }\AttributeTok{filename=}\StringTok{"Corr\_table.doc"}\NormalTok{, }\AttributeTok{show.conf.interval=}\NormalTok{F)}
+\end{Highlighting}
+\end{Shaded}
+
+The ability to suppress reporting of reporting confidence intervals has been deprecated in this version.
+The function argument show.conf.interval will be removed in a later version.
+
+Means, standard deviations, and correlations with confidence intervals
+
+Variable M SD 1 2 3\\
+1. IPIP100agreeableness 4.67 0.77
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\item
+  IPIP100conscientiousness 4.14 0.92 .21**\\
+  {[}.21, .22{]}
+\item
+  IPIP100extraversion 3.92 1.02 .38** .13**\\
+  {[}.37, .38{]} {[}.13, .14{]}
+\item
+  IPIP100intellect 4.59 0.73 .16** .08** .22**\\
+  {[}.15, .16{]} {[}.07, .08{]} {[}.21, .23{]}
+\end{enumerate}
+
+Note. M and SD are used to represent mean and standard deviation, respectively.
+Values in square brackets indicate the 95\% confidence interval.
+The confidence interval is a plausible range of population correlations
+that could have caused the sample correlation (Cumming, 2014).
+* indicates p \textless{} .05. ** indicates p \textless{} .01.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# PEER REVIEW: To get a more elegant table, perhaps you can create your own function that gives you the sample size and percent of sample size by different characteristic and then use map to create a data frame with the categories of choice. I wrote a function below to get you started.}
+
+\NormalTok{sample }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(df,x) \{}
+\NormalTok{  df }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{group\_by}\NormalTok{(\{\{x\}\}) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{summarize}\NormalTok{(}\AttributeTok{group\_sample =} \FunctionTok{n}\NormalTok{()) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ungroup}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{rename}\NormalTok{(}\AttributeTok{group =}\NormalTok{ \{\{x\}\}) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{mutate}\NormalTok{(}\AttributeTok{total\_sample =} \FunctionTok{sum}\NormalTok{(group\_sample),}
+           \AttributeTok{percent\_sample =}\NormalTok{ group\_sample}\SpecialCharTok{/}\NormalTok{total\_sample) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{select}\NormalTok{(group,group\_sample, percent\_sample)}
+\NormalTok{\}}
+
+\FunctionTok{sample}\NormalTok{(SAPA,race)}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{a-tibble-15-x-3-1}{%
 \section{A tibble: 15 x 3}\label{a-tibble-15-x-3-1}}
@@ -476,7 +496,16 @@ group group\_sample percent\_sample
 13 Puerto Rican 512 0.00629\\
 14 White/Caucasian 62859 0.773\\
 15 6 0.0000737
-\# A tibble: 6 x 3
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sample}\NormalTok{(SAPA,education)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{a-tibble-6-x-3-1}{%
+\section{A tibble: 6 x 3}\label{a-tibble-6-x-3-1}}
+
 group group\_sample percent\_sample
 1 College graduate 12381 0.152
 2 Currently attending college 32469 0.399
@@ -484,6 +513,41 @@ group group\_sample percent\_sample
 4 High school graduate 6145 0.0755
 5 Less than 12 years 11759 0.145
 6 Some college did not graduate 8274 0.102
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# average scores on included survey questions}
+\NormalTok{average\_surveyscores }\OtherTok{\textless{}{-}}\NormalTok{ SAPA }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize\_at}\NormalTok{(}\FunctionTok{vars}\NormalTok{(q\_76}\SpecialCharTok{:}\NormalTok{q\_1989), mean, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+
+\CommentTok{\# average scores on survey questions by state (for final: can group by other variables as well)}
+\NormalTok{average\_statescores }\OtherTok{\textless{}{-}}\NormalTok{ SAPA }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(state) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize\_at}\NormalTok{(}\FunctionTok{vars}\NormalTok{(q\_76}\SpecialCharTok{:}\NormalTok{q\_1989), mean, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{allFA }\OtherTok{\textless{}{-}} \FunctionTok{fa.parallel}\NormalTok{(SAPA[,}\DecValTok{8}\SpecialCharTok{:}\DecValTok{106}\NormalTok{], }\AttributeTok{use =} \StringTok{"pairwise.complete.obs"}\NormalTok{,}\AttributeTok{cor=}\StringTok{"cor"}\NormalTok{, }\AttributeTok{n.iter =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{final_files/figure-latex/\#5 factor structure-1.pdf}
+
+\begin{verbatim}
+## Parallel analysis suggests that the number of factors =  20  and the number of components =  14
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{allFA}\SpecialCharTok{$}\NormalTok{nfact}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 20
+\end{verbatim}
 
 \begingroup\fontsize{12}{14}\selectfont
 
@@ -809,6 +873,13 @@ Wyoming & 4.631488 & 0.6969593 & 126\\*
 \end{landscape}
 \endgroup{}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{load}\NormalTok{(}\FunctionTok{here}\NormalTok{(}\StringTok{"data"}\NormalTok{, }\StringTok{"statefactor.rda"}\NormalTok{))}
+\NormalTok{stateFactordf}
+\end{Highlighting}
+\end{Shaded}
+
 \begin{verbatim}
 ##   Alabama Alaska Arizona Arkansas California Colorado Connecticut Delaware
 ## 1       5      6       5        5          5        5           5        6
@@ -826,12 +897,85 @@ Wyoming & 4.631488 & 0.6969593 & 126\\*
 ## 1         5       8
 \end{verbatim}
 
+\begin{verbatim}
+## Downloading ingested version of data with readr::read_tsv. To download the original version and remove this message, set original = TRUE.
+\end{verbatim}
+
+\begin{verbatim}
+## Rows: 128464 Columns: 390
+## -- Column specification --------------------------------------------------------
+## Delimiter: "\t"
+## chr  (12): gender, relstatus, marstatus, exer, smoke, country, state, ethnic...
+## dbl (378): RID, age, height, BMI, weight, q_6, q_22, q_23, q_39, q_40, q_44,...
+## 
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+## Joining, by = "state"
+\end{verbatim}
+
+\newpage
+
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+\hypertarget{big-five}{%
+\subsection{Big Five}\label{big-five}}
+
+One of the most widely replicated findings within the field of personality psychology is the Big Five structure of personality. With roots in the 1800's, personality psychology sought to determine the best way to represent the large number of personality traits in a concise structure. This research initially involved researchers providing participants with large numbers of trait descriptive adjectives and asking them to rate the extent to which those adjectives characterize themselves or someone they knew. Dimension reduction analyses were then used to create a simpler structure from those responses.
+
+Multiple research groups began converging on the five factor structure as early as the 1960's, with an increasing consensus by the late 1980's. Most of the recent work on the big five has been conducted through a combination of confirmatory factor analysis and theory driven selection of survey items based on previous findings about the structure.
+
+\hypertarget{geographical-personality}{%
+\subsection{Geographical Personality}\label{geographical-personality}}
+
+In recent years, there has been increasing focus on regional variation of personality traits within the United States. Work has examined the extent to which regions of the US differ on the Big Five domains and can be said to have distinct and characteristic combinations of trait levels. For example, Rentfrow and colleagues (2013) show that the south and midwest are best characterized as friendly and conventional, whereas the west is relaxed and creative, and the northeast is temperamental and uninhibited.
+
+A limitation of this work is that it examines the extent to which the five factor structure captures each region and what differences in the levels of each factor are due to regional variation. This research utilizes confirmatory factor analyses that assume that the five factor structure is the ideal level of dimensionality to characterize all regions.
+
+\hypertarget{cross-cultural-studies}{%
+\subsection{Cross-Cultural Studies}\label{cross-cultural-studies}}
+
+Much of the cross-cultural work on personality structure has found some support for the notion that the five factor structure has applicability in a number of cultures. However, these studies typically are conducted from an etic perspective that translate the items used in western samples.
+
+However, when studies are conducted from an emic perspective -- that is, using trait descriptive adjectives from the language of the culture, rather than translations of items used in the big five framework -- different structures emerge. A varying number of factors have been found to best fit different cultures, ranging from one to seven in many cases.
+
+\hypertarget{geographical-factor-structure-within-us}{%
+\subsection{Geographical Factor Structure within US}\label{geographical-factor-structure-within-us}}
+
+Within the US, the regional variation in factor structures has not been an extensively studied topic. Because most research operates within a framework that utilizes confirmatory factor analysis, there is little information on the extent to which regions differ in their factor structure.
+
+In the current study, we use exploratory factor analyses to provide estimates of the optimal factor structures for each of the fifty states.
+
+\hypertarget{brief-methods}{%
+\section{Brief Methods}\label{brief-methods}}
+
+\hypertarget{measures}{%
+\subsection{Measures}\label{measures}}
+
+The International Personality Item Pool is an open-source repository of personality trait items that have been researched extensively in the big five tradition. The current study uses ninety nine of one hundred items from the IPIP-100. Participants rated themselves on a number of personality traits from 1- not at all like me to 6- very much like me.
+
+\hypertarget{data-collection}{%
+\subsection{Data Collection}\label{data-collection}}
+
+Data were obtained from the Harvard \href{https://dataverse.harvard.edu/dataverse/SAPA-Project}{Dataverse}. Data were initially collected using the Synthetic Aperture for Personality Assessment (Revelle et al., 2016; Condon and Revelle, 2014; Wilt et al., 2011; @DVN/2IBBMG\_2021) which utilizes a massively missing completely at random design, wherein each participant only provides responses to a fraction of items.
+
+\hypertarget{analyses}{%
+\section{Analyses}\label{analyses}}
+
+First, we provide descriptive norms for the entire US sample, and then by state.
+
+Next, we use parallel analysis to determine the optimal number of factors in the whole sample. Our hypothesis is that five factors will provide an optimal fit.
+
+The main analyses are fifty parallel analyses, one for every state, that estimates the optimal number of personality dimensions for each state. We hypothesize that there will be variation in the number of ideal dimensions across states.
+
+\newpage
+
 \hypertarget{results}{%
 \section{Results}\label{results}}
 
 The parallel factor analyses indicate that the modal number of factors is 5, as is found in 36 of the 50 states, with 7, 6, and 1 states respectively being better represented by 6, 7, and 8 factors.
 
-\includegraphics{final_manuscript_files/figure-latex/unnamed-chunk-3-1.pdf} \includegraphics{final_manuscript_files/figure-latex/unnamed-chunk-3-2.pdf} \includegraphics{final_manuscript_files/figure-latex/unnamed-chunk-3-3.pdf} \includegraphics{final_manuscript_files/figure-latex/unnamed-chunk-3-4.pdf}
+\includegraphics{final_files/figure-latex/unnamed-chunk-3-1.pdf} \includegraphics{final_files/figure-latex/unnamed-chunk-3-2.pdf} \includegraphics{final_files/figure-latex/unnamed-chunk-3-3.pdf} \includegraphics{final_files/figure-latex/unnamed-chunk-3-4.pdf}
 
 \hypertarget{ek-peer-review}{%
 \subsubsection{EK Peer Review:}\label{ek-peer-review}}
@@ -860,42 +1004,5 @@ What I learned: Familiarity with the IPIP dataset! I'd really like tos ee some v
 \item
   Code cleanup: moved library declarations to teh beginning of the script, and added the ``needs'' package'' to simplify package loading
 \end{itemize}
-
-\hypertarget{discussion}{%
-\section{Discussion}\label{discussion}}
-
-\newpage
-
-\hypertarget{references}{%
-\section{References}\label{references}}
-
-\begingroup
-\setlength{\parindent}{-0.5in}
-\setlength{\leftskip}{0.5in}
-
-\hypertarget{refs}{}
-\begin{CSLReferences}{1}{0}
-\leavevmode\vadjust pre{\hypertarget{ref-R-papaja}{}}%
-Aust, F., \& Barth, M. (2020). \emph{{papaja}: {Create} {APA} manuscripts with {R Markdown}}. Retrieved from \url{https://github.com/crsh/papaja}
-
-\leavevmode\vadjust pre{\hypertarget{ref-condon2014international}{}}%
-Condon, D. M., \& Revelle, W. (2014). The international cognitive ability resource: Development and initial validation of a public-domain measure. \emph{Intelligence}, \emph{43}, 52--64.
-
-\leavevmode\vadjust pre{\hypertarget{ref-DVNux2f2IBBMG_2021}{}}%
-Condon, D., Zabelina, D., \& Revelle, W. (2021). \emph{{Reproducibility Data for: Creative Achievement and Individual Differences}} (Version V3) {[}Data set{]}. Harvard Dataverse. \url{https://doi.org/10.7910/DVN/2IBBMG}
-
-\leavevmode\vadjust pre{\hypertarget{ref-R-base}{}}%
-R Core Team. (2021). \emph{R: A language and environment for statistical computing}. Vienna, Austria: R Foundation for Statistical Computing. Retrieved from \url{https://www.R-project.org/}
-
-\leavevmode\vadjust pre{\hypertarget{ref-revelle2016web}{}}%
-Revelle, W., Condon, D. M., Wilt, J., French, J. A., Brown, A., \& Elleman, L. G. (2016). Web and phone based data collection using planned missing designs. \emph{Sage Handbook of Online Research Methods (2nd Ed., P. 578-595). Sage Publications, Inc}.
-
-\leavevmode\vadjust pre{\hypertarget{ref-wilt2011dynamic}{}}%
-Wilt, J., Funkhouser, K., \& Revelle, W. (2011). The dynamic relationships of affective synchrony to perceptions of situations. \emph{Journal of Research in Personality}, \emph{45}(3), 309--321.
-
-\end{CSLReferences}
-
-\endgroup
-
 
 \end{document}
