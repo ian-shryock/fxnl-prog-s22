@@ -1,0 +1,585 @@
+---
+title             : "EDLD 653 Final Project"
+shorttitle        : "The Personality Structures of the 50 States"
+
+author: 
+  - name          : "Anisha Babu, Ian Shryock, Dillon Welindt, Futing Zou, Diana DeWald"
+    affiliation   : "1"
+    corresponding : yes    
+    address       : "1585 E 13th Ave. Eugene, OR 97403"
+ 
+
+affiliation:
+  - id            : "1"
+    institution   : "University of Oregon"
+
+
+authornote: |
+ Website for project can be found at: https://github.com/ian-shryock/fxnl-prog-s22
+
+abstract: |
+  One or two sentences providing a **basic introduction** to the field,  comprehensible to a scientist in any discipline.
+  
+  Two to three sentences of **more detailed background**, comprehensible  to scientists in related disciplines.
+  
+  One sentence clearly stating the **general problem** being addressed by  this particular study.
+  
+  One sentence summarizing the main result (with the words "**here we show**" or their equivalent).
+  
+  Two or three sentences explaining what the **main result** reveals in direct comparison to what was thought to be the case previously, or how the  main result adds to previous knowledge.
+  
+  One or two sentences to put the results into a more **general context**.
+  
+  Two or three sentences to provide a **broader perspective**, readily comprehensible to a scientist in any discipline.
+  
+  <!-- https://tinyurl.com/ybremelq -->
+  
+keywords          : "keywords"
+wordcount         : "X"
+
+bibliography      : ["r-references.bib"]
+
+floatsintext      : no
+figurelist        : no
+tablelist         : no
+footnotelist      : no
+linenumbers       : yes
+mask              : no
+draft             : no
+
+documentclass     : "apa6"
+classoption       : "man"
+output            : papaja::apa6_pdf
+---
+
+```{r setup, include = FALSE}
+library("papaja")
+r_refs("r-references.bib")
+```
+
+```{r analysis-preferences}
+# Seed for random number generation
+set.seed(42)
+knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
+```
+
+# Introduction
+
+
+## Big Five 
+One of the most widely replicated findings within the field of personality psychology is the Big Five structure of personality. With roots in the 1800’s, personality psychology sought to determine the best way to represent the large number of personality traits in a concise structure. This research initially involved researchers providing participants with large numbers of trait descriptive adjectives and asking them to rate the extent to which those adjectives characterize themselves or someone they knew. Dimension reduction analyses were then used to create a simpler structure from those responses. 
+
+Multiple research groups began converging on the five factor structure as early as the 1960’s, with an increasing consensus by the late 1980’s. Most of the recent work on the big five has been conducted through a combination of confirmatory factor analysis and theory driven selection of survey items based on previous findings about the structure. 
+
+
+
+
+## Geographical Personality
+In recent years, there has been increasing focus on regional variation of personality traits within the United States. Work has examined the extent to which regions of the US differ on the Big Five domains and can be said to have distinct and characteristic combinations of trait levels. For example, Rentfrow and colleagues (2013) show that the south and midwest are best characterized as friendly and conventional, whereas the west is relaxed and creative, and the northeast is temperamental and uninhibited. 
+
+A limitation of this work is that it examines the extent to which the five factor structure captures each region and what differences in the levels of each factor are due to regional variation. This research utilizes confirmatory factor analyses that assume that the five factor structure is the ideal level of dimensionality to characterize all regions. 
+
+## Cross-Cultural Studies
+Much of the cross-cultural work on personality structure has found some support for the notion that the five factor structure has applicability in a number of cultures. However, these studies typically are conducted from an etic perspective that translate the items used in western samples. 
+
+However, when studies are conducted from an emic perspective – that is, using trait descriptive adjectives from the language of the culture, rather than translations of items used in the big five framework – different structures emerge. A varying number of factors have been found to best fit different cultures, ranging from one to seven in many cases.
+
+
+
+
+## Geographical Factor Structure within US
+Within the US, the regional variation in factor structures has not been an extensively studied topic. Because most research operates within a framework that utilizes confirmatory factor analysis, there is little information on the extent to which regions differ in their factor structure. 
+
+In the current study, we use exploratory factor analyses to provide estimates of the optimal factor structures for each of the fifty states. 
+
+# Methods
+
+## Measures
+The International Personality Item Pool is an open-source repository of personality trait items that have been researched extensively in the big five tradition. The current study uses ninety nine of one hundred items from the IPIP-100. Participants rated themselves on a number of personality traits from 1- not at all like me to 6- very much like me. 
+
+## Data Collection and Participants
+Data were obtained from the Harvard [Dataverse](https://dataverse.harvard.edu/dataverse/SAPA-Project). Data were initially collected using the Synthetic Aperture for Personality Assessment  (Revelle et al., 2016; Condon and Revelle, 2014; Wilt et al., 2011) which utilizes a massively missing completely at random design, wherein each participant only provides responses to a fraction of items. 
+
+
+## Data analysis
+We used `r cite_r("r-references.bib")` for all our analyses.
+
+First, we provide descriptive norms for the entire US sample, and then by state. 
+
+Next, we use parallel analysis to determine the optimal number of factors in the whole sample. Our hypothesis is that five factors will provide an optimal fit. 
+
+The main analyses are fifty parallel analyses, one for every state, that estimates the optimal number of personality dimensions for each state. We hypothesize that there will be variation in the number of ideal dimensions across states. 
+
+
+
+```{r initial, include=FALSE}
+library(needs)
+needs(tidyverse, dataverse, kableExtra, psych, arsenal, apaTables, here, rio, GPArotation, qgraph)
+
+
+# download data from url
+Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
+
+SAPA <- get_dataframe_by_name(
+  "sapaTempData04apr2006thru18aug2010.tab",
+  "10.7910/DVN/H9RQD6")
+
+
+#RG This didn't work for me: Error in get_dataframe_by_name("sapaTempData04apr2006thru18aug2010.tab",  : could not find function "get_dataframe_by_name"
+#AB: I think this fxn is just from the psych library right?
+
+# IPIP keys list
+IPIPkeysList <- list(
+IPIP100agreeableness = c("-q_140", "-q_146", "q_150", "-q_195", "-q_200", 
+                         "q_217", "-q_838", "q_844", "q_1041", "q_1053", 
+                         "q_1162", "-q_1163", "q_1206", "q_1364", "q_1385", 
+                         "q_1419", "q_1705", "q_1763", "q_1792", "q_1832"),
+IPIP100conscientiousness = c("q_76", "q_124", "q_530", "q_619", "-q_626", 
+                             "-q_904", "q_931", "q_962", "-q_1254", "-q_1255", 
+                             "q_1290", "q_1333", "q_1374", "-q_1397", "q_1422", 
+                             "-q_1452", "-q_1483", "q_1507", "-q_1696", 
+                             "-q_1949"),
+IPIP100extraversion = c("-q_241", "q_254", "q_262", "-q_403", "-q_690", "q_698", 
+                        "-q_712", "q_815", "q_819", "-q_901", "-q_1114", 
+                        "-q_1180", "q_1205", "q_1410", "-q_1480", "q_1742", 
+                        "q_1768", "q_1803", "-q_1913"),
+IPIP100intellect = c("q_128", "q_132", "-q_194", "q_240", "-q_316", "q_422", 
+                     "q_492", "q_493", "-q_609", "q_1050", "q_1058", "-q_1083", 
+                     "-q_1088", "q_1090", "q_1388", "q_1392", "q_1738", 
+                     "-q_1861", "q_1893", "-q_1964"),
+IPIP100stability = c("-q_108", "q_177", "q_248", "-q_497", "-q_890", 
+                     "-q_952", "-q_960", "-q_974", "-q_979", "-q_986", 
+                     "-q_995", "-q_1020", "-q_1099", "-q_1479", "-q_1505", 
+                     "q_1585", "q_1677", "q_1683", "-q_1775", "-q_1989"),
+IPIP50agreeableness = c("q_844", "q_1792", "q_1763", "q_150", "q_1419", 
+                        "q_1053", "-q_838", "-q_200", "-q_195", "-q_1163"),
+IPIP50conscientiousness = c("-q_1255", "-q_1397", "-q_1483", "-q_1696", "q_124", 
+                            "q_1290", "q_1507", "q_76", "q_931", "q_962"),
+IPIP50extraversion = c("q_819", "q_698", "q_262", "q_1803", "q_1742", "-q_712", 
+                       "-q_690", "-q_241", "-q_1180", "-q_1114"),
+IPIP50intellect = c("q_128", "q_240", "q_1893", "q_1738", "q_1090", "q_1058", 
+                    "q_1050", "-q_609", "-q_194", "-q_1088"),
+IPIP50stability = c("-q_108", "-q_1099", "-q_1479", "-q_1989", "-q_497", 
+                    "-q_974", "-q_986", "-q_995", "q_1677", "q_248")
+
+)
+
+```
+
+```{r preprocessing, warning = FALSE}
+SAPA <- SAPA %>%
+  # filter in US
+  filter(country == "USA") %>%
+  # filter 50 states
+  filter(!state %in% c('District of Columbia', 
+                       'Guam', 
+                       'Palau',
+                       'Puerto Rico', 
+                       'Virgin Islands',
+                       'Northern Mariana Islands', 
+                       'American Samoa', 
+                       'Marshall Islands', 
+                       NA)) 
+
+# filter out rows with all NA
+SAPA <- SAPA[rowSums(is.na(SAPA)) < 99, ]
+
+# in list form select only used Q's
+usedQ <- colnames(SAPA[8:106])
+
+IPIPkeys <- map(IPIPkeysList, function(x) {
+    x[match(usedQ, x)]
+    na.omit(x)
+})
+
+# select only IPIP 100
+IPIPkeys <- IPIPkeys[1:4]
+
+```
+
+```{r demographics, warning= FALSE, echo = FALSE}
+# idk if this is what we want here - tableby package not available
+map((SAPA[c(2,3,5,6,7)]), table)
+
+```
+
+```{r individual subject scores, warning= FALSE}
+# score items
+scores <- psych::scoreItems(keys = IPIPkeys, items = SAPA, min = 1, max = 6, 
+                            totals = FALSE, impute = 'none')$scores
+
+
+```
+
+```{r #3 descriptives statistics, warning = FALSE, results = 'asis'}
+# demographic table
+demog_tab <- summary(tableby(~ age + gender + race + education, 
+                             data = SAPA, test = FALSE),  
+                     title = "Full Sample Demographics")
+
+demog_tab
+
+# PEER REVIEW: To get a more elegant table, perhaps you can create your own function that gives you the sample size and percent of sample size by different characteristic and then use map to create a data frame with the categories of choice. I wrote a function below to get you started.
+
+sample <- function(df,x) {
+  df %>%
+  group_by({{x}}) %>%
+  summarize(group_sample = n()) %>%
+  ungroup() %>%
+  rename(group = {{x}}) %>%
+  mutate(total_sample = sum(group_sample),
+         percent_sample = group_sample/total_sample) %>%
+  select(group,group_sample, percent_sample)
+}
+
+sample(SAPA,race)
+sample(SAPA,education)
+
+# to add for final: demographic table grouped by state
+
+# to add for final:  improve correlation matrix format/names (below), include other personality traits (like stability), and include more complex grouping by state, gender, race, etc.
+
+#RG This table looks great on the pdf, would you consider collapsing the race/ethnicity variables for clarity?
+
+res <- cor(scores, use = "complete.obs")
+round(res, 2)
+
+
+apa.cor.table(scores, filename="Corr_table.doc", show.conf.interval=FALSE)
+
+apa.cor.table(scores, filename="Corr_table.doc", show.conf.interval=F)
+
+# PEER REVIEW: To get a more elegant table, perhaps you can create your own function that gives you the sample size and percent of sample size by different characteristic and then use map to create a data frame with the categories of choice. I wrote a function below to get you started.
+
+sample <- function(df,x) {
+  df %>%
+    group_by({{x}}) %>%
+    summarize(group_sample = n()) %>%
+    ungroup() %>%
+    rename(group = {{x}}) %>%
+    mutate(total_sample = sum(group_sample),
+           percent_sample = group_sample/total_sample) %>%
+    select(group,group_sample, percent_sample)
+}
+
+sample(SAPA,race)
+sample(SAPA,education)
+
+
+```
+
+```{r #4 average scores by factor, warning = FALSE}
+# average scores on included survey questions
+average_surveyscores <- SAPA %>%
+  summarize_at(vars(q_76:q_1989), mean, na.rm = TRUE)
+
+# average scores on survey questions by state (for final: can group by other variables as well)
+average_statescores <- SAPA %>%
+  group_by(state) %>%
+  summarize_at(vars(q_76:q_1989), mean, na.rm = TRUE)
+
+```
+
+
+```{r #6/7 state-wise descriptives, warning = FALSE, include = FALSE}
+# combine demographics & traits
+factorSAPA <- cbind(SAPA[1:7], scores)
+
+# add extra state column
+factorSAPAstate <- factorSAPA %>%
+  mutate(state_name = state)
+
+# nest data by state
+by_state <- split(factorSAPAstate, factorSAPAstate$state)
+
+# descriptive stats - THERE SHOULD BE A BETTER WAY TO DO THIS (SOME KIND OF NESTED MAP FXN?)  ## summarize_at? 
+# I am not sure but I feel like map2 could work here if you have a vector of variable names. (Murat comment)
+# AB: I am not sure that map2 would actually be more efficient since the variable names are different for each of the 4 factors. So it would have to be done 4 separate times anyway ...?
+
+stateAgree <- map(by_state, ~summarize(.x, meanFactor = mean(IPIP100agreeableness, na.rm = TRUE),
+                                    sdFactor = sd(IPIP100agreeableness, na.rm = TRUE),
+                                    nFactor = length(IPIP100agreeableness),
+                                    stateName = state_name[1],
+                                    factorName = "Agreeableness"))
+
+stateCons <- map(by_state, ~summarize(.x, meanFactor = mean(IPIP100conscientiousness, na.rm = TRUE),
+                                    sdFactor = sd(IPIP100conscientiousness, na.rm = TRUE),
+                                    nFactor = length(IPIP100conscientiousness),
+                                    stateName = state_name[1],
+                                    factorName = "Conscientiousness"))
+
+stateExtra <- map(by_state, ~summarize(.x, meanFactor = mean(IPIP100extraversion, na.rm = TRUE),
+                                    sdFactor = sd(IPIP100extraversion, na.rm = TRUE),
+                                    nFactor = length(IPIP100extraversion),
+                                    stateName = state_name[1],
+                                    factorName = "Extraversion"))
+
+stateIntel <- map(by_state, ~summarize(.x, meanFactor = mean(IPIP100intellect, na.rm = TRUE),
+                                    sdFactor = sd(IPIP100intellect, na.rm = TRUE),
+                                    nFactor = length(IPIP100intellect),
+                                    stateName = state_name[1],
+                                    factorName = "Intellect"))
+# group all factors in list
+allFactor <- list(stateAgree, stateCons, stateExtra, stateIntel)
+
+names(allFactor) = c('Agreeableness', 'Conscientiousness', 'Extraversion', 'Intellect')
+
+# VERSION 1 SEPARATE TABLES FOR ALL FACTOR/STATE COMBINATIONS
+
+# function to create table 
+makeTable <- function(x, name=deparse(substitute(x))) {
+  kable(x[1:3], booktabs = TRUE, longtable = TRUE, col.names = c("Mean", "SD", "N"), 
+        caption = paste('State of ', x[4], ' ', x[5], ' Descriptives')) %>% 
+    landscape() %>% 
+    kable_styling(font_size = 12, latex_options = c("scale_down", "repeat_header")) %>% 
+    kable_classic() 
+}
+
+# create tables for each factor & state
+map(allFactor, ~map(.x, ~makeTable(.x)))
+
+
+
+
+# VERSION 2 FROM PEER REVIEW:
+# They suggested using the gt package, but it does not seem to be available for this version of R
+
+# summarize each factor by state
+state_factor_agree <- tibble(
+  state_names = names(stateAgree),
+  agree_mean = map_df(stateAgree,~.x[1]),
+  agree_sd = map_df(stateAgree,~.x[2]),
+  agree_n = map_df(stateAgree,~.x[3]),
+)
+
+
+stateAgreeDF <- reduce(stateAgree, rbind)
+AgreeZscores <- map2(stateAgreeDF[1], stateAgreeDF[2], ~((stateAgreeDF[1]-mean(stateAgreeDF$meanFactor))/stateAgreeDF[2])) %>% reduce(stateAgree, rbind)
+
+
+# state_factor_agree <- tibble(
+#   state_names = names(stateAgree),
+#   agree_mean = map_dbl(stateAgree,~.x[[1]][1]),
+#   agree_sd = map_dbl(stateAgree,~.x[[2]][1]),
+#   agree_n = map_int(stateAgree,~.x[[3]][1]),
+# )
+
+state_factor_cons <- tibble(
+  state_names = names(stateCons),
+  cons_mean = map_df(stateCons,~.x[1]),
+  cons_sd = map_df(stateCons,~.x[2]),
+  cons_n = map_df(stateCons,~.x[3]),
+)
+state_factor_extra <- tibble(
+  state_names = names(stateExtra),
+  extra_mean = map_df(stateExtra,~.x[1]),
+  extra_sd = map_df(stateExtra,~.x[2]),
+  extra_n = map_df(stateExtra,~.x[3]),
+)
+state_factor_intel <- tibble(
+  state_names = names(stateIntel),
+  intel_mean = map_df(stateIntel,~.x[1]),
+  intel_sd = map_df(stateIntel,~.x[2]),
+  intel_n = map_df(stateIntel,~.x[3]),
+)
+
+
+kable(state_factor_agree, booktabs = TRUE, longtable = TRUE, col.names = c("State", "Mean", "SD", "N"), 
+    caption = "Agreeableness Descriptives") %>% 
+    landscape() %>% 
+    kable_styling(font_size = 12, latex_options = c("scale_down", "repeat_header")) %>% 
+    kable_classic() 
+kable(state_factor_cons, booktabs = TRUE, longtable = TRUE, col.names = c("State", "Mean", "SD", "N"), 
+    caption = "Conscientiousness Descriptives") %>% 
+    landscape() %>% 
+    kable_styling(font_size = 12, latex_options = c("scale_down", "repeat_header")) %>% 
+    kable_classic() 
+kable(state_factor_extra, booktabs = TRUE, longtable = TRUE, col.names = c("State", "Mean", "SD", "N"), 
+    caption = "Extraversion Descriptives") %>% 
+    landscape() %>% 
+    kable_styling(font_size = 12, latex_options = c("scale_down", "repeat_header")) %>% 
+    kable_classic() 
+kable(state_factor_intel, booktabs = TRUE, longtable = TRUE, col.names = c("State", "Mean", "SD", "N"), 
+    caption = "Intellect Descriptives") %>% 
+    landscape() %>% 
+    kable_styling(font_size = 12, latex_options = c("scale_down", "repeat_header")) %>% 
+    kable_classic() 
+
+```
+
+```{r KableOuput, echo = FALSE, message=FALSE, warning=FALSE}
+kable(state_factor_agree, booktabs = TRUE, longtable = TRUE, col.names = c("State", "Mean", "SD", "N"), 
+    caption = "Agreeableness Descriptives") %>% 
+    landscape() %>% 
+    kable_styling(font_size = 12, latex_options = c("scale_down", "repeat_header")) %>% 
+    kable_classic() 
+kable(state_factor_cons, booktabs = TRUE, longtable = TRUE, col.names = c("State", "Mean", "SD", "N"), 
+    caption = "Conscientiousness Descriptives") %>% 
+    landscape() %>% 
+    kable_styling(font_size = 12, latex_options = c("scale_down", "repeat_header")) %>% 
+    kable_classic() 
+kable(state_factor_extra, booktabs = TRUE, longtable = TRUE, col.names = c("State", "Mean", "SD", "N"), 
+    caption = "Extraversion Descriptives") %>% 
+    landscape() %>% 
+    kable_styling(font_size = 12, latex_options = c("scale_down", "repeat_header")) %>% 
+    kable_classic() 
+kable(state_factor_intel, booktabs = TRUE, longtable = TRUE, col.names = c("State", "Mean", "SD", "N"), 
+    caption = "Intellect Descriptives") %>% 
+    landscape() %>% 
+    kable_styling(font_size = 12, latex_options = c("scale_down", "repeat_header")) %>% 
+    kable_classic() 
+```
+
+
+```{r #8 average scores by factor - from nested states}
+
+
+```
+
+```{r #9 factor structure - from nested states, include = FALSE, warning = FALSE, eval = F}
+by_stateFactors <- split(SAPA, factorSAPA$state)
+
+stateFactors <- SAPA %>% nest_by(state)
+
+#stateFactors <- SAPA %>% nest_by(state) %>% mutate((factors=map(fa.parallel(.x[[2]][,7:105], use = "pairwise.complete.obs"), n.iter = 1, cor = "cor")$nfact) this needs troubleshooting
+
+stateFactor <- map(by_stateFactors, ~fa.parallel(cov(.x[,8:106], use = "pairwise.complete.obs"), n.iter = 20, cor = "cov")$nfact)
+stateFactordf <- t(as.data.frame(stateFactor))
+
+getmode <- function(pass) {
+   unique <- unique(pass)
+   unique[which.max(tabulate(match(pass, unique)))]
+}
+getmode(purrr::reduce(stateFactor, rbind))
+min(purrr::reduce(stateFactor, rbind))
+max(purrr::reduce(stateFactor, rbind))
+table(purrr::reduce(stateFactor, rbind))
+```
+
+```{r #9 table, warning = FALSE}
+load(here("data", "statefactor.rda"))
+stateFactordf
+
+```
+
+```{r #10 prep efas, warning = FALSE, echo = FALSE}
+## Using a larger dataset for the following analyses (correlation matrices couldn't full be estimated)
+load(here("data", "statefactor.rda"))
+SAPA2 <- get_dataframe_by_name(
+  "sapaTempData373items18aug2010thru08dec2013.tab",
+  "10.7910/DVN/C40K1U")
+items <- import(here("data", "IPIPitemLists.rdata"))
+
+ip <- items[1:5] %>% unlist() 
+names(ip) <- NULL
+SAPA2 <- SAPA2 %>% 
+    # filter in US
+  filter(country == "USA") %>%
+  # filter 50 states
+  filter(!state %in% 
+           c('District of Columbia', 'Guam', 'Palau',
+             'Puerto Rico', 'Virgin Islands',
+             'Northern Mariana Islands', 'American Samoa', 
+             'Marshall Islands', NA)) %>% 
+  select(state, all_of(ip))
+  
+
+
+stateFacLong <- stateFactordf %>% 
+  pivot_longer(everything(), names_to = "state", values_to = "nfact") %>% 
+  mutate(state = gsub(".", " ", state, fixed = TRUE))
+
+nest_stateFactors <- SAPA2 %>% 
+  group_by(state) %>% 
+  #select(starts_with("q")) %>% 
+  nest()
+
+for_efa <- left_join(nest_stateFactors, stateFacLong)
+```
+
+
+```{r #10 run efa, warning = FALSE, echo = FALSE, eval = FALSE}
+efaSolutions <- for_efa %>% mutate(solution = list(fa(as.data.frame(data), 
+                                                      nfactors = nfact, 
+                                                      rotate = "oblimin")$loadings))
+save(efaSolutions, file = here("data", "solutions2.rda")) 
+```
+
+
+```{r  warning = FALSE, echo = FALSE, eval = F}
+## regrettably, qgraph automatically plots, resulting in all 50 plots rendered
+## 
+load(here("data", "solutions2.rda"))
+
+
+efaSolutions2 <- efaSolutions %>% 
+  mutate(plot = map(
+    solution,
+  ~{qgraph(.x,
+       minimum = 0.2, cut = 0.4, 
+       vsize = c(1, 15),borders = FALSE, 
+       asize = 0.07, esize = 4, vTrans = 200)
+    }
+  )
+  )
+
+save(efaSolutions2, file = here("data", "netplots.rda"))
+```
+
+
+```{r  warning = FALSE, echo = FALSE}
+## get loadings for whole population
+five_factor <- fa(SAPA2 %>% select(starts_with("q")), 
+                  nfactors = 5, rotate = "oblimin")
+```
+
+
+# Results
+
+The parallel factor analyses indicate that the modal number of factors is 5, as is found in 36 of the 50 states, with 7, 6, and 1 states respectively being better represented by 6, 7, and 8 factors.
+
+```{r  warning = FALSE, echo = FALSE}
+load(here("data", "netplots.rda"))
+qgraph(five_factor$loadings, minimum = 0.2, cut = 0.4, 
+       vsize = c(1, 15),borders = FALSE, 
+       asize = 0.07, esize = 4, vTrans = 200)
+title("Personality Structure for United States")
+
+qgraph(efaSolutions2$plot[[1]])
+title(paste0("Personality Structure for ", efaSolutions2[[1]][1]))
+
+qgraph(efaSolutions2$plot[[25]])
+title(paste0("Personality Structure for ", efaSolutions2[[1]][25]))
+
+qgraph(efaSolutions2$plot[[50]])
+title(paste0("Personality Structure for ", efaSolutions2[[1]][50]))
+
+
+```
+
+
+
+### EK Peer Review:
+# Areas of strength:
+1. Awesome use of branches/git features in general! Made it clear to see who was working on  what sections, and how the project was arranged. 
+2. Code is arranged easily to read, nice use of sections and not doing more than 1~2 things per line of code.
+3. Great reproducibility with having data loading working on first try for me, and doesn't require any extra files/folders outside of the "scripts" folder- might be beneficial to cache the data however?
+
+What I learned: Familiarity with the IPIP dataset! I'd really like tos ee some visualizations on how these factors vary across the different states, maybe using a geographic visualization?
+
+# EK Suggestions:
+- Code cleanup: moved library declarations to teh beginning of the script, and added the "needs" package" to simplify package loading
+
+# Discussion
+
+
+\newpage
+
+# References
+
+\begingroup
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}
+
+<div id="refs" custom-style="Bibliography"></div>
+\endgroup
