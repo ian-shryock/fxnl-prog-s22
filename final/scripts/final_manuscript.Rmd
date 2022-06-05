@@ -280,6 +280,10 @@ average_statescores <- SAPA %>%
 
 ```
 
+```{r #5 factor structure, warning = FALSE, include = FALSE}
+#allFA <- fa.parallel(SAPA[,8:106], use = "pairwise.complete.obs",cor="cor", n.iter = 2)
+#allFA$nfact
+```
 
 ```{r #6/7 state-wise descriptives, warning = FALSE, include = FALSE}
 # combine demographics & traits
@@ -439,12 +443,13 @@ kable(state_factor_intel, booktabs = TRUE, longtable = TRUE, col.names = c("Stat
 ```{r #9 factor structure - from nested states, include = FALSE, warning = FALSE, eval = F}
 by_stateFactors <- split(SAPA, factorSAPA$state)
 
-stateFactors <- SAPA %>% nest_by(state)
+stateFactors <- SAPA %>% group_by(state) %>% nest() %>% 
+  mutate(factors = map(data, ~fa.parallel(cov(.x[,7:105], use = "pairwise.complete.obs"), n.iter = 5, cor = "cov")$nfact))
 
-#stateFactors <- SAPA %>% nest_by(state) %>% mutate((factors=map(fa.parallel(.x[[2]][,7:105], use = "pairwise.complete.obs"), n.iter = 1, cor = "cor")$nfact) this needs troubleshooting
+stateFactor <- stateFactors$factors
 
-stateFactor <- map(by_stateFactors, ~fa.parallel(cov(.x[,8:106], use = "pairwise.complete.obs"), n.iter = 20, cor = "cov")$nfact)
-stateFactordf <- t(as.data.frame(stateFactor))
+# stateFactor <- map(by_stateFactors, ~fa.parallel(cov(.x[,8:106], use = "pairwise.complete.obs"), n.iter = 20, cor = "cov")$nfact)
+# stateFactordf <- t(as.data.frame(stateFactor))
 
 getmode <- function(pass) {
    unique <- unique(pass)
