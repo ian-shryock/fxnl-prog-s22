@@ -1,0 +1,349 @@
+\begin{longtable}[]{@{}lc@{}}
+\caption{(\#tab:\#3 descriptives statistics)Full Sample Demographics}\tabularnewline
+\toprule
+& Overall (N=81366) \\
+\midrule
+\endfirsthead
+\toprule
+& Overall (N=81366) \\
+\midrule
+\endhead
+\textbf{age} & \\
+~~~Mean (SD) & 27.177 (11.343) \\
+~~~Range & 14.000 - 90.000 \\
+\textbf{gender} & \\
+~~~Female & 56901 (69.9\%) \\
+~~~Male & 24465 (30.1\%) \\
+\textbf{race} & \\
+~~~N-Miss & 6 \\
+~~~African American & 6108 (7.5\%) \\
+~~~Chinese & 1129 (1.4\%) \\
+~~~Indian/Pakistani & 469 (0.6\%) \\
+~~~Japanese & 257 (0.3\%) \\
+~~~Korean & 500 (0.6\%) \\
+~~~Latino & 2079 (2.6\%) \\
+~~~Mexican & 2166 (2.7\%) \\
+~~~Native American & 728 (0.9\%) \\
+~~~Other & 3067 (3.8\%) \\
+~~~Other Asian & 566 (0.7\%) \\
+~~~Pacific Islander & 305 (0.4\%) \\
+~~~Philipino & 615 (0.8\%) \\
+~~~Puerto Rican & 512 (0.6\%) \\
+~~~White/Caucasian & 62859 (77.3\%) \\
+\textbf{education} & \\
+~~~College graduate & 12381 (15.2\%) \\
+~~~Currently attending college & 32469 (39.9\%) \\
+~~~Graduate or professional degree & 10338 (12.7\%) \\
+~~~High school graduate & 6145 (7.6\%) \\
+~~~Less than 12 years & 11759 (14.5\%) \\
+~~~Some college did not graduate & 8274 (10.2\%) \\
+\bottomrule
+\end{longtable}
+\efloatseparator
+ 
+\begin{longtable}[t]{llll}
+\caption{\label{tab:KableOuput}Agreeableness Descriptives}\\
+\toprule
+State & Mean & SD & N\\
+\midrule
+\endfirsthead
+\caption[]{\label{tab:KableOuput}Agreeableness Descriptives \textit{(continued)}}\\
+\toprule
+State & Mean & SD & N\\
+\midrule
+\endhead
+
+\endfoot
+\bottomrule
+\endlastfoot
+Alabama & 4.610537 & 0.7744197 & 643\\
+Alaska & 4.629332 & 0.7841253 & 555\\
+Arizona & 4.596157 & 0.7729134 & 866\\
+Arkansas & 4.689144 & 0.7750065 & 577\\
+California & 4.663943 & 0.7623445 & 9709\\
+\addlinespace
+Colorado & 4.631178 & 0.7809921 & 1097\\
+Connecticut & 4.634948 & 0.7713774 & 986\\
+Delaware & 4.575882 & 0.7144243 & 592\\
+Florida & 4.659417 & 0.8070510 & 2936\\
+Georgia & 4.688953 & 0.7696673 & 2414\\
+\addlinespace
+Hawaii & 4.637072 & 0.8284047 & 292\\
+Idaho & 4.672925 & 0.7444675 & 340\\
+Illinois & 4.729347 & 0.7352130 & 5520\\
+Indiana & 4.689507 & 0.7638457 & 1707\\
+Iowa & 4.667843 & 0.7655999 & 982\\
+\addlinespace
+Kansas & 4.678785 & 0.7617303 & 808\\
+Kentucky & 4.693537 & 0.7580447 & 820\\
+Louisiana & 4.703087 & 0.7277572 & 2030\\
+Maine & 4.667634 & 0.7913389 & 356\\
+Maryland & 4.707332 & 0.7694775 & 1772\\
+\addlinespace
+Massachusetts & 4.654854 & 0.7788784 & 1935\\
+Michigan & 4.653881 & 0.7815882 & 2549\\
+Minnesota & 4.667296 & 0.7423893 & 2104\\
+Mississippi & 4.722192 & 0.7991229 & 604\\
+Missouri & 4.665174 & 0.7644602 & 1611\\
+\addlinespace
+Montana & 4.765261 & 0.6641912 & 243\\
+Nebraska & 4.641667 & 0.7724856 & 580\\
+Nevada & 4.633536 & 0.7698699 & 274\\
+New Hampshire & 4.629999 & 0.7428263 & 389\\
+New Jersey & 4.669726 & 0.7642500 & 2495\\
+\addlinespace
+New Mexico & 4.727511 & 0.7475549 & 1199\\
+New York & 4.663282 & 0.8054766 & 4942\\
+North Carolina & 4.647067 & 0.7780090 & 1454\\
+North Dakota & 4.615877 & 0.8189782 & 190\\
+Ohio & 4.700273 & 0.7612682 & 3600\\
+\addlinespace
+Oklahoma & 4.652295 & 0.7867416 & 771\\
+Oregon & 4.633837 & 0.7672260 & 1203\\
+Pennsylvania & 4.656941 & 0.7579218 & 4758\\
+Rhode Island & 4.732280 & 0.7377559 & 422\\
+South Carolina & 4.727500 & 0.7352295 & 1010\\
+\addlinespace
+South Dakota & 4.657946 & 0.8397148 & 172\\
+Tennessee & 4.663913 & 0.8098826 & 1133\\
+Texas & 4.652647 & 0.7789094 & 4662\\
+Utah & 4.665389 & 0.7546368 & 487\\
+Vermont & 4.776898 & 0.6847462 & 161\\
+\addlinespace
+Virginia & 4.722891 & 0.7433986 & 2787\\
+Washington & 4.653790 & 0.7633607 & 1742\\
+West Virginia & 4.618171 & 0.8055191 & 384\\
+Wisconsin & 4.641089 & 0.7689811 & 2377\\
+Wyoming & 4.662522 & 0.7447127 & 126\\*
+\end{longtable}
+\efloatseparator
+ 
+\begin{longtable}[t]{llll}
+\caption{\label{tab:KableOuput}Conscientiousness Descriptives}\\
+\toprule
+State & Mean & SD & N\\
+\midrule
+\endfirsthead
+\caption[]{\label{tab:KableOuput}Conscientiousness Descriptives \textit{(continued)}}\\
+\toprule
+State & Mean & SD & N\\
+\midrule
+\endhead
+
+\endfoot
+\bottomrule
+\endlastfoot
+Alabama & 4.117571 & 0.9667964 & 643\\
+Alaska & 4.026173 & 0.8683283 & 555\\
+Arizona & 4.098011 & 0.8929967 & 866\\
+Arkansas & 4.147743 & 0.9248194 & 577\\
+California & 4.095768 & 0.9086644 & 9709\\
+\addlinespace
+Colorado & 4.124273 & 0.9210228 & 1097\\
+Connecticut & 4.120340 & 0.9307941 & 986\\
+Delaware & 3.997203 & 0.8632940 & 592\\
+Florida & 4.179669 & 0.9343133 & 2936\\
+Georgia & 4.129606 & 0.9180854 & 2414\\
+\addlinespace
+Hawaii & 4.170548 & 0.8806935 & 292\\
+Idaho & 4.150588 & 0.8735417 & 340\\
+Illinois & 4.162300 & 0.9112091 & 5520\\
+Indiana & 4.218357 & 0.9211999 & 1707\\
+Iowa & 4.102082 & 0.9230007 & 982\\
+\addlinespace
+Kansas & 4.108794 & 0.9105627 & 808\\
+Kentucky & 4.122991 & 0.9537198 & 820\\
+Louisiana & 4.209949 & 0.8955529 & 2030\\
+Maine & 4.205641 & 0.9188266 & 356\\
+Maryland & 4.128232 & 0.9095782 & 1772\\
+\addlinespace
+Massachusetts & 4.118530 & 0.9365527 & 1935\\
+Michigan & 4.162636 & 0.9299835 & 2549\\
+Minnesota & 4.096184 & 0.8982866 & 2104\\
+Mississippi & 4.198448 & 0.9059218 & 604\\
+Missouri & 4.141600 & 0.9351437 & 1611\\
+\addlinespace
+Montana & 4.160722 & 0.9577293 & 243\\
+Nebraska & 4.156379 & 0.8777856 & 580\\
+Nevada & 4.082401 & 0.9495511 & 274\\
+New Hampshire & 4.148700 & 0.8946446 & 389\\
+New Jersey & 4.148890 & 0.9280449 & 2495\\
+\addlinespace
+New Mexico & 4.262791 & 0.8985910 & 1199\\
+New York & 4.148340 & 0.9339365 & 4942\\
+North Carolina & 4.171695 & 0.9481568 & 1454\\
+North Dakota & 4.287222 & 0.8787829 & 190\\
+Ohio & 4.188897 & 0.9247682 & 3600\\
+\addlinespace
+Oklahoma & 4.140532 & 0.9454096 & 771\\
+Oregon & 4.070511 & 0.9039862 & 1203\\
+Pennsylvania & 4.117532 & 0.9191805 & 4758\\
+Rhode Island & 4.099572 & 0.9192980 & 422\\
+South Carolina & 4.136447 & 0.8851777 & 1010\\
+\addlinespace
+South Dakota & 4.266537 & 0.8999202 & 172\\
+Tennessee & 4.208465 & 0.9470666 & 1133\\
+Texas & 4.131076 & 0.9285345 & 4662\\
+Utah & 4.102647 & 0.8660975 & 487\\
+Vermont & 4.090649 & 0.9496127 & 161\\
+\addlinespace
+Virginia & 4.141444 & 0.9057514 & 2787\\
+Washington & 4.127309 & 0.9222153 & 1742\\
+West Virginia & 4.163824 & 0.9387757 & 384\\
+Wisconsin & 4.112204 & 0.9268177 & 2377\\
+Wyoming & 4.188095 & 0.9480086 & 126\\*
+\end{longtable}
+\efloatseparator
+ 
+\begin{longtable}[t]{llll}
+\caption{\label{tab:KableOuput}Extraversion Descriptives}\\
+\toprule
+State & Mean & SD & N\\
+\midrule
+\endfirsthead
+\caption[]{\label{tab:KableOuput}Extraversion Descriptives \textit{(continued)}}\\
+\toprule
+State & Mean & SD & N\\
+\midrule
+\endhead
+
+\endfoot
+\bottomrule
+\endlastfoot
+Alabama & 3.744427 & 1.0737088 & 643\\
+Alaska & 3.802078 & 1.0298194 & 555\\
+Arizona & 3.826485 & 1.0391321 & 866\\
+Arkansas & 3.826526 & 1.1045412 & 577\\
+California & 3.916162 & 1.0182084 & 9709\\
+\addlinespace
+Colorado & 3.811444 & 1.0267798 & 1097\\
+Connecticut & 3.924073 & 1.0262157 & 986\\
+Delaware & 4.029242 & 0.9524545 & 592\\
+Florida & 3.888615 & 1.0586144 & 2936\\
+Georgia & 3.998944 & 1.0429965 & 2414\\
+\addlinespace
+Hawaii & 3.835455 & 1.0309916 & 292\\
+Idaho & 3.752173 & 1.0263106 & 340\\
+Illinois & 4.012087 & 0.9837590 & 5520\\
+Indiana & 3.894970 & 1.0577104 & 1707\\
+Iowa & 3.907930 & 1.0020006 & 982\\
+\addlinespace
+Kansas & 3.939745 & 1.0499232 & 808\\
+Kentucky & 3.938068 & 1.0360986 & 820\\
+Louisiana & 4.010502 & 0.9748960 & 2030\\
+Maine & 3.846177 & 1.0208230 & 356\\
+Maryland & 3.919828 & 1.0085951 & 1772\\
+\addlinespace
+Massachusetts & 3.894588 & 1.0272060 & 1935\\
+Michigan & 3.896950 & 1.0384003 & 2549\\
+Minnesota & 3.941308 & 1.0015734 & 2104\\
+Mississippi & 3.920760 & 1.0388218 & 604\\
+Missouri & 3.912232 & 0.9806955 & 1611\\
+\addlinespace
+Montana & 3.847828 & 1.0609354 & 243\\
+Nebraska & 3.918702 & 0.9855573 & 580\\
+Nevada & 3.816920 & 1.0112589 & 274\\
+New Hampshire & 3.862380 & 0.9731819 & 389\\
+New Jersey & 3.996112 & 0.9864916 & 2495\\
+\addlinespace
+New Mexico & 3.898791 & 1.0508917 & 1199\\
+New York & 3.933406 & 1.0287508 & 4942\\
+North Carolina & 3.802822 & 1.0565457 & 1454\\
+North Dakota & 3.803845 & 1.0412612 & 190\\
+Ohio & 3.920517 & 1.0329506 & 3600\\
+\addlinespace
+Oklahoma & 3.804182 & 1.0792374 & 771\\
+Oregon & 3.886437 & 1.0061902 & 1203\\
+Pennsylvania & 3.958699 & 1.0067223 & 4758\\
+Rhode Island & 4.057464 & 0.9397830 & 422\\
+South Carolina & 4.043584 & 0.9876283 & 1010\\
+\addlinespace
+South Dakota & 3.979409 & 1.0081303 & 172\\
+Tennessee & 3.847732 & 1.0370815 & 1133\\
+Texas & 3.888641 & 1.0537326 & 4662\\
+Utah & 3.884845 & 1.0514536 & 487\\
+Vermont & 3.917118 & 0.9878257 & 161\\
+\addlinespace
+Virginia & 3.943700 & 1.0111944 & 2787\\
+Washington & 3.809801 & 1.0334914 & 1742\\
+West Virginia & 3.779065 & 1.0798027 & 384\\
+Wisconsin & 3.920540 & 1.0092239 & 2377\\
+Wyoming & 3.821847 & 1.0187586 & 126\\*
+\end{longtable}
+\efloatseparator
+ 
+\begin{longtable}[t]{llll}
+\caption{\label{tab:KableOuput}Intellect Descriptives}\\
+\toprule
+State & Mean & SD & N\\
+\midrule
+\endfirsthead
+\caption[]{\label{tab:KableOuput}Intellect Descriptives \textit{(continued)}}\\
+\toprule
+State & Mean & SD & N\\
+\midrule
+\endhead
+
+\endfoot
+\bottomrule
+\endlastfoot
+Alabama & 4.637855 & 0.7449558 & 643\\
+Alaska & 4.664919 & 0.7668085 & 555\\
+Arizona & 4.665397 & 0.7510410 & 866\\
+Arkansas & 4.601727 & 0.7666522 & 577\\
+California & 4.607159 & 0.7273981 & 9709\\
+\addlinespace
+Colorado & 4.670469 & 0.7275069 & 1097\\
+Connecticut & 4.655686 & 0.7412064 & 986\\
+Delaware & 4.386655 & 0.7205952 & 592\\
+Florida & 4.657286 & 0.7032552 & 2936\\
+Georgia & 4.597719 & 0.7234032 & 2414\\
+\addlinespace
+Hawaii & 4.533509 & 0.7517126 & 292\\
+Idaho & 4.676192 & 0.7004048 & 340\\
+Illinois & 4.568339 & 0.7243646 & 5520\\
+Indiana & 4.578118 & 0.7459488 & 1707\\
+Iowa & 4.533963 & 0.7319487 & 982\\
+\addlinespace
+Kansas & 4.600704 & 0.7605258 & 808\\
+Kentucky & 4.601366 & 0.7377464 & 820\\
+Louisiana & 4.421264 & 0.7414032 & 2030\\
+Maine & 4.643924 & 0.7361798 & 356\\
+Maryland & 4.577738 & 0.7187010 & 1772\\
+\addlinespace
+Massachusetts & 4.574818 & 0.7139949 & 1935\\
+Michigan & 4.656310 & 0.7285229 & 2549\\
+Minnesota & 4.531498 & 0.7231444 & 2104\\
+Mississippi & 4.559547 & 0.7368477 & 604\\
+Missouri & 4.588972 & 0.7330890 & 1611\\
+\addlinespace
+Montana & 4.708861 & 0.7378293 & 243\\
+Nebraska & 4.495270 & 0.7481413 & 580\\
+Nevada & 4.651490 & 0.7185546 & 274\\
+New Hampshire & 4.630421 & 0.7565377 & 389\\
+New Jersey & 4.612689 & 0.7390479 & 2495\\
+\addlinespace
+New Mexico & 4.579827 & 0.6900077 & 1199\\
+New York & 4.649041 & 0.7256438 & 4942\\
+North Carolina & 4.569312 & 0.7502207 & 1454\\
+North Dakota & 4.570237 & 0.7177782 & 190\\
+Ohio & 4.556529 & 0.7364082 & 3600\\
+\addlinespace
+Oklahoma & 4.605553 & 0.7834762 & 771\\
+Oregon & 4.619854 & 0.7436931 & 1203\\
+Pennsylvania & 4.512731 & 0.7411906 & 4758\\
+Rhode Island & 4.622255 & 0.6808287 & 422\\
+South Carolina & 4.485802 & 0.7222830 & 1010\\
+\addlinespace
+South Dakota & 4.653013 & 0.6828377 & 172\\
+Tennessee & 4.590234 & 0.7736854 & 1133\\
+Texas & 4.613907 & 0.7484548 & 4662\\
+Utah & 4.607547 & 0.7199137 & 487\\
+Vermont & 4.735498 & 0.7363306 & 161\\
+\addlinespace
+Virginia & 4.547663 & 0.7079233 & 2787\\
+Washington & 4.684024 & 0.6893191 & 1742\\
+West Virginia & 4.582448 & 0.7334187 & 384\\
+Wisconsin & 4.504417 & 0.7397412 & 2377\\
+Wyoming & 4.631488 & 0.6969593 & 126\\*
+\end{longtable}
