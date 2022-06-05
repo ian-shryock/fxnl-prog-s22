@@ -360,12 +360,13 @@ kable(state_factor_intel, booktabs = TRUE, longtable = TRUE, col.names = c("Stat
 ```{r #9 factor structure - from nested states, include = FALSE, warning = FALSE, eval = F}
 by_stateFactors <- split(SAPA, factorSAPA$state)
 
-stateFactors <- SAPA %>% nest_by(state)
+stateFactors <- SAPA %>% group_by(state) %>% nest() %>% 
+  mutate(factors = map(data, ~fa.parallel(cov(.x[,7:105], use = "pairwise.complete.obs"), n.iter = 5, cor = "cov")$nfact))
 
-#stateFactors <- SAPA %>% nest_by(state) %>% mutate((factors=map(fa.parallel(.x[[2]][,7:105], use = "pairwise.complete.obs"), n.iter = 1, cor = "cor")$nfact) this needs troubleshooting
+stateFactor <- stateFactors$factors
 
-stateFactor <- map(by_stateFactors, ~fa.parallel(cov(.x[,8:106], use = "pairwise.complete.obs"), n.iter = 20, cor = "cov")$nfact)
-stateFactordf <- t(as.data.frame(stateFactor))
+# stateFactor <- map(by_stateFactors, ~fa.parallel(cov(.x[,8:106], use = "pairwise.complete.obs"), n.iter = 20, cor = "cov")$nfact)
+# stateFactordf <- t(as.data.frame(stateFactor))
 
 getmode <- function(pass) {
    unique <- unique(pass)
@@ -508,7 +509,7 @@ The main analyses are fifty parallel analyses, one for every state, that estimat
 
 # Results
 
-The parallel factor analyses indicate that the modal number of factors is 5, as is found in 36 of the 50 states, with 7, 6, and 1 states respectively being better represented by 6, 7, and 8 factors.
+The parallel factor analyses indicate that the modal number of factors is 5, as is found in 36 of the 50 states, with 7, 6, and 1 states respectively being better represented by 6, 7, and 8 factors. This analysis relies on covariance matrices uing pairwise complete observations; use of a raw matrix does not converge for each state. However, where such analyses are convergent, findings indicate a factor structure of approximately 20-30, which is consistent with the findings of related SAPA studies, which find a 27-factor structure. The complete sample yielded a 20-factor structure in our exploratory analysis, suggesting: 1. an issue of completeness limiting state-level inference (an expected outcome of the SAPA sampling strategy), and; 2. A potential hierarchical factor structure in which the 20 factors aggregate to fewer.
 
 
 ```{r  warning = FALSE, echo = FALSE}
