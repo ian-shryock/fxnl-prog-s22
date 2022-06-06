@@ -413,7 +413,7 @@ kable(state_factor_intel, booktabs = TRUE, longtable = TRUE, col.names = c("Stat
 by_stateFactors <- split(SAPA, factorSAPA$state)
 
 stateFactors <- SAPA %>% group_by(state) %>% nest() %>% 
-  mutate(factors = map(data, ~fa.parallel(cov(.x[,7:105], use = "pairwise.complete.obs"), n.iter = 5, cor = "cov")$nfact))
+  mutate(factors = map(data, ~fa.parallel(cov(.x[,7:105], use = "pairwise.complete.obs"), n.iter = 5, cor = "cov")$nfact), kmo = map(data, ~KMO(.x[,7:105])$MSA) )
 
 stateFactor <- stateFactors$factors
 
@@ -510,7 +510,7 @@ five_factor <- fa(SAPA2 %>% select(starts_with("q")),
 
 # Results
 
-The parallel factor analyses indicate that the modal number of factors is 5, as is found in 36 of the 50 states, with 7, 6, and 1 states respectively being better represented by 6, 7, and 8 factors.
+The parallel factor analyses indicate that the modal number of factors is 5, as is found in 36 of the 50 states, with 7, 6, and 1 states respectively being better represented by 6, 7, and 8 factors. This analysis relies on covariance matrices uing pairwise complete observations; use of a raw matrix does not converge for each state. However, where such analyses are convergent, findings indicate a factor structure of approximately 20-30.
 
 ```{r  warning = FALSE, echo = FALSE}
 load(here("data", "netplots.rda"))
@@ -534,6 +534,11 @@ title(paste0("Personality Structure for ", efaSolutions2[[1]][50]))
 
 # Discussion
 
+These findings appear to confirm the Big Five factor structure of personality. However, this conclusion is extremely tentative, and relies on numerous assumptions holding, for which there is little basis. Most notably, the Kaiser, Meyer, Olkin Measure of Sampling Adequacy indicates a "Marvelous" (@kaiser1974index) measure of the whole sample, whereas no state on it's own is acceptable for factor analysis by those same standards. The complete sample appears to have a 20-factor structure which is more consistent with the findings of related SAPA studies, which finds a 27-factor structure. That the complete sample yielded a 20-factor structure in our exploratory analysis, suggests: 1. an issue of completeness limiting state-level inference (an expected outcome of the SAPA sampling strategy), and; 2. A potential hierarchical factor structure in which the 20 factors aggregate to fewer.
+
+However, barring this issue, it appears notable that smaller states are better represented by more than five factors. This is surprising, as there were no a priori data of the populations of these states entered into the analyses, and thus, such inferences are not based on a more robust estimate. Further inspection demonstrates that states with a larger number of factors have a number of responses approximately commensurate with their state population size; that is to say, less populous states produce fewer observations and a higher factor structure. It seems a reasonable hypothesis that these findings are not well-founded.
+
+Thus, while state-level (dis)confirmation of any extant published personality structure, and demonstration of the homogeneity therein remains a fruitful endeavor, these data do not admit to being interpreted to those ends. SAPA, relying on large degrees of missingness, is not well-suited for such a degree of granularity. A shorter, but more complete personality questionnaire would be more apt. However, stable measures of an individual's personality is a function of the number of items, and thus limits the number of factors to extract. Thus, there is a tension between the so-called "Big Few" and personality structures comprised of more numerous factors. Due to the limited attention of any respondent, and limited resources of researchers to incentivize larger questionnaires, the Big Few personality structure will continue to be reified; if factors aggregate to form this structure, this measurement is limited but valid. To the extent that they do not, these prevailing structures are increasingly problematic.
 
 \newpage
 
