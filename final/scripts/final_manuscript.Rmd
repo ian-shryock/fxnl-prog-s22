@@ -381,8 +381,8 @@ kable(state_factor_intel, booktabs = TRUE, longtable = TRUE, col.names = c("Stat
 
 ```{r KableOuput, echo = FALSE, message=FALSE, warning=FALSE}
 
-kable(sample(SAPA,race), caption = "Race Demographics", col.names = c("Race", "N", "% of Sample"))
-kable(sample(SAPA,education), caption = "Education Demographics", col.names = c("Education", "N", "% of Sample"))
+kable(sample(SAPA,race), caption = "Race Demographics", col.names = c("Race", "N", "Prop.  of Sample"))
+kable(sample(SAPA,education), caption = "Education Demographics", col.names = c("Education", "N", "Prop.of Sample"))
 
 apa.cor.table(cor_data, filename="Corr_table.doc", show.sig.stars = TRUE)
 
