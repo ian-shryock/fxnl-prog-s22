@@ -44,20 +44,10 @@
   pdftitle={EDLD 653 Final Project},
   pdfauthor={Anisha Babu, Ian Shryock, Dillon Welindt, Futing Zou, Diana DeWald1},
   pdflang={en-EN},
-  pdfkeywords={keywords},
+  pdfkeywords={Personality traits, SAPA-Project Dataverse, Functional Programming},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
-\usepackage{longtable,booktabs,array}
-\usepackage{calc} % for calculating minipage widths
-% Correct order of tables after \paragraph or \subparagraph
-\usepackage{etoolbox}
-\makeatletter
-\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
-\makeatother
-% Allow footnotes in longtable head/foot
-\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
-\makesavenoteenv{longtable}
 \usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -149,7 +139,7 @@
   {}{\typeout{Failed to patch title.}}
 \makeatother
 \shorttitle{The Personality Structures of the 50 States}
-\keywords{keywords\newline\indent Word count: X}
+\keywords{Personality traits, SAPA-Project Dataverse, Functional Programming\newline\indent Word count: 1106}
 \DeclareDelayedFloatFlavor{ThreePartTable}{table}
 \DeclareDelayedFloatFlavor{lltable}{table}
 \DeclareDelayedFloatFlavor*{longtable}{table}
@@ -184,19 +174,7 @@ Website for project can be found at: \url{https://github.com/ian-shryock/fxnl-pr
 \affiliation{\vspace{0.5cm}\textsuperscript{1} University of Oregon}
 
 \abstract{
-One or two sentences providing a \textbf{basic introduction} to the field, comprehensible to a scientist in any discipline.
-
-Two to three sentences of \textbf{more detailed background}, comprehensible to scientists in related disciplines.
-
-One sentence clearly stating the \textbf{general problem} being addressed by this particular study.
-
-One sentence summarizing the main result (with the words ``\textbf{here we show}'' or their equivalent).
-
-Two or three sentences explaining what the \textbf{main result} reveals in direct comparison to what was thought to be the case previously, or how the main result adds to previous knowledge.
-
-One or two sentences to put the results into a more \textbf{general context}.
-
-Two or three sentences to provide a \textbf{broader perspective}, readily comprehensible to a scientist in any discipline.
+Big Five personality data were collected from \textasciitilde114,000 individuals in the US between April 2006 and August 2010. Participants were randomly assigned to question blocks of an assessment titled `International Personality Item Pool Big Five Factor Markers,' to indicate individuals' Big Five traits (Openness, Conscientiousness, Extraversion, Agreeableness, and Neuroticism). Additionally, demographic data were collected from participants on an optional basis. Such data included questions about participants' gender, age, country, state (if applicable), race, and education level. We used this demographic data in tandem with trait data to run descriptive, correlational, and factor analyses, hypothesizing that there would be variation in the number of ideal dimensions across states. We found this to be the case, with personality traits demonstrating best fit in a range of 5 to 8 traits across 50 states.
 }
 
 
@@ -243,15 +221,13 @@ In the current study, we use exploratory factor analyses to provide estimates of
 
 The International Personality Item Pool is an open-source repository of personality trait items that have been researched extensively in the big five tradition. The current study uses ninety nine of one hundred items from the IPIP-100. Participants rated themselves on a number of personality traits from 1- not at all like me to 6- very much like me.
 
-\hypertarget{data-collection-and-participants}{%
-\subsection{Data Collection and Participants}\label{data-collection-and-participants}}
+\hypertarget{data-collection}{%
+\subsection{Data Collection}\label{data-collection}}
 
 Data were obtained from the Harvard \href{https://dataverse.harvard.edu/dataverse/SAPA-Project}{Dataverse} (D. Condon, Zabelina, and Revelle (2021)). Data were initially collected using the Synthetic Aperture for Personality Assessment (D. M. Condon \& Revelle, 2014; see Revelle et al., 2016; Wilt, Funkhouser, \& Revelle, 2011) which utilizes a massively missing completely at random design, wherein each participant only provides responses to a fraction of items.
 
 \hypertarget{data-analysis}{%
 \subsection{Data analysis}\label{data-analysis}}
-
-We used R {[}Version 4.1.1; R Core Team (2021){]} and the R-package \emph{papaja} {[}Version 0.1.0.9997; Aust and Barth (2020){]} for all our analyses.
 
 First, we provide descriptive norms for the entire US sample, and then by state.
 
@@ -259,231 +235,96 @@ Next, we use parallel analysis to determine the optimal number of factors in the
 
 The main analyses are fifty parallel analyses, one for every state, that estimates the optimal number of personality dimensions for each state. We hypothesize that there will be variation in the number of ideal dimensions across states.
 
+\begin{table}
+
+\caption{\label{tab:KableOuput}Race Demographics}
+\centering
+\begin{tabular}[t]{l|r|r}
+\hline
+Race & N & \% of Sample\\
+\hline
+African American & 6108 & 0.0750682\\
+\hline
+Chinese & 1129 & 0.0138756\\
+\hline
+Indian/Pakistani & 469 & 0.0057641\\
+\hline
+Japanese & 257 & 0.0031586\\
+\hline
+Korean & 500 & 0.0061451\\
+\hline
+Latino & 2079 & 0.0255512\\
+\hline
+Mexican & 2166 & 0.0266205\\
+\hline
+Native American & 728 & 0.0089472\\
+\hline
+Other & 3067 & 0.0376939\\
+\hline
+Other Asian & 566 & 0.0069562\\
+\hline
+Pacific Islander & 305 & 0.0037485\\
+\hline
+Philipino & 615 & 0.0075584\\
+\hline
+Puerto Rican & 512 & 0.0062926\\
+\hline
+White/Caucasian & 62859 & 0.7725463\\
+\hline
+NA & 6 & 0.0000737\\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}
+
+\caption{\label{tab:KableOuput}Education Demographics}
+\centering
+\begin{tabular}[t]{l|r|r}
+\hline
+Education & N & \% of Sample\\
+\hline
+College graduate & 12381 & 0.1521643\\
+\hline
+Currently attending college & 32469 & 0.3990487\\
+\hline
+Graduate or professional degree & 10338 & 0.1270555\\
+\hline
+High school graduate & 6145 & 0.0755229\\
+\hline
+Less than 12 years & 11759 & 0.1445198\\
+\hline
+Some college did not graduate & 8274 & 0.1016887\\
+\hline
+\end{tabular}
+\end{table}
+
 \begin{verbatim}
-## $gender
 ## 
-## Female   Male 
-##  56901  24465 
 ## 
-## $age
+## Means, standard deviations, and correlations with confidence intervals
+##  
 ## 
-##   14   15   16   17   18   19   20   21   22   23   24   25   26   27   28   29 
-##  767 1113 3129 6462 7707 6709 5896 4885 3621 2999 2569 2300 2193 2085 1887 1649 
-##   30   31   32   33   34   35   36   37   38   39   40   41   42   43   44   45 
-## 1590 1453 1345 1230 1212 1240 1152 1159 1069  958 1010  840  866  847  815  791 
-##   46   47   48   49   50   51   52   53   54   55   56   57   58   59   60   61 
-##  688  691  681  626  665  542  537  500  433  389  309  301  246  217  212  126 
-##   62   63   64   65   66   67   68   69   70   71   72   73   74   75   76   77 
-##  132   88   68   82   50   47   29   27   27   22   21    6   12    7    5    4 
-##   78   79   80   81   82   83   84   85   86   87   88   89   90 
-##    5    3    4    1    1    2    1    3    2    2    1    2    1 
+##   Variable             M    SD   1          2          3         
+##   1. Agreeableness     4.67 0.77                                 
+##                                                                  
+##   2. Conscientiousness 4.14 0.92 .21**                           
+##                                  [.21, .22]                      
+##                                                                  
+##   3. Extraversion      3.92 1.02 .38**      .13**                
+##                                  [.37, .38] [.13, .14]           
+##                                                                  
+##   4. Intellect         4.59 0.73 .16**      .08**      .22**     
+##                                  [.15, .16] [.07, .08] [.21, .23]
+##                                                                  
 ## 
-## $state
+## Note. M and SD are used to represent mean and standard deviation, respectively.
+## Values in square brackets indicate the 95% confidence interval.
+## The confidence interval is a plausible range of population correlations 
+## that could have caused the sample correlation (Cumming, 2014).
+##  * indicates p < .05. ** indicates p < .01.
 ## 
-##        Alabama         Alaska        Arizona       Arkansas     California 
-##            643            555            866            577           9709 
-##       Colorado    Connecticut       Delaware        Florida        Georgia 
-##           1097            986            592           2936           2414 
-##         Hawaii          Idaho       Illinois        Indiana           Iowa 
-##            292            340           5520           1707            982 
-##         Kansas       Kentucky      Louisiana          Maine       Maryland 
-##            808            820           2030            356           1772 
-##  Massachusetts       Michigan      Minnesota    Mississippi       Missouri 
-##           1935           2549           2104            604           1611 
-##        Montana       Nebraska         Nevada  New Hampshire     New Jersey 
-##            243            580            274            389           2495 
-##     New Mexico       New York North Carolina   North Dakota           Ohio 
-##           1199           4942           1454            190           3600 
-##       Oklahoma         Oregon   Pennsylvania   Rhode Island South Carolina 
-##            771           1203           4758            422           1010 
-##   South Dakota      Tennessee          Texas           Utah        Vermont 
-##            172           1133           4662            487            161 
-##       Virginia     Washington  West Virginia      Wisconsin        Wyoming 
-##           2787           1742            384           2377            126 
-## 
-## $race
-## 
-## African American          Chinese Indian/Pakistani         Japanese 
-##             6108             1129              469              257 
-##           Korean           Latino          Mexican  Native American 
-##              500             2079             2166              728 
-##            Other      Other Asian Pacific Islander        Philipino 
-##             3067              566              305              615 
-##     Puerto Rican  White/Caucasian 
-##              512            62859 
-## 
-## $education
-## 
-##                College graduate     Currently attending college 
-##                           12381                           32469 
-## Graduate or professional degree            High school graduate 
-##                           10338                            6145 
-##              Less than 12 years   Some college did not graduate 
-##                           11759                            8274
 \end{verbatim}
-
-\begin{longtable}[]{@{}lc@{}}
-\caption{(\#tab:\#3 descriptives statistics)Full Sample Demographics}\tabularnewline
-\toprule
-& Overall (N=81366) \\
-\midrule
-\endfirsthead
-\toprule
-& Overall (N=81366) \\
-\midrule
-\endhead
-\textbf{age} & \\
-~~~Mean (SD) & 27.177 (11.343) \\
-~~~Range & 14.000 - 90.000 \\
-\textbf{gender} & \\
-~~~Female & 56901 (69.9\%) \\
-~~~Male & 24465 (30.1\%) \\
-\textbf{race} & \\
-~~~N-Miss & 6 \\
-~~~African American & 6108 (7.5\%) \\
-~~~Chinese & 1129 (1.4\%) \\
-~~~Indian/Pakistani & 469 (0.6\%) \\
-~~~Japanese & 257 (0.3\%) \\
-~~~Korean & 500 (0.6\%) \\
-~~~Latino & 2079 (2.6\%) \\
-~~~Mexican & 2166 (2.7\%) \\
-~~~Native American & 728 (0.9\%) \\
-~~~Other & 3067 (3.8\%) \\
-~~~Other Asian & 566 (0.7\%) \\
-~~~Pacific Islander & 305 (0.4\%) \\
-~~~Philipino & 615 (0.8\%) \\
-~~~Puerto Rican & 512 (0.6\%) \\
-~~~White/Caucasian & 62859 (77.3\%) \\
-\textbf{education} & \\
-~~~College graduate & 12381 (15.2\%) \\
-~~~Currently attending college & 32469 (39.9\%) \\
-~~~Graduate or professional degree & 10338 (12.7\%) \\
-~~~High school graduate & 6145 (7.6\%) \\
-~~~Less than 12 years & 11759 (14.5\%) \\
-~~~Some college did not graduate & 8274 (10.2\%) \\
-\bottomrule
-\end{longtable}
-
-\hypertarget{a-tibble-15-x-3}{%
-\section{A tibble: 15 x 3}\label{a-tibble-15-x-3}}
-
-group group\_sample percent\_sample
-1 African American 6108 0.0751\\
-2 Chinese 1129 0.0139\\
-3 Indian/Pakistani 469 0.00576\\
-4 Japanese 257 0.00316\\
-5 Korean 500 0.00615\\
-6 Latino 2079 0.0256\\
-7 Mexican 2166 0.0266\\
-8 Native American 728 0.00895\\
-9 Other 3067 0.0377\\
-10 Other Asian 566 0.00696\\
-11 Pacific Islander 305 0.00375\\
-12 Philipino 615 0.00756\\
-13 Puerto Rican 512 0.00629\\
-14 White/Caucasian 62859 0.773\\
-15 6 0.0000737
-\# A tibble: 6 x 3
-group group\_sample percent\_sample
-1 College graduate 12381 0.152
-2 Currently attending college 32469 0.399
-3 Graduate or professional degree 10338 0.127
-4 High school graduate 6145 0.0755
-5 Less than 12 years 11759 0.145
-6 Some college did not graduate 8274 0.102
-IPIP100agreeableness IPIP100conscientiousness
-IPIP100agreeableness 1.00 0.21
-IPIP100conscientiousness 0.21 1.00
-IPIP100extraversion 0.38 0.13
-IPIP100intellect 0.16 0.08
-IPIP100extraversion IPIP100intellect
-IPIP100agreeableness 0.38 0.16
-IPIP100conscientiousness 0.13 0.08
-IPIP100extraversion 1.00 0.22
-IPIP100intellect 0.22 1.00
-The ability to suppress reporting of reporting confidence intervals has been deprecated in this version.
-The function argument show.conf.interval will be removed in a later version.
-
-Means, standard deviations, and correlations with confidence intervals
-
-Variable M SD 1 2 3\\
-1. IPIP100agreeableness 4.67 0.77
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{1}
-\item
-  IPIP100conscientiousness 4.14 0.92 .21**\\
-  {[}.21, .22{]}
-\item
-  IPIP100extraversion 3.92 1.02 .38** .13**\\
-  {[}.37, .38{]} {[}.13, .14{]}
-\item
-  IPIP100intellect 4.59 0.73 .16** .08** .22**\\
-  {[}.15, .16{]} {[}.07, .08{]} {[}.21, .23{]}
-\end{enumerate}
-
-Note. M and SD are used to represent mean and standard deviation, respectively.
-Values in square brackets indicate the 95\% confidence interval.
-The confidence interval is a plausible range of population correlations
-that could have caused the sample correlation (Cumming, 2014).
-* indicates p \textless{} .05. ** indicates p \textless{} .01.
-
-The ability to suppress reporting of reporting confidence intervals has been deprecated in this version.
-The function argument show.conf.interval will be removed in a later version.
-
-Means, standard deviations, and correlations with confidence intervals
-
-Variable M SD 1 2 3\\
-1. IPIP100agreeableness 4.67 0.77
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{1}
-\item
-  IPIP100conscientiousness 4.14 0.92 .21**\\
-  {[}.21, .22{]}
-\item
-  IPIP100extraversion 3.92 1.02 .38** .13**\\
-  {[}.37, .38{]} {[}.13, .14{]}
-\item
-  IPIP100intellect 4.59 0.73 .16** .08** .22**\\
-  {[}.15, .16{]} {[}.07, .08{]} {[}.21, .23{]}
-\end{enumerate}
-
-Note. M and SD are used to represent mean and standard deviation, respectively.
-Values in square brackets indicate the 95\% confidence interval.
-The confidence interval is a plausible range of population correlations
-that could have caused the sample correlation (Cumming, 2014).
-* indicates p \textless{} .05. ** indicates p \textless{} .01.
-
-\hypertarget{a-tibble-15-x-3-1}{%
-\section{A tibble: 15 x 3}\label{a-tibble-15-x-3-1}}
-
-group group\_sample percent\_sample
-1 African American 6108 0.0751\\
-2 Chinese 1129 0.0139\\
-3 Indian/Pakistani 469 0.00576\\
-4 Japanese 257 0.00316\\
-5 Korean 500 0.00615\\
-6 Latino 2079 0.0256\\
-7 Mexican 2166 0.0266\\
-8 Native American 728 0.00895\\
-9 Other 3067 0.0377\\
-10 Other Asian 566 0.00696\\
-11 Pacific Islander 305 0.00375\\
-12 Philipino 615 0.00756\\
-13 Puerto Rican 512 0.00629\\
-14 White/Caucasian 62859 0.773\\
-15 6 0.0000737
-\# A tibble: 6 x 3
-group group\_sample percent\_sample
-1 College graduate 12381 0.152
-2 Currently attending college 32469 0.399
-3 Graduate or professional degree 10338 0.127
-4 High school graduate 6145 0.0755
-5 Less than 12 years 11759 0.145
-6 Some college did not graduate 8274 0.102
 
 \begingroup\fontsize{12}{14}\selectfont
 
@@ -833,36 +674,12 @@ The parallel factor analyses indicate that the modal number of factors is 5, as 
 
 \includegraphics{final_manuscript_files/figure-latex/unnamed-chunk-3-1.pdf} \includegraphics{final_manuscript_files/figure-latex/unnamed-chunk-3-2.pdf} \includegraphics{final_manuscript_files/figure-latex/unnamed-chunk-3-3.pdf} \includegraphics{final_manuscript_files/figure-latex/unnamed-chunk-3-4.pdf}
 
-\hypertarget{ek-peer-review}{%
-\subsubsection{EK Peer Review:}\label{ek-peer-review}}
-
-\hypertarget{areas-of-strength}{%
-\section{Areas of strength:}\label{areas-of-strength}}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Awesome use of branches/git features in general! Made it clear to see who was working on what sections, and how the project was arranged.
-\item
-  Code is arranged easily to read, nice use of sections and not doing more than 1\textasciitilde2 things per line of code.
-\item
-  Great reproducibility with having data loading working on first try for me, and doesn't require any extra files/folders outside of the ``scripts'' folder- might be beneficial to cache the data however?
-\end{enumerate}
-
-What I learned: Familiarity with the IPIP dataset! I'd really like tos ee some visualizations on how these factors vary across the different states, maybe using a geographic visualization?
-
-\hypertarget{ek-suggestions}{%
-\section{EK Suggestions:}\label{ek-suggestions}}
-
-\begin{itemize}
-\tightlist
-\item
-  Code cleanup: moved library declarations to teh beginning of the script, and added the ``needs'' package'' to simplify package loading
-\end{itemize}
-
 \hypertarget{discussion}{%
 \section{Discussion}\label{discussion}}
+
+\newpage
+
+We used the following R packages for this manuscript: R {[}Version 4.1.1; R Core Team (2021){]} and the R-packages \emph{apaTables} {[}Version 2.0.8; Stanley (2021){]}, \emph{arsenal} {[}Version 3.6.3; Heinzen, Sinnwell, Atkinson, Gunderson, and Dougherty (2021){]}, \emph{dataverse} {[}Version 0.3.10; Kuriwaki, Beasley, and Leeper (2022){]}, \emph{dplyr} {[}Version 1.0.9; Wickham, François, Henry, and Müller (2022){]}, \emph{forcats} {[}Version 0.5.1; Wickham (2021){]}, \emph{ggplot2} {[}Version 3.3.6; Wickham (2016){]}, \emph{GPArotation} {[}Version 2022.4.1; Bernaards and I.Jennrich (2005){]}, \emph{here} {[}Version 1.0.1; Müller (2020){]}, \emph{kableExtra} {[}Version 1.3.4; Zhu (2021){]}, \emph{needs} {[}Version 0.0.3; Katz (2016){]}, \emph{papaja} {[}Version 0.1.0.9997; Aust and Barth (2020){]}, \emph{psych} {[}Version 2.2.5; Revelle (2022){]}, \emph{purrr} {[}Version 0.3.4; Henry and Wickham (2020){]}, \emph{qgraph} {[}Version 1.9.2; Epskamp, Cramer, Waldorp, Schmittmann, and Borsboom (2012){]}, \emph{readr} {[}Version 2.1.2; Wickham, Hester, and Bryan (2022){]}, \emph{rio} {[}Version 0.5.29; Chan, Chan, Leeper, and Becker (2021){]}, \emph{stringr} {[}Version 1.4.0; Wickham (2019){]}, \emph{tibble} {[}Version 3.1.7; Müller and Wickham (2022){]}, \emph{tidyr} {[}Version 1.2.0; Wickham and Girlich (2022){]}, and \emph{tidyverse} {[}Version 1.3.1; Wickham et al. (2019){]}
 
 \newpage
 
@@ -878,20 +695,77 @@ What I learned: Familiarity with the IPIP dataset! I'd really like tos ee some v
 \leavevmode\vadjust pre{\hypertarget{ref-R-papaja}{}}%
 Aust, F., \& Barth, M. (2020). \emph{{papaja}: {Create} {APA} manuscripts with {R Markdown}}. Retrieved from \url{https://github.com/crsh/papaja}
 
+\leavevmode\vadjust pre{\hypertarget{ref-R-GPArotation}{}}%
+Bernaards, C. A., \& I.Jennrich, R. (2005). Gradient projection algorithms and software for arbitrary rotation criteria in factor analysis. \emph{Educational and Psychological Measurement}, \emph{65}, 676--696.
+
+\leavevmode\vadjust pre{\hypertarget{ref-R-rio}{}}%
+Chan, C., Chan, G. C., Leeper, T. J., \& Becker, J. (2021). \emph{Rio: A swiss-army knife for data file i/o}.
+
 \leavevmode\vadjust pre{\hypertarget{ref-condon2014international}{}}%
 Condon, D. M., \& Revelle, W. (2014). The international cognitive ability resource: Development and initial validation of a public-domain measure. \emph{Intelligence}, \emph{43}, 52--64.
 
 \leavevmode\vadjust pre{\hypertarget{ref-DVNux2f2IBBMG_2021}{}}%
 Condon, D., Zabelina, D., \& Revelle, W. (2021). \emph{{Reproducibility Data for: Creative Achievement and Individual Differences}} (Version V3) {[}Data set{]}. Harvard Dataverse. \url{https://doi.org/10.7910/DVN/2IBBMG}
 
+\leavevmode\vadjust pre{\hypertarget{ref-R-qgraph}{}}%
+Epskamp, S., Cramer, A. O. J., Waldorp, L. J., Schmittmann, V. D., \& Borsboom, D. (2012). {qgraph}: Network visualizations of relationships in psychometric data. \emph{Journal of Statistical Software}, \emph{48}(4), 1--18.
+
+\leavevmode\vadjust pre{\hypertarget{ref-R-arsenal}{}}%
+Heinzen, E., Sinnwell, J., Atkinson, E., Gunderson, T., \& Dougherty, G. (2021). \emph{Arsenal: An arsenal of 'r' functions for large-scale statistical summaries}. Retrieved from \url{https://CRAN.R-project.org/package=arsenal}
+
+\leavevmode\vadjust pre{\hypertarget{ref-R-purrr}{}}%
+Henry, L., \& Wickham, H. (2020). \emph{Purrr: Functional programming tools}. Retrieved from \url{https://CRAN.R-project.org/package=purrr}
+
+\leavevmode\vadjust pre{\hypertarget{ref-R-needs}{}}%
+Katz, J. (2016). \emph{Needs: Attaches and installs packages}. Retrieved from \url{https://CRAN.R-project.org/package=needs}
+
+\leavevmode\vadjust pre{\hypertarget{ref-R-dataverse}{}}%
+Kuriwaki, S., Beasley, W., \& Leeper, T. J. (2022). \emph{Dataverse: R client for dataverse 4+ repositories}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-R-here}{}}%
+Müller, K. (2020). \emph{Here: A simpler way to find your files}. Retrieved from \url{https://CRAN.R-project.org/package=here}
+
+\leavevmode\vadjust pre{\hypertarget{ref-R-tibble}{}}%
+Müller, K., \& Wickham, H. (2022). \emph{Tibble: Simple data frames}. Retrieved from \url{https://CRAN.R-project.org/package=tibble}
+
 \leavevmode\vadjust pre{\hypertarget{ref-R-base}{}}%
 R Core Team. (2021). \emph{R: A language and environment for statistical computing}. Vienna, Austria: R Foundation for Statistical Computing. Retrieved from \url{https://www.R-project.org/}
+
+\leavevmode\vadjust pre{\hypertarget{ref-R-psych}{}}%
+Revelle, W. (2022). \emph{Psych: Procedures for psychological, psychometric, and personality research}. Evanston, Illinois: Northwestern University. Retrieved from \url{https://CRAN.R-project.org/package=psych}
 
 \leavevmode\vadjust pre{\hypertarget{ref-revelle2016web}{}}%
 Revelle, W., Condon, D. M., Wilt, J., French, J. A., Brown, A., \& Elleman, L. G. (2016). Web and phone based data collection using planned missing designs. \emph{Sage Handbook of Online Research Methods (2nd Ed., P. 578-595). Sage Publications, Inc}.
 
+\leavevmode\vadjust pre{\hypertarget{ref-R-apaTables}{}}%
+Stanley, D. (2021). \emph{apaTables: Create american psychological association (APA) style tables}. Retrieved from \url{https://CRAN.R-project.org/package=apaTables}
+
+\leavevmode\vadjust pre{\hypertarget{ref-R-ggplot2}{}}%
+Wickham, H. (2016). \emph{ggplot2: Elegant graphics for data analysis}. Springer-Verlag New York. Retrieved from \url{https://ggplot2.tidyverse.org}
+
+\leavevmode\vadjust pre{\hypertarget{ref-R-stringr}{}}%
+Wickham, H. (2019). \emph{Stringr: Simple, consistent wrappers for common string operations}. Retrieved from \url{https://CRAN.R-project.org/package=stringr}
+
+\leavevmode\vadjust pre{\hypertarget{ref-R-forcats}{}}%
+Wickham, H. (2021). \emph{Forcats: Tools for working with categorical variables (factors)}. Retrieved from \url{https://CRAN.R-project.org/package=forcats}
+
+\leavevmode\vadjust pre{\hypertarget{ref-R-tidyverse}{}}%
+Wickham, H., Averick, M., Bryan, J., Chang, W., McGowan, L. D., François, R., \ldots{} Yutani, H. (2019). Welcome to the {tidyverse}. \emph{Journal of Open Source Software}, \emph{4}(43), 1686. \url{https://doi.org/10.21105/joss.01686}
+
+\leavevmode\vadjust pre{\hypertarget{ref-R-dplyr}{}}%
+Wickham, H., François, R., Henry, L., \& Müller, K. (2022). \emph{Dplyr: A grammar of data manipulation}. Retrieved from \url{https://CRAN.R-project.org/package=dplyr}
+
+\leavevmode\vadjust pre{\hypertarget{ref-R-tidyr}{}}%
+Wickham, H., \& Girlich, M. (2022). \emph{Tidyr: Tidy messy data}. Retrieved from \url{https://CRAN.R-project.org/package=tidyr}
+
+\leavevmode\vadjust pre{\hypertarget{ref-R-readr}{}}%
+Wickham, H., Hester, J., \& Bryan, J. (2022). \emph{Readr: Read rectangular text data}. Retrieved from \url{https://CRAN.R-project.org/package=readr}
+
 \leavevmode\vadjust pre{\hypertarget{ref-wilt2011dynamic}{}}%
 Wilt, J., Funkhouser, K., \& Revelle, W. (2011). The dynamic relationships of affective synchrony to perceptions of situations. \emph{Journal of Research in Personality}, \emph{45}(3), 309--321.
+
+\leavevmode\vadjust pre{\hypertarget{ref-R-kableExtra}{}}%
+Zhu, H. (2021). \emph{kableExtra: Construct complex table with 'kable' and pipe syntax}. Retrieved from \url{https://CRAN.R-project.org/package=kableExtra}
 
 \end{CSLReferences}
 

@@ -18,24 +18,11 @@ authornote: |
  Website for project can be found at: https://github.com/ian-shryock/fxnl-prog-s22
 
 abstract: |
-  One or two sentences providing a **basic introduction** to the field,  comprehensible to a scientist in any discipline.
+  Big Five personality data were collected from ~114,000 individuals in the US between April 2006 and August 2010. Participants were randomly assigned to     question blocks of an assessment titled ‘International Personality Item Pool Big Five Factor Markers’, to indicate individuals’ Big Five traits (Openness, Conscientiousness, Extraversion, Agreeableness, and Neuroticism). Additionally, demographic data were collected from participants on an optional basis. Such data included questions about participants’ gender, age, country, state (if applicable), race, and education level. We used this demographic data in tandem with trait data to run descriptive, correlational, and factor analyses, hypothesizing that there would be variation in the number of ideal dimensions across states. We found this to be the case, with personality traits demonstrating best fit in a range of 5 to 8 traits across 50 states.
+
   
-  Two to three sentences of **more detailed background**, comprehensible  to scientists in related disciplines.
-  
-  One sentence clearly stating the **general problem** being addressed by  this particular study.
-  
-  One sentence summarizing the main result (with the words "**here we show**" or their equivalent).
-  
-  Two or three sentences explaining what the **main result** reveals in direct comparison to what was thought to be the case previously, or how the  main result adds to previous knowledge.
-  
-  One or two sentences to put the results into a more **general context**.
-  
-  Two or three sentences to provide a **broader perspective**, readily comprehensible to a scientist in any discipline.
-  
-  <!-- https://tinyurl.com/ybremelq -->
-  
-keywords          : "keywords"
-wordcount         : "X"
+keywords          : "Personality traits, SAPA-Project Dataverse, Functional Programming"
+wordcount         : "1106"
 
 bibliography      : ["r-references.bib"]
 
@@ -53,7 +40,7 @@ output            : papaja::apa6_pdf
 ---
 
 ```{r setup, include = FALSE}
-library("papaja")
+library(papaja)
 r_refs("r-references.bib")
 ```
 
@@ -97,12 +84,11 @@ In the current study, we use exploratory factor analyses to provide estimates of
 ## Measures
 The International Personality Item Pool is an open-source repository of personality trait items that have been researched extensively in the big five tradition. The current study uses ninety nine of one hundred items from the IPIP-100. Participants rated themselves on a number of personality traits from 1- not at all like me to 6- very much like me. 
 
-## Data Collection and Participants
+## Data Collection
 Data were obtained from the Harvard [Dataverse](https://dataverse.harvard.edu/dataverse/SAPA-Project) (@DVN/2IBBMG_2021). Data were initially collected using the Synthetic Aperture for Personality Assessment [see @revelle2016web; @condon2014international; @wilt2011dynamic] which utilizes a massively missing completely at random design, wherein each participant only provides responses to a fraction of items. 
 
 
 ## Data analysis
-We used `r cite_r("r-references.bib")` for all our analyses.
 
 First, we provide descriptive norms for the entire US sample, and then by state. 
 
@@ -115,6 +101,7 @@ The main analyses are fifty parallel analyses, one for every state, that estimat
 ```{r initial, include=FALSE}
 library(needs)
 needs(tidyverse, dataverse, kableExtra, psych, arsenal, apaTables, here, rio, GPArotation, qgraph)
+
 
 
 # download data from url
@@ -197,8 +184,8 @@ IPIPkeys <- IPIPkeys[1:4]
 
 ```
 
-```{r demographics, warning= FALSE, echo = FALSE}
-# idk if this is what we want here - tableby package not available
+```{r demographics, warning= FALSE, echo = FALSE, include = FALSE}
+# tableby package not available
 map((SAPA[c(2,3,5,6,7)]), table)
 
 ```
@@ -211,16 +198,15 @@ scores <- psych::scoreItems(keys = IPIPkeys, items = SAPA, min = 1, max = 6,
 
 ```
 
-```{r #3 descriptives statistics, warning = FALSE, results = 'asis'}
-# demographic table
-demog_tab <- summary(tableby(~ age + gender + race + education, 
-                             data = SAPA, test = FALSE),  
-                     title = "Full Sample Demographics")
+```{r #3, warning= FALSE, echo = FALSE}
+# initial pass at demographic table
 
-demog_tab
+# demog_tab <- summary(tableby(~ age + gender + race + education, 
+#                             data = SAPA, test = FALSE),  
+#                     title = "Full Sample Demographics")
 
-# PEER REVIEW: To get a more elegant table, perhaps you can create your own function that gives you the sample size and percent of sample size by different characteristic and then use map to create a data frame with the categories of choice. I wrote a function below to get you started.
 
+# After help from peer review (tables are added in KableOutput codechunk below):
 sample <- function(df,x) {
   df %>%
   group_by({{x}}) %>%
@@ -232,40 +218,22 @@ sample <- function(df,x) {
   select(group,group_sample, percent_sample)
 }
 
-sample(SAPA,race)
-sample(SAPA,education)
+# correlation matrix for 4 traits in scores
 
-# to add for final: demographic table grouped by state
+# initial pass at correlation matrix; this table failed to show significance values 
+# res <- cor(cor_data, use = "complete.obs")
 
-# to add for final:  improve correlation matrix format/names (below), include other personality traits (like stability), and include more complex grouping by state, gender, race, etc.
+# kable(res)
 
-#RG This table looks great on the pdf, would you consider collapsing the race/ethnicity variables for clarity?
+# final (correlation matrix added in KableOutput codechunk below):
 
-res <- cor(scores, use = "complete.obs")
-round(res, 2)
+ Agreeableness <- scores[1:81366, 1]
+ Conscientiousness <- scores[1:81366, 2]
+ Extraversion <- scores[1:81366, 3]
+ Intellect <- scores[1:81366, 4]
 
-
-apa.cor.table(scores, filename="Corr_table.doc", show.conf.interval=FALSE)
-
-apa.cor.table(scores, filename="Corr_table.doc", show.conf.interval=F)
-
-# PEER REVIEW: To get a more elegant table, perhaps you can create your own function that gives you the sample size and percent of sample size by different characteristic and then use map to create a data frame with the categories of choice. I wrote a function below to get you started.
-
-sample <- function(df,x) {
-  df %>%
-    group_by({{x}}) %>%
-    summarize(group_sample = n()) %>%
-    ungroup() %>%
-    rename(group = {{x}}) %>%
-    mutate(total_sample = sum(group_sample),
-           percent_sample = group_sample/total_sample) %>%
-    select(group,group_sample, percent_sample)
-}
-
-sample(SAPA,race)
-sample(SAPA,education)
-
-
+ cor_data <- data.frame(Agreeableness, Conscientiousness, Extraversion, Intellect)
+ 
 ```
 
 ```{r #4 average scores by factor, warning = FALSE}
@@ -412,6 +380,12 @@ kable(state_factor_intel, booktabs = TRUE, longtable = TRUE, col.names = c("Stat
 ```
 
 ```{r KableOuput, echo = FALSE, message=FALSE, warning=FALSE}
+
+kable(sample(SAPA,race), caption = "Race Demographics", col.names = c("Race", "N", "% of Sample"))
+kable(sample(SAPA,education), caption = "Education Demographics", col.names = c("Education", "N", "% of Sample"))
+
+apa.cor.table(cor_data, filename="Corr_table.doc", show.sig.stars = TRUE)
+
 kable(state_factor_agree, booktabs = TRUE, longtable = TRUE, col.names = c("State", "Mean", "SD", "N"), 
     caption = "Agreeableness Descriptives") %>% 
     landscape() %>% 
@@ -435,11 +409,6 @@ kable(state_factor_intel, booktabs = TRUE, longtable = TRUE, col.names = c("Stat
 ```
 
 
-```{r #8 average scores by factor - from nested states}
-
-
-```
-
 ```{r #9 factor structure - from nested states, include = FALSE, warning = FALSE, eval = F}
 by_stateFactors <- split(SAPA, factorSAPA$state)
 
@@ -461,7 +430,7 @@ max(purrr::reduce(stateFactor, rbind))
 table(purrr::reduce(stateFactor, rbind))
 ```
 
-```{r #9 table, warning = FALSE}
+```{r #9 table, warning = FALSE, inclue = FALSE}
 load(here("data", "statefactor.rda"))
 stateFactordf
 
@@ -563,20 +532,12 @@ title(paste0("Personality Structure for ", efaSolutions2[[1]][50]))
 ```
 
 
-
-### EK Peer Review:
-# Areas of strength:
-1. Awesome use of branches/git features in general! Made it clear to see who was working on  what sections, and how the project was arranged. 
-2. Code is arranged easily to read, nice use of sections and not doing more than 1~2 things per line of code.
-3. Great reproducibility with having data loading working on first try for me, and doesn't require any extra files/folders outside of the "scripts" folder- might be beneficial to cache the data however?
-
-What I learned: Familiarity with the IPIP dataset! I'd really like tos ee some visualizations on how these factors vary across the different states, maybe using a geographic visualization?
-
-# EK Suggestions:
-- Code cleanup: moved library declarations to teh beginning of the script, and added the "needs" package" to simplify package loading
-
 # Discussion
 
+
+\newpage
+
+We used the following R packages for this manuscript: `r cite_r("r-references.bib")`
 
 \newpage
 
