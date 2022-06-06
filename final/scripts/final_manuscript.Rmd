@@ -409,7 +409,7 @@ kable(state_factor_intel, booktabs = TRUE, longtable = TRUE, col.names = c("Stat
 ```
 
 
-```{r #9 factor structure - from nested states, include = FALSE, warning = FALSE, eval = F}
+```{r #9 factor structure - from nested states, include = FALSE, warning = FALSE}
 by_stateFactors <- split(SAPA, factorSAPA$state)
 
 stateFactors <- SAPA %>% group_by(state) %>% nest() %>% 
@@ -472,7 +472,7 @@ for_efa <- left_join(nest_stateFactors, stateFacLong)
 ```
 
 
-```{r #10 run efa, warning = FALSE, echo = FALSE, eval = FALSE}
+```{r #10 run efa, warning = FALSE, echo = FALSE, eval = TRUE}
 efaSolutions <- for_efa %>% mutate(solution = list(fa(as.data.frame(data), 
                                                       nfactors = nfact, 
                                                       rotate = "oblimin")$loadings))
