@@ -22,7 +22,7 @@ abstract: |
 
   
 keywords          : "Personality traits, SAPA-Project Dataverse, Functional Programming"
-wordcount         : "1106"
+wordcount         : "1283"
 
 bibliography      : ["r-references.bib"]
 
@@ -384,7 +384,7 @@ kable(state_factor_intel, booktabs = TRUE, longtable = TRUE, col.names = c("Stat
 kable(sample(SAPA,race), caption = "Race Demographics", col.names = c("Race", "N", "Prop.  of Sample"))
 kable(sample(SAPA,education), caption = "Education Demographics", col.names = c("Education", "N", "Prop.of Sample"))
 
-apa.cor.table(cor_data, filename="Corr_table.doc", show.sig.stars = TRUE)
+# apa.cor.table(cor_data, filename="Corr_table.doc", show.sig.stars = TRUE)
 
 kable(state_factor_agree, booktabs = TRUE, longtable = TRUE, col.names = c("State", "Mean", "SD", "N"), 
     caption = "Agreeableness Descriptives") %>% 
@@ -430,7 +430,7 @@ max(purrr::reduce(stateFactor, rbind))
 table(purrr::reduce(stateFactor, rbind))
 ```
 
-```{r #9 table, warning = FALSE, inclue = FALSE}
+```{r #9 table, warning = FALSE, include = FALSE}
 load(here("data", "statefactor.rda"))
 stateFactordf
 
@@ -509,7 +509,6 @@ five_factor <- fa(SAPA2 %>% select(starts_with("q")),
 
 
 # Results
-
 The parallel factor analyses indicate that the modal number of factors is 5, as is found in 36 of the 50 states, with 7, 6, and 1 states respectively being better represented by 6, 7, and 8 factors. This analysis relies on covariance matrices uing pairwise complete observations; use of a raw matrix does not converge for each state. However, where such analyses are convergent, findings indicate a factor structure of approximately 20-30.
 
 ```{r  warning = FALSE, echo = FALSE}

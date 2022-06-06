@@ -139,7 +139,7 @@
   {}{\typeout{Failed to patch title.}}
 \makeatother
 \shorttitle{The Personality Structures of the 50 States}
-\keywords{Personality traits, SAPA-Project Dataverse, Functional Programming\newline\indent Word count: 1106}
+\keywords{Personality traits, SAPA-Project Dataverse, Functional Programming\newline\indent Word count: 1283}
 \DeclareDelayedFloatFlavor{ThreePartTable}{table}
 \DeclareDelayedFloatFlavor{lltable}{table}
 \DeclareDelayedFloatFlavor*{longtable}{table}
@@ -241,7 +241,7 @@ The main analyses are fifty parallel analyses, one for every state, that estimat
 \centering
 \begin{tabular}[t]{l|r|r}
 \hline
-Race & N & \% of Sample\\
+Race & N & Prop.  of Sample\\
 \hline
 African American & 6108 & 0.0750682\\
 \hline
@@ -282,7 +282,7 @@ NA & 6 & 0.0000737\\
 \centering
 \begin{tabular}[t]{l|r|r}
 \hline
-Education & N & \% of Sample\\
+Education & N & Prop.of Sample\\
 \hline
 College graduate & 12381 & 0.1521643\\
 \hline
@@ -298,33 +298,6 @@ Some college did not graduate & 8274 & 0.1016887\\
 \hline
 \end{tabular}
 \end{table}
-
-\begin{verbatim}
-## 
-## 
-## Means, standard deviations, and correlations with confidence intervals
-##  
-## 
-##   Variable             M    SD   1          2          3         
-##   1. Agreeableness     4.67 0.77                                 
-##                                                                  
-##   2. Conscientiousness 4.14 0.92 .21**                           
-##                                  [.21, .22]                      
-##                                                                  
-##   3. Extraversion      3.92 1.02 .38**      .13**                
-##                                  [.37, .38] [.13, .14]           
-##                                                                  
-##   4. Intellect         4.59 0.73 .16**      .08**      .22**     
-##                                  [.15, .16] [.07, .08] [.21, .23]
-##                                                                  
-## 
-## Note. M and SD are used to represent mean and standard deviation, respectively.
-## Values in square brackets indicate the 95% confidence interval.
-## The confidence interval is a plausible range of population correlations 
-## that could have caused the sample correlation (Cumming, 2014).
-##  * indicates p < .05. ** indicates p < .01.
-## 
-\end{verbatim}
 
 \begingroup\fontsize{12}{14}\selectfont
 
@@ -650,32 +623,21 @@ Wyoming & 4.631488 & 0.6969593 & 126\\*
 \end{landscape}
 \endgroup{}
 
-\begin{verbatim}
-##   Alabama Alaska Arizona Arkansas California Colorado Connecticut Delaware
-## 1       5      6       5        5          5        5           5        6
-##   Florida Georgia Hawaii Idaho Illinois Indiana Iowa Kansas Kentucky Louisiana
-## 1       5       5      6     6        5       5    5      5        5         5
-##   Maine Maryland Massachusetts Michigan Minnesota Mississippi Missouri Montana
-## 1     5        5             5        5         5           6        5       7
-##   Nebraska Nevada New.Hampshire New.Jersey New.Mexico New.York North.Carolina
-## 1        5      7             6          5          5        5              5
-##   North.Dakota Ohio Oklahoma Oregon Pennsylvania Rhode.Island South.Carolina
-## 1            7    5        5      5            5            7              5
-##   South.Dakota Tennessee Texas Utah Vermont Virginia Washington West.Virginia
-## 1            7         5     5    5       8        5          5             6
-##   Wisconsin Wyoming
-## 1         5       8
-\end{verbatim}
-
 \hypertarget{results}{%
 \section{Results}\label{results}}
 
-The parallel factor analyses indicate that the modal number of factors is 5, as is found in 36 of the 50 states, with 7, 6, and 1 states respectively being better represented by 6, 7, and 8 factors.
+The parallel factor analyses indicate that the modal number of factors is 5, as is found in 36 of the 50 states, with 7, 6, and 1 states respectively being better represented by 6, 7, and 8 factors. This analysis relies on covariance matrices uing pairwise complete observations; use of a raw matrix does not converge for each state. However, where such analyses are convergent, findings indicate a factor structure of approximately 20-30.
 
 \includegraphics{final_manuscript_files/figure-latex/unnamed-chunk-3-1.pdf} \includegraphics{final_manuscript_files/figure-latex/unnamed-chunk-3-2.pdf} \includegraphics{final_manuscript_files/figure-latex/unnamed-chunk-3-3.pdf} \includegraphics{final_manuscript_files/figure-latex/unnamed-chunk-3-4.pdf}
 
 \hypertarget{discussion}{%
 \section{Discussion}\label{discussion}}
+
+These findings appear to confirm the Big Five factor structure of personality. However, this conclusion is extremely tentative, and relies on numerous assumptions holding, for which there is little basis. Most notably, the Kaiser, Meyer, Olkin Measure of Sampling Adequacy indicates a ``Marvelous'' (Kaiser (1974)) measure of the whole sample, whereas no state on it's own is acceptable for factor analysis by those same standards. The complete sample appears to have a 20-factor structure which is more consistent with the findings of related SAPA studies, which finds a 27-factor structure. That the complete sample yielded a 20-factor structure in our exploratory analysis, suggests: 1. an issue of completeness limiting state-level inference (an expected outcome of the SAPA sampling strategy), and; 2. A potential hierarchical factor structure in which the 20 factors aggregate to fewer.
+
+However, barring this issue, it appears notable that smaller states are better represented by more than five factors. This is surprising, as there were no a priori data of the populations of these states entered into the analyses, and thus, such inferences are not based on a more robust estimate. Further inspection demonstrates that states with a larger number of factors have a number of responses approximately commensurate with their state population size; that is to say, less populous states produce fewer observations and a higher factor structure. It seems a reasonable hypothesis that these findings are not well-founded.
+
+Thus, while state-level (dis)confirmation of any extant published personality structure, and demonstration of the homogeneity therein remains a fruitful endeavor, these data do not admit to being interpreted to those ends. SAPA, relying on large degrees of missingness, is not well-suited for such a degree of granularity. A shorter, but more complete personality questionnaire would be more apt. However, stable measures of an individual's personality is a function of the number of items, and thus limits the number of factors to extract. Thus, there is a tension between the so-called ``Big Few'' and personality structures comprised of more numerous factors. Due to the limited attention of any respondent, and limited resources of researchers to incentivize larger questionnaires, the Big Few personality structure will continue to be reified; if factors aggregate to form this structure, this measurement is limited but valid. To the extent that they do not, these prevailing structures are increasingly problematic.
 
 \newpage
 
@@ -715,6 +677,9 @@ Heinzen, E., Sinnwell, J., Atkinson, E., Gunderson, T., \& Dougherty, G. (2021).
 
 \leavevmode\vadjust pre{\hypertarget{ref-R-purrr}{}}%
 Henry, L., \& Wickham, H. (2020). \emph{Purrr: Functional programming tools}. Retrieved from \url{https://CRAN.R-project.org/package=purrr}
+
+\leavevmode\vadjust pre{\hypertarget{ref-kaiser1974index}{}}%
+Kaiser, H. F. (1974). An index of factorial simplicity. \emph{Psychometrika}, \emph{39}(1), 31--36.
 
 \leavevmode\vadjust pre{\hypertarget{ref-R-needs}{}}%
 Katz, J. (2016). \emph{Needs: Attaches and installs packages}. Retrieved from \url{https://CRAN.R-project.org/package=needs}

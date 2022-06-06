@@ -6,7 +6,7 @@
 \centering
 \begin{tabular}[t]{l|r|r}
 \hline
-Race & N & \% of Sample\\
+Race & N & Prop.  of Sample\\
 \hline
 African American & 6108 & 0.0750682\\
 \hline
@@ -48,7 +48,7 @@ NA & 6 & 0.0000737\\
 \centering
 \begin{tabular}[t]{l|r|r}
 \hline
-Education & N & \% of Sample\\
+Education & N & Prop.of Sample\\
 \hline
 College graduate & 12381 & 0.1521643\\
 \hline

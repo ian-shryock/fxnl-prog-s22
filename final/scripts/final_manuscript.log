@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.6.5)  6 JUN 2022 11:31
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.6.5)  6 JUN 2022 13:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -688,104 +688,36 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ] [2] [3] [4]
 \openout3 = `final_manuscript.ttt'.
 
-(final_manuscript.ttt)
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 302.
-(c:/Users/ddewa/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
-File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) [5]
-Overfull \hbox (36.59523pt too wide) in paragraph at lines 327--327
-[]\T1/lmtt/m/n/12 ## Note. M and SD are used to represent mean and standard deviation, respectively.[] 
- []
-
-[6]
-Overfull \hbox (5.72021pt too wide) in paragraph at lines 668--668
-[]\T1/lmtt/m/n/12 ##   Alabama Alaska Arizona Arkansas California Colorado Connecticut Delaware[] 
- []
-
-
-Overfull \hbox (5.7062pt too wide) in paragraph at lines 668--668
-[]\T1/lmtt/m/n/12 ## 1       5      6       5        5          5        5           5        6[] 
- []
-
-
-Overfull \hbox (30.42023pt too wide) in paragraph at lines 668--668
-[]\T1/lmtt/m/n/12 ##   Florida Georgia Hawaii Idaho Illinois Indiana Iowa Kansas Kentucky Louisiana[] 
- []
-
-
-Overfull \hbox (30.40622pt too wide) in paragraph at lines 668--668
-[]\T1/lmtt/m/n/12 ## 1       5       5      6     6        5       5    5      5        5         5[] 
- []
-
-
-Overfull \hbox (30.42023pt too wide) in paragraph at lines 668--668
-[]\T1/lmtt/m/n/12 ##   Maine Maryland Massachusetts Michigan Minnesota Mississippi Missouri Montana[] 
- []
-
-
-Overfull \hbox (30.41322pt too wide) in paragraph at lines 668--668
-[]\T1/lmtt/m/n/12 ## 1     5        5             5        5         5           6        5       7[] 
- []
-
-
-Overfull \hbox (24.24522pt too wide) in paragraph at lines 668--668
-[]\T1/lmtt/m/n/12 ##   Nebraska Nevada New.Hampshire New.Jersey New.Mexico New.York North.Carolina[] 
- []
-
-
-Overfull \hbox (24.23822pt too wide) in paragraph at lines 668--668
-[]\T1/lmtt/m/n/12 ## 1        5      7             6          5          5        5              5[] 
- []
-
-
-Overfull \hbox (18.07022pt too wide) in paragraph at lines 668--668
-[]\T1/lmtt/m/n/12 ##   North.Dakota Ohio Oklahoma Oregon Pennsylvania Rhode.Island South.Carolina[] 
- []
-
-
-Overfull \hbox (18.07022pt too wide) in paragraph at lines 668--668
-[]\T1/lmtt/m/n/12 ## 1            7    5        5      5            5            7              5[] 
- []
-
-
-Overfull \hbox (24.24522pt too wide) in paragraph at lines 668--668
-[]\T1/lmtt/m/n/12 ##   South.Dakota Tennessee Texas Utah Vermont Virginia Washington West.Virginia[] 
- []
-
-
-Overfull \hbox (24.23822pt too wide) in paragraph at lines 668--668
-[]\T1/lmtt/m/n/12 ## 1            7         5     5    5       8        5          5             6[] 
- []
-
-<final_manuscript_files/figure-latex/unnamed-chunk-3-1.pdf, id=96, 469.755pt x 325.215pt>
+(final_manuscript.ttt) [5]
+<final_manuscript_files/figure-latex/unnamed-chunk-3-1.pdf, id=91, 469.755pt x 325.215pt>
 File: final_manuscript_files/figure-latex/unnamed-chunk-3-1.pdf Graphic file (type pdf)
 <use final_manuscript_files/figure-latex/unnamed-chunk-3-1.pdf>
-Package pdftex.def Info: final_manuscript_files/figure-latex/unnamed-chunk-3-1.pdf  used on input line 675.
+Package pdftex.def Info: final_manuscript_files/figure-latex/unnamed-chunk-3-1.pdf  used on input line 631.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<final_manuscript_files/figure-latex/unnamed-chunk-3-2.pdf, id=97, 469.755pt x 325.215pt>
+<final_manuscript_files/figure-latex/unnamed-chunk-3-2.pdf, id=92, 469.755pt x 325.215pt>
 File: final_manuscript_files/figure-latex/unnamed-chunk-3-2.pdf Graphic file (type pdf)
 <use final_manuscript_files/figure-latex/unnamed-chunk-3-2.pdf>
-Package pdftex.def Info: final_manuscript_files/figure-latex/unnamed-chunk-3-2.pdf  used on input line 675.
+Package pdftex.def Info: final_manuscript_files/figure-latex/unnamed-chunk-3-2.pdf  used on input line 631.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<final_manuscript_files/figure-latex/unnamed-chunk-3-3.pdf, id=98, 469.755pt x 325.215pt>
+<final_manuscript_files/figure-latex/unnamed-chunk-3-3.pdf, id=93, 469.755pt x 325.215pt>
 File: final_manuscript_files/figure-latex/unnamed-chunk-3-3.pdf Graphic file (type pdf)
 <use final_manuscript_files/figure-latex/unnamed-chunk-3-3.pdf>
-Package pdftex.def Info: final_manuscript_files/figure-latex/unnamed-chunk-3-3.pdf  used on input line 675.
+Package pdftex.def Info: final_manuscript_files/figure-latex/unnamed-chunk-3-3.pdf  used on input line 631.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<final_manuscript_files/figure-latex/unnamed-chunk-3-4.pdf, id=99, 469.755pt x 325.215pt>
+<final_manuscript_files/figure-latex/unnamed-chunk-3-4.pdf, id=94, 469.755pt x 325.215pt>
 File: final_manuscript_files/figure-latex/unnamed-chunk-3-4.pdf Graphic file (type pdf)
 <use final_manuscript_files/figure-latex/unnamed-chunk-3-4.pdf>
-Package pdftex.def Info: final_manuscript_files/figure-latex/unnamed-chunk-3-4.pdf  used on input line 675.
+Package pdftex.def Info: final_manuscript_files/figure-latex/unnamed-chunk-3-4.pdf  used on input line 631.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 
-Overfull \hbox (28.90639pt too wide) in paragraph at lines 675--676
+Overfull \hbox (28.90639pt too wide) in paragraph at lines 631--632
 [][] 
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[7
+[6
 
 
 
@@ -794,33 +726,30 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
-]
+ <./final_manuscript_files/figure-latex/unnamed-chunk-3-1.pdf>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[8 <./final_manuscript_files/figure-latex/unnamed-chunk-3-1.pdf>]
+[7 <./final_manuscript_files/figure-latex/unnamed-chunk-3-2.pdf>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[9 <./final_manuscript_files/figure-latex/unnamed-chunk-3-2.pdf>]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[10 <./final_manuscript_files/figure-latex/unnamed-chunk-3-3.pdf>] [11 <./final_manuscript_files/figure-latex/unnamed-chunk-3-4.pdf>] [12]
+[8 <./final_manuscript_files/figure-latex/unnamed-chunk-3-3.pdf>] [9 <./final_manuscript_files/figure-latex/unnamed-chunk-3-4.pdf>] [10] [11]
 Underfull \vbox (badness 1028) has occurred while \output is active []
 
-[13]
+[12]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[14] AED endfloat: Processing end Figures and Tables [15] (./final_manuscript.ttt [16
+[13] AED endfloat: Processing end Figures and Tables [14] (./final_manuscript.ttt [15
 
 
-] [17] [18
+] [16] [17
 
-] [19] [20] [21
+] [18] [19] [20
 
-] [22] [23] [24
+] [21] [22] [23
 
-] [25] [26] [27
+] [24] [25] [26
 
-] [28]) [29] (./final_manuscript.aux)
+] [27]) [28] (./final_manuscript.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
@@ -828,18 +757,18 @@ Package rerunfilecheck Info: File `final_manuscript.out' has not changed.
 (rerunfilecheck)             Checksum: 6D43AD5C86D6C423DB17C1397A60EC4D;1508.
  ) 
 Here is how much of TeX's memory you used:
- 15700 strings out of 480253
- 257420 string characters out of 5892691
- 568615 words of memory out of 5000000
- 33258 multiletter control sequences out of 15000+600000
- 512796 words of font info for 64 fonts, out of 8000000 for 9000
+ 15658 strings out of 480253
+ 256727 string characters out of 5892691
+ 568614 words of memory out of 5000000
+ 33220 multiletter control sequences out of 15000+600000
+ 512478 words of font info for 63 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  72i,11n,77p,2255b,590s stack positions out of 10000i,1000n,20000p,200000b,200000s
-{c:/Users/ddewa/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}<c:/Users/ddewa/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/ddewa/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/ddewa/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/Users/ddewa/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/Users/ddewa/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss8.pfb><c:/Users/ddewa/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt12.pfb>
-Output written on final_manuscript.pdf (29 pages, 227190 bytes).
+{c:/Users/ddewa/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}<c:/Users/ddewa/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/ddewa/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/ddewa/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/Users/ddewa/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/Users/ddewa/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss8.pfb>
+Output written on final_manuscript.pdf (28 pages, 192694 bytes).
 PDF statistics:
- 332 PDF objects out of 1000 (max. 8388607)
- 278 compressed objects within 3 object streams
+ 324 PDF objects out of 1000 (max. 8388607)
+ 273 compressed objects within 3 object streams
  88 named destinations out of 1000 (max. 500000)
  117 words of extra memory for PDF output out of 10000 (max. 10000000)
 
