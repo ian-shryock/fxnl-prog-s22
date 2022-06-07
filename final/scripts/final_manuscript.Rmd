@@ -111,10 +111,6 @@ SAPA <- get_dataframe_by_name(
   "sapaTempData04apr2006thru18aug2010.tab",
   "10.7910/DVN/H9RQD6")
 
-
-#RG This didn't work for me: Error in get_dataframe_by_name("sapaTempData04apr2006thru18aug2010.tab",  : could not find function "get_dataframe_by_name"
-#AB: I think this fxn is just from the psych library right?
-
 # IPIP keys list
 IPIPkeysList <- list(
 IPIP100agreeableness = c("-q_140", "-q_146", "q_150", "-q_195", "-q_200", 
@@ -264,10 +260,7 @@ factorSAPAstate <- factorSAPA %>%
 # nest data by state
 by_state <- split(factorSAPAstate, factorSAPAstate$state)
 
-# descriptive stats - THERE SHOULD BE A BETTER WAY TO DO THIS (SOME KIND OF NESTED MAP FXN?)  ## summarize_at? 
-# I am not sure but I feel like map2 could work here if you have a vector of variable names. (Murat comment)
-# AB: I am not sure that map2 would actually be more efficient since the variable names are different for each of the 4 factors. So it would have to be done 4 separate times anyway ...?
-
+# create list for each factor
 stateAgree <- map(by_state, ~summarize(.x, meanFactor = mean(IPIP100agreeableness, na.rm = TRUE),
                                     sdFactor = sd(IPIP100agreeableness, na.rm = TRUE),
                                     nFactor = length(IPIP100agreeableness),
@@ -296,25 +289,6 @@ allFactor <- list(stateAgree, stateCons, stateExtra, stateIntel)
 
 names(allFactor) = c('Agreeableness', 'Conscientiousness', 'Extraversion', 'Intellect')
 
-# VERSION 1 SEPARATE TABLES FOR ALL FACTOR/STATE COMBINATIONS
-
-# function to create table 
-makeTable <- function(x, name=deparse(substitute(x))) {
-  kable(x[1:3], booktabs = TRUE, longtable = TRUE, col.names = c("Mean", "SD", "N"), 
-        caption = paste('State of ', x[4], ' ', x[5], ' Descriptives')) %>% 
-    landscape() %>% 
-    kable_styling(font_size = 12, latex_options = c("scale_down", "repeat_header")) %>% 
-    kable_classic() 
-}
-
-# create tables for each factor & state
-map(allFactor, ~map(.x, ~makeTable(.x)))
-
-
-
-
-# VERSION 2 FROM PEER REVIEW:
-# They suggested using the gt package, but it does not seem to be available for this version of R
 
 # summarize each factor by state
 state_factor_agree <- tibble(
@@ -326,15 +300,11 @@ state_factor_agree <- tibble(
 
 
 stateAgreeDF <- reduce(stateAgree, rbind)
-AgreeZscores <- map2(stateAgreeDF[1], stateAgreeDF[2], ~((stateAgreeDF[1]-mean(stateAgreeDF$meanFactor))/stateAgreeDF[2])) %>% reduce(stateAgree, rbind)
+AgreeZscores <- map2(stateAgreeDF[1], 
+                     stateAgreeDF[2], 
+                     ~((stateAgreeDF[1]-mean(stateAgreeDF$meanFactor))/stateAgreeDF[2])) %>% 
+  reduce(stateAgree, rbind)
 
-
-# state_factor_agree <- tibble(
-#   state_names = names(stateAgree),
-#   agree_mean = map_dbl(stateAgree,~.x[[1]][1]),
-#   agree_sd = map_dbl(stateAgree,~.x[[2]][1]),
-#   agree_n = map_int(stateAgree,~.x[[3]][1]),
-# )
 
 state_factor_cons <- tibble(
   state_names = names(stateCons),
@@ -355,27 +325,6 @@ state_factor_intel <- tibble(
   intel_n = map_df(stateIntel,~.x[3]),
 )
 
-
-kable(state_factor_agree, booktabs = TRUE, longtable = TRUE, col.names = c("State", "Mean", "SD", "N"), 
-    caption = "Agreeableness Descriptives") %>% 
-    landscape() %>% 
-    kable_styling(font_size = 12, latex_options = c("scale_down", "repeat_header")) %>% 
-    kable_classic() 
-kable(state_factor_cons, booktabs = TRUE, longtable = TRUE, col.names = c("State", "Mean", "SD", "N"), 
-    caption = "Conscientiousness Descriptives") %>% 
-    landscape() %>% 
-    kable_styling(font_size = 12, latex_options = c("scale_down", "repeat_header")) %>% 
-    kable_classic() 
-kable(state_factor_extra, booktabs = TRUE, longtable = TRUE, col.names = c("State", "Mean", "SD", "N"), 
-    caption = "Extraversion Descriptives") %>% 
-    landscape() %>% 
-    kable_styling(font_size = 12, latex_options = c("scale_down", "repeat_header")) %>% 
-    kable_classic() 
-kable(state_factor_intel, booktabs = TRUE, longtable = TRUE, col.names = c("State", "Mean", "SD", "N"), 
-    caption = "Intellect Descriptives") %>% 
-    landscape() %>% 
-    kable_styling(font_size = 12, latex_options = c("scale_down", "repeat_header")) %>% 
-    kable_classic() 
 
 ```
 
